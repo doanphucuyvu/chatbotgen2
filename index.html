@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot CLB MIT</title>
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body, html {
+      width: 100%;
+      height: 100%;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s, color 0.4s;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg: #eef2f3;
+      --text: #111;
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --primary: #ff4d4d;
+      --secondary: #ff99aa;
+      --accent: #0072ff;
+    }
+    body.dark {
+      --bg: #1a1a1a;
+      --text: #f0f0f0;
+      --glass-bg: rgba(0, 0, 0, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --primary: #cc3d3d;
+      --secondary: #cc7a88;
+    }
+
+    #container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* Cột trái */
+    #left {
+      width: 25%;
+      border-right: 1px solid #ccc;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      display: flex;
+      flex-direction: column;
+      transition: width 0.3s ease;
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+    }
+    #left.collapsed { width: 50px; }
+
+    #left h3 { 
+      text-align: center; 
+      margin: 15px 0; 
+      color: white; 
+      transition: opacity 0.3s;
+      font-size: 1.2rem;
+      padding: 0 10px;
+    }
+    #left.collapsed h3, 
+    #left.collapsed #questions { 
+      opacity: 0; 
+      pointer-events: none; 
+    }
+
+    #search-container {
+      padding: 10px;
+      position: relative;
+    }
+
+    #search-input {
+      width: 100%;
+      padding: 10px 15px;
+      border-radius: 20px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      backdrop-filter: blur(10px);
+    }
+
+    #search-input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    #questions { 
+      flex: 1; 
+      overflow-y: auto; 
+      padding: 10px;
+      scrollbar-width: thin;
+    }
+    #questions::-webkit-scrollbar {
+      width: 5px;
+    }
+    #questions::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+
+    details {
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+    details[open] {
+      margin-bottom: 15px;
+    }
+    details summary {
+      font-size: 15px;
+      margin: 10px 0;
+      cursor: pointer;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      padding: 8px 0;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+    details summary::after {
+      content: '▼';
+      font-size: 0.8em;
+      margin-left: auto;
+      transition: transform 0.3s ease;
+    }
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    details button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+      color: var(--text);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-size: 14px;
+    }
+    details button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Cột giữa */
+    #middle {
+      flex: 1;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #ccc;
+      position: relative;
+    }
+    #middle h3 {
+      text-align: center;
+      margin: 15px 0;
+      color: var(--text);
+      font-size: 1.4rem;
+    }
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+      scrollbar-width: thin;
+    }
+    #chat::-webkit-scrollbar {
+      width: 8px;
+    }
+    #chat::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+    .message {
+      margin: 15px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      animation: fadeIn 0.4s ease;
+    }
+    .message.user {
+      flex-direction: row-reverse;
+    }
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .avatar.bot {
+      background: linear-gradient(135deg, #00c6ff, var(--accent));
+    }
+    .avatar.user {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
+    .bubble {
+      padding: 12px 16px;
+      border-radius: 18px;
+      max-width: 80%;
+      animation: slideIn 0.4s ease;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      line-height: 1.5;
+    }
+    .message.user .bubble {
+      border-top-right-radius: 4px;
+      background: rgba(173, 216, 230, 0.3);
+    }
+    .message.bot .bubble {
+      border-top-left-radius: 4px;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Hiệu ứng nhấp nháy */
+    .blink { animation: blink 1s infinite; }
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0.3; }
+    }
+
+    /* Form nhập tin nhắn */
+    #chat-form {
+      display: flex;
+      padding: 15px;
+      background: var(--bg);
+      border-top: 1px solid #ccc;
+      position: relative;
+    }
+    #user-input {
+      flex: 1;
+      padding: 12px 15px;
+      border-radius: 24px;
+      border: 1px solid #ccc;
+      background: var(--glass-bg);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    #user-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(0, 114, 255, 0.2);
+    }
+    #suggestions {
+      position: absolute;
+      bottom: 100%;
+      left: 15px;
+      right: 15px;
+      background: var(--bg);
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      max-height: 150px;
+      overflow-y: auto;
+      display: none;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .suggestion-item {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .suggestion-item:hover {
+      background: rgba(0,0,0,0.05);
+    }
+    #chat-form button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      border-radius: 24px;
+      border: none;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+    #chat-form button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Cột phải */
+    #right {
+      width: 25%;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      display: flex;
+      flex-direction: column;
+      transition: width 0.3s ease;
+      overflow: hidden;
+      padding-top: 60px; /* để tránh bị che */
+    }
+    #right.collapsed { 
+      width: 50px; 
+      padding-top: 60px; 
+    }
+    #right h3 { 
+      text-align: center; 
+      margin: 15px 0; 
+      color: white; 
+      transition: opacity 0.3s;
+      font-size: 1.2rem;
+    }
+    #right.collapsed h3, 
+    #right.collapsed #history, 
+    #right.collapsed #clearHistory { 
+      opacity: 0; 
+      pointer-events: none; 
+    }
+
+    #history { 
+      flex: 1; 
+      overflow-y: auto; 
+      padding: 10px;
+      scrollbar-width: thin;
+    }
+    #history::-webkit-scrollbar {
+      width: 5px;
+    }
+    #history::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+    #history button, #clearHistory {
+      width: 100%;
+      padding: 12px;
+      margin: 5px 0;
+      border: none;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+      color: var(--text);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-align: left;
+      font-size: 14px;
+    }
+    #history button:hover, #clearHistory:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Thanh công cụ nổi */
+    #topbar {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .tool-btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tool-btn:hover { 
+      transform: scale(1.05); 
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Mobile layout */
+    body.mobile-layout #container { 
+      flex-direction: column; 
+    }
+    body.mobile-layout #left,
+    body.mobile-layout #right {
+      width: 100%;
+      height: auto;
+      max-height: 40vh;
+      order: 2;
+      padding-top: 0;
+    }
+    body.mobile-layout #middle {
+      order: 1;
+      width: 100%;
+      height: 60vh;
+    }
+    body.mobile-layout #left.collapsed,
+    body.mobile-layout #right.collapsed {
+      width: 100%;
+      height: 50px;
+      overflow: hidden;
+    }
+
+    /* Hiệu ứng tải */
+    .loader {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Hiệu ứng cho các nút đã nhấn */
+    button:active {
+      transform: scale(0.95) !important;
+    }
+
+    /* Toast thông báo */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .toast.show {
+      opacity: 1;
+    }
+
+    /* Tối ưu cho mobile */
+    @media (max-width: 768px) {
+      .bubble {
+        max-width: 85%;
+        font-size: 14px;
+        padding: 10px 14px;
+      }
+      
+      #user-input {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+      
+      #chat-form button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      
+      .avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+      }
+      
+      #topbar {
+        top: 5px;
+        right: 5px;
+        gap: 5px;
+        padding: 6px;
+      }
+      
+      .tool-btn {
+        padding: 6px 10px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Thanh công cụ cố định góc trên bên phải -->
+  <div id="topbar">
+    <button id="mobileBtn" class="tool-btn" onclick="toggleMobileLayout()" title="Chuyển đổi chế độ mobile">📱</button>
+    <button class="tool-btn" onclick="toggleDarkMode()" title="Chế độ sáng/tối">🌙</button>
+    <button class="tool-btn" onclick="toggleLeft()" title="Ẩn/hiện câu hỏi">❓</button>
+    <button class="tool-btn" onclick="toggleRight()" title="Ẩn/hiện lịch sử">📚</button>
+    <button class="tool-btn" onclick="speakCurrentMessage()" title="Đọc tin nhắn">🔊</button>
+  </div>
+
+  <div id="container">
+    <!-- Cột trái -->
+    <div id="left">
+      <h3>Câu hỏi thường gặp</h3>
+      <div id="search-container">
+        <input type="text" id="search-input" placeholder="Tìm kiếm câu hỏi..." oninput="filterQuestions()">
+      </div>
+      <div id="questions">
+
+        <details open>
+          <summary>🏫 TỔNG QUAN</summary>
+          <button onclick="askQuestion('Giới thiệu chung về CLB MIT')">Giới thiệu chung về CLB MIT</button>
+          <button onclick="askQuestion('Ý nghĩa tên gọi MIT')">Ý nghĩa tên gọi MIT</button>
+          <button onclick="askQuestion('Thông tin liên hệ')">Thông tin liên hệ</button>
+        </details>
+
+        <details>
+          <summary>🚀 SỨ MỆNH VÀ TẦM NHÌN</summary>
+          <button onclick="askQuestion('Sứ mệnh')">Sứ mệnh</button>
+          <button onclick="askQuestion('Tầm nhìn')">Tầm nhìn</button>
+        </details>
+
+        <details>
+          <summary>🧩 MÔ HÌNH TỔ CHỨC</summary>
+          <button onclick="askQuestion('Ban điều hành')">Ban điều hành</button>
+          <button onclick="askQuestion('Các phân ban')">Các phân ban</button>
+          <button onclick="askQuestion('Thành viên trong từng ban')">Thành viên trong từng ban</button>
+        </details>
+
+        <details>
+          <summary>📜 QUY ĐỊNH CHUNG</summary>
+          <button onclick="askQuestion('Tên gọi')">Tên gọi</button>
+          <button onclick="askQuestion('Tôn chỉ, mục đích')">Tôn chỉ, mục đích</button>
+        </details>
+
+        <details>
+          <summary>🛠️ CHỨC NĂNG VÀ NHIỆM VỤ</summary>
+          <button onclick="askQuestion('Chức năng')">Chức năng</button>
+          <button onclick="askQuestion('Nhiệm vụ')">Nhiệm vụ</button>
+        </details>
+
+        <details>
+          <summary>💰 CÔNG TÁC TÀI CHÍNH</summary>
+          <button onclick="askQuestion('Tài chính')">Tài chính</button>
+        </details>
+
+        <details>
+          <summary>🏆 KHEN THƯỞNG, KỶ LUẬT</summary>
+          <button onclick="askQuestion('Khen thưởng')">Khen thưởng</button>
+          <button onclick="askQuestion('Kỷ luật')">Kỷ luật</button>
+        </details>
+
+        <details>
+          <summary>👥 HỘI VIÊN</summary>
+          <button onclick="askQuestion('Tiêu chuẩn Hội viên')">Tiêu chuẩn Hội viên</button>
+          <button onclick="askQuestion('Quyền lợi của Hội viên')">Quyền lợi của Hội viên</button>
+          <button onclick="askQuestion('Nghĩa vụ của Hội viên')">Nghĩa vụ của Hội viên</button>
+          <button onclick="askQuestion('Đăng ký làm Hội viên')">Đăng ký làm Hội viên</button>
+          <button onclick="askQuestion('Rút, xóa tên khỏi CLB')">Rút, xóa tên khỏi CLB</button>
+        </details>
+
+        <details>
+          <summary>📑 GIẤY TỜ LIÊN QUAN</summary>
+          <button onclick="askQuestion('Đơn đăng kí tham gia CLB')">Đơn đăng kí tham gia CLB</button>
+          <button onclick="askQuestion('Đơn xin rút khỏi CLB')">Đơn xin rút khỏi CLB</button>
+          <button onclick="askQuestion('Nội quy CLB MIT')">Nội quy CLB MIT</button>
+        </details>
+
+        <details>
+          <summary>🎟️ CÁCH THAM GIA CLB</summary>
+          <button onclick="askQuestion('Cách tham gia CLB MIT')">Cách tham gia CLB MIT</button>
+        </details>
+
+      </div>
+    </div>
+
+    <!-- Cột giữa -->
+    <div id="middle">
+      <h3>MIT GPT</h3>
+      <div id="chat"></div>
+      <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Nhập câu hỏi của bạn..." autocomplete="off">
+        <div id="suggestions"></div>
+        <button type="submit">Gửi</button>
+      </form>
+    </div>
+
+    <!-- Cột phải -->
+    <div id="right">
+      <h3>Lịch sử trò chuyện</h3>
+      <div id="history"></div>
+      <button id="clearHistory" onclick="clearHistory()">Xóa lịch sử & Chat</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const chat = document.getElementById('chat');
+    const historyDiv = document.getElementById('history');
+    const left = document.getElementById('left');
+    const right = document.getElementById('right');
+    const mobileBtn = document.getElementById('mobileBtn');
+    const chatForm = document.getElementById('chat-form');
+    const userInput = document.getElementById('user-input');
+    const searchInput = document.getElementById('search-input');
+    const suggestions = document.getElementById('suggestions');
+    let history = JSON.parse(localStorage.getItem("chatHistory")) || [];
+    let synth = window.speechSynthesis;
+    let currentUtterance = null;
+
+    const answers = {
+      "Giới thiệu chung về CLB MIT": "Câu lạc bộ Công nghệ Thông tin trường THPT Mỹ Đình (MIT) được thành lập với  mục tiêu phát triển tư duy công nghệ theo hướng đổi mới,  sáng tạo, gần gũi và giàu cá tính của thế hệ trẻ. MIT  không chỉ tập trung vào lập trình phát triển các kỹ năng tin học mà còn góp phần khơi dậy khả năng khám phá, thử thách giới hạn bản thân, biến những kiến thức tưởng chừng khô khan trở nên sống động, thú vị và đầy màu sắc dưới lăng kính năng động, nhiệt huyết của tuổi trẻ. Thông qua các hoạt động tương tác xoay quanh những chủ đề công nghệ thông tin, MyDinh Information Technology Club hy vọng sẽ là nơi tạo điều kiện để mỗi người thể hiện góc nhìn cá nhân, rèn luyện tư duy công nghệ và phá bỏ rào cản tiếp cận tri thức.",
+      "Ý nghĩa tên gọi MIT": "Tên tiếng Việt: Câu lạc bộ Công nghệ Thông tin.Tên tiếng Anh: MIT - MyDinh Information Technology Club. MIT không chỉ là một cái tên đại diện cho CLB, nó còn mang ý nghĩa “khám phá công nghệ” – không chỉ thể hiện niềm đam mê lập trình, công nghệ mà còn đại diện cho tuổi trẻ năng động, sáng tạo và đầy nhiệt huyết.  Tin học không chỉ là nơi học hỏi kỹ năng mới, mà còn là không gian để mỗi thành viên thỏa sức sáng tạo, kết nối và truyền cảm hứng cho nhau, tràn đầy sự nhiệt tình và sức sống của thời thanh xuân.",
+      "Thông tin liên hệ": "Fanpage: https://www.facebook.com/mydinhitclub/; Gmail: mydinhitclub@gmail.com",
+
+      "Sứ mệnh": "Tạo dựng môi trường học tập, chia sẻ và giao lưu lành mạnh, nơi các thành viên cùng nhau rèn luyện kỹ năng tin học, lập trình và ứng dụng công nghệ thông tin vào đời sống, học tập. Nâng cao tư duy logic, khả năng sáng tạo trong lĩnh vực công nghệ, đồng thời bồi dưỡng năng lực giải quyết vấn đề và kỹ năng làm việc nhóm. Trang bị nền tảng kiến thức và kỹ năng số cần thiết, giúp các thành viên tự tin hội nhập, bắt kịp xu hướng chuyển đổi số và sự phát triển mạnh mẽ của kỷ nguyên công nghệ 4.0.",
+      "Tầm nhìn": "-	Thông qua các hoạt động, dự án và cuộc thi, CLB khơi dậy niềm yêu thích công nghệ và tin học, tạo cơ hội cho học sinh tiếp cận trực tiếp, rèn luyện kỹ năng qua thực hành và trải nghiệm thực tế.  -	Phối hợp với nhà trường trong việc xây dựng các chuyên đề về công nghệ, lập trình và ứng dụng tin học, mang đến nhiều hình thức học tập sáng tạo, dễ tiếp cận cho học sinh trong và ngoài trường.  -	Hình thành các nhóm nghiên cứu nhỏ, nơi học sinh có thể phát triển ý tưởng, cùng nhau sáng tạo, nghiên cứu và thử sức trong các lĩnh vực công nghệ nằm trong khả năng và sở thích của bản thân.",
+
+      "Ban điều hành": "Chủ tịch: Đoàn Phúc Uy Vũ – K5A8 – 0842522010; Phó Chủ tịch: Nguyễn Đỗ Trà My - K4A2 - 0981552706",
+      "Các phân ban": "-	Ban Chuyên Môn: +) Phân ban Office: Đảm nhận chuyên môn các nền tảng Word, Excel, PowerPoint, thiết kế slide. +) Phân ban Lập trình: Đăm nhận nhiệm vụ lập trình web cơ bản, Python, mini game, ứng dụng học tập. +) Phân ban Trí tuệ nhân tạo (AI): Tìm hiểu AI cơ bản, sử dụng AI trong học tập và sáng tạo nội dung (chatbot, AI image, AI video). +) Phân ban Multimedia: Dựng video (CapCut, Canva). -	Ban Hậu Cần: +) Phân ban Truyền thông: Thiết kế poster, quản lý fanpage câu lạc bộ, quảng bá sự kiện. +) Phân ban Tài chính – Hậu cần: Quản lý các hoạt động tài chính, lập ngân sách, quản lý quỹ và tìm các nhà tài trợ cho hoạt động của MIT.",
+      "Thành viên trong từng ban": "Cập nhật sau",
+
+      "Tên gọi": "1.	Tên Tiếng Việt:  Câu lạc bộ Công nghệ Thông tin      2.	Tên Tiếng Anh: MyDinh Information Technology Club     3.	Tên viết tắt: MIT",
+      "Tôn chỉ, mục đích": "I)	Mục đích.  -	Mục đích chung: MyDinh IT được thành lập với mục tiêu tạo ra một không gian sinh hoạt thoải mái, tự do sáng tạo và gắn kết cộng đồng học sinh có đam mê công nghệ, mong muốn rèn luyện kỹ năng tin học và khám phá sâu hơn về các lĩnh vực liên quan đến công nghệ thông tin.    -	Mục đích cụ thể: CLB hướng tới mô hình học tập gắn với tư duy công nghệ và kỹ năng số, giúp học sinh tiếp cận nhiều hơn với các phương pháp học tập hiện đại, từ đó phát triển bản thân theo hướng tích cực, sáng tạo và hội nhập với kỷ nguyên công nghệ 4.0.  II)	Tôn chỉ -	Là nơi học tập, sáng tạo và thực hành qua các dự án lập trình, thiết kế, hay ứng dụng công nghệ mà trên lớp học chính khóa thường chưa có nhiều thời gian để trải nghiệm. -	Tạo ra một môi trường sinh hoạt lành mạnh, bổ ích, góp phần làm mới suy nghĩ của mọi người, biến tin học và công nghệ – vốn tưởng chừng khô khan – trở nên thú vị, gần gũi và đầy cảm hứng.",
+      "Chức năng": "-	Câu lạc bộ Tin học sẽ cung cấp những kiến thức bổ ích, thú vị về công nghệ, lập trình và ứng dụng tin học; đồng thời tổ chức các hoạt động trải nghiệm, dự án thực hành và trưng bày sản phẩm công nghệ để thu hút học sinh học hỏi, đào sâu kiến thức. -	Góp phần quảng bá hình ảnh của CLB cũng như xây dựng định hướng phát triển theo các phương pháp học tập hiện đại, hiệu quả và lành mạnh, giúp học sinh rèn luyện kỹ năng số và khơi gợi niềm đam mê công nghệ.",
+      "Nhiệm vụ": "-	Rèn luyện kỹ năng tin học thực tiễn và sáng tạo nội dung cho thành viên. -	Tiếp cận AI – công nghệ mới theo cách đơn giản, ứng dụng vào học tập và đời sống. -	Tạo cơ hội làm việc nhóm, giao lưu, kết bạn, tạo sản phẩm chung để lưu giữ kỷ niệm. -	Câu lạc bộ hy vọng sẽ có cơ hội hỗ trợ giáo viên trong công tác chuẩn bị bài giảng Powerpoint, chỉnh sửa video, soạn thảo Word, Excel…trong khả năng của CLB, MIT cam kết sẽ giữ kín bài giảng của thầy cô. -	Câu lạc bộ  MIT sẽ hỗ trợ trường trong các hoạt động truyền thông, sự kiện phù hợp với sứ mệnh và mục tiêu câu lạc bộ đề ra.",
+      "Tài chính": "-	Câu lạc bộ hoạt động chủ yếu trên nền tảng mạng xã hội, trang thông tin truyền thông trực tuyến nên sẽ không thu quỹ CLB. -	Nếu có chi phí phát sinh sẽ thông báo cho thành viên CLB.",
+      
+      "Khen thưởng": "-	Những thành viên, nhóm thành viên có đóng góp tích cực cho câu lạc bộ được ghi nhận trong quá trình tham gia các hoạt động sẽ được ban điều hành câu lạc bộ đề xuất với BCH Đoàn trường THPT Mỹ Đình khen thưởng.",
+      "Kỷ luật": "-	Những thành viên vi phạm quy chế tùy theo mức độ sẽ bị kỷ luật từ khiển trách đến khai trừ ra khỏi câu lạc bộ được chia làm três mức kỷ luật: +) Mức 1: Nhắc nhở  +) Mức 2: Kỷ luật trước toàn câu lạc bộ +) Mức 3: Khai trừ ra khỏi câu lạc bộ  -	Các hình thức của mức độ kỷ luật Cụ thể do ban điều hành câu lạc bộ đề ra và toàn thể câu lạc bộ thống nhất trên nguyên tắc biểu quyết dân chủ với sự đồng ý từ 50% chính thức tham gia biểu quyết trở lên",
+      
+      "Tiêu chuẩn Hội viên": "-	Là học sinh trường THPT Mỹ Đình đạt hạnh kiểm Tốt -	Không vi phạm pháp luật, nội quy nhà trường, điều lệ của câu lạc bộ.",
+      "Quyền lợi của Hội viên": "-	Được tham gia các hoạt động của CLB    -	Được đề xuất các nguyện vọng, ý kiến chính đánh; được giúp đỡ và tạo điều kiện trong quá trình tham gia sinh hoạt.   -	Được biểu dương, khen thưởng khi có những đóng góp tích cực, xuất sắc trong các hoạt động của CLB.",
+      "Nghĩa vụ của Hội viên": "-	Tôn trọng và tuân thủ điều lệ, nội quy của câu lạc bộ, giữ gìn tư cách hội viên     -	Tích cực tham gia các hoạt động của câu lạc bộ, thực hiện các nhiệm vụ của câu lạc bộ theo sự phân công của ban điều hành     -	Thực hiện công tác tuyên truyền nhằm nâng cao uy tín và mở rộng tầm ảnh hưởng của câu lạc bộ     -	Giới thiệu và phát triển hội viên mới",
+      "Đăng ký làm Hội viên": "Người muốn trở thành hội viên chính thức của câu lạc bộ phải tự nguyện làm đơn làm hồ sơ theo mẫu quy định của tổ chức. Đồng thời phải được phụ huynh xác nhận và đồng ý tham gia câu lạc bộ.",
+      "Rút, xóa tên khỏi CLB": "-	Tự nguyện làm đơn xin rút khỏi Câu lạc bộ vì lý do cá nhân.    -	Thành viên không tham gia sinh hoạt mà không có lý do chính đánh thì bị xóa tên trong danh sách hội viên.     -	Thành viên vi phạn quy định và điều lệ của tổ chức gây ảnh hưởng xấu đến uy tín của câu lạc bộ thì bị khai trừ ra khỏi câu lạc bộ.",
+
+      "Đơn đăng kí tham gia CLB": "Liên hệ bằng Gmail: mydinhitclub@gmail.com để nhận tài liệu",
+      "Đơn xin rút khỏi CLB": "Liên hệ bằng Gmail: mydinhitclub@gmail.com để nhận tài liệu",
+      "Nội quy CLB MIT": "Liên hệ bằng Gmail: mydinhitclub@gmail.com để nhận tài liệu",
+      "Cách tham gia CLB MIT": "Qua Link (được đăng ở fanpage Facebook) hoặc đăng kí trực tiếp qua quầy(theo đợt)",
+    };
+
+    // Hàm hiển thị toast thông báo
+    function showToast(message, duration = 3000) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, duration);
+    }
+
+    // Xử lý form nhập tin nhắn
+    chatForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const question = userInput.value.trim();
+      if (question) {
+        handleUserQuestion(question);
+        userInput.value = '';
+        suggestions.style.display = 'none';
+      }
+    });
+
+    // Tìm kiếm câu hỏi
+    function filterQuestions() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const buttons = document.querySelectorAll('#questions button');
+      
+      buttons.forEach(button => {
+        const text = button.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          button.style.display = 'block';
+          // Mở details cha nếu có kết quả phù hợp
+          let parentDetails = button.closest('details');
+          if (parentDetails) {
+            parentDetails.open = true;
+          }
+        } else {
+          button.style.display = 'none';
+        }
+      });
+    }
+
+    // Gợi ý câu hỏi khi nhập
+    userInput.addEventListener('input', function() {
+      const value = this.value.toLowerCase();
+      if (value.length < 2) {
+        suggestions.style.display = 'none';
+        return;
+      }
+      
+      const matches = [];
+      for (const key in answers) {
+        if (key.toLowerCase().includes(value)) {
+          matches.push(key);
+          if (matches.length >= 5) break;
+        }
+      }
+      
+      if (matches.length > 0) {
+        suggestions.innerHTML = '';
+        matches.forEach(match => {
+          const div = document.createElement('div');
+          div.className = 'suggestion-item';
+          div.textContent = match;
+          div.onclick = () => {
+            askQuestion(match);
+            userInput.value = '';
+            suggestions.style.display = 'none';
+          };
+          suggestions.appendChild(div);
+        });
+        suggestions.style.display = 'block';
+      } else {
+        suggestions.style.display = 'none';
+      }
+    });
+
+    // Đóng gợi ý khi click ra ngoài
+    document.addEventListener('click', function(e) {
+      if (!suggestions.contains(e.target) && e.target !== userInput) {
+        suggestions.style.display = 'none';
+      }
+    });
+
+    function handleUserQuestion(question) {
+      // Hiệu ứng tải
+      const loadingMsg = createMessage("bot", "", false, true);
+      
+      // Tìm câu trả lời phù hợp nhất
+      let bestMatch = null;
+      let maxSimilarity = 0;
+      
+      for (const key in answers) {
+        const similarity = calculateSimilarity(question, key);
+        if (similarity > maxSimilarity) {
+          maxSimilarity = similarity;
+          bestMatch = key;
+        }
+      }
+      
+      // Ngưỡng tương đồng tối thiểu
+      setTimeout(() => {
+        if (maxSimilarity > 0.3) {
+          // Xóa thông báo đang tải
+          chat.removeChild(loadingMsg);
+          askQuestion(bestMatch);
+        } else {
+          // Không tìm thấy câu trả lời phù hợp
+          chat.removeChild(loadingMsg);
+          createMessage("user", question);
+          createMessage("bot", "Xin lỗi, mình chưa có thông tin về câu hỏi này. Vui lòng thử lại với câu hỏi khác hoặc liên hệ CLB MIT để được hỗ trợ.", true, true);
+          history.push({question, answer: "Không có câu trả lời"});
+          localStorage.setItem("chatHistory", JSON.stringify(history));
+          updateHistory();
+        }
+      }, 800); // Delay để hiệu ứng tải hiển thị đủ lâu
+    }
+
+    // Hàm tính độ tương đồng giữa hai chuỗi (đơn giản)
+    function calculateSimilarity(str1, str2) {
+      const words1 = str1.toLowerCase().split(/\s+/);
+      const words2 = str2.toLowerCase().split(/\s+/);
+      
+      let matchCount = 0;
+      for (const word1 of words1) {
+        if (words2.includes(word1)) {
+          matchCount++;
+        }
+      }
+      
+      return matchCount / Math.max(words1.length, words2.length);
+    }
+
+    function typeWriterEffect(element, text, baseSpeed = 30) {
+      let i = 0;
+      element.innerHTML = "";
+      function typing() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          let speed = Math.max(10, baseSpeed - i / 3);
+          setTimeout(typing, speed);
+        }
+      }
+      typing();
+    }
+
+    function createMessage(role, text, animate = false, blink = false) {
+      const messageDiv = document.createElement("div");
+      messageDiv.classList.add("message", role);
+      messageDiv.style.opacity = "0";
+      messageDiv.style.transform = "translateY(20px)";
+
+      const avatar = document.createElement("div");
+      avatar.classList.add("avatar", role === "user" ? "user" : "bot");
+      avatar.innerText = role === "user" ? "👤" : "🤖";
+
+      const bubble = document.createElement("div");
+      bubble.classList.add("bubble");
+
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(bubble);
+      chat.appendChild(messageDiv);
+
+      // Hiệu ứng xuất hiện
+      setTimeout(() => {
+        messageDiv.style.transition = "opacity 0.3s, transform 0.3s";
+        messageDiv.style.opacity = "1";
+        messageDiv.style.transform = "translateY(0)";
+      }, 10);
+
+      if (role === "bot" && blink) {
+        bubble.innerHTML = '<span class="loader"></span>';
+        const delay = Math.floor(Math.random() * 1500) + 800;
+        setTimeout(() => {
+          bubble.innerHTML = "";
+          if (animate) {
+            typeWriterEffect(bubble, text);
+          } else {
+            bubble.innerText = text;
+          }
+        }, delay);
+      } else {
+        if (animate) {
+          typeWriterEffect(bubble, text);
+        } else {
+          bubble.innerText = text;
+        }
+      }
+
+      chat.scrollTop = chat.scrollHeight;
+      return messageDiv;
+    }
+
+    function askQuestion(question) {
+      const answer = answers[question] || "Xin lỗi, mình chưa có câu trả lời cho câu hỏi này.";
+      createMessage("user", question);
+      const botMessage = createMessage("bot", answer, true, true);
+      history.push({question, answer});
+      localStorage.setItem("chatHistory", JSON.stringify(history));
+      updateHistory();
+      
+      // Lưu tin nhắn bot cuối cùng để đọc
+      localStorage.setItem("lastBotMessage", answer);
+      
+      // Haptic feedback trên mobile (nếu được hỗ trợ)
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
+      }
+    }
+
+    function updateHistory() {
+      historyDiv.innerHTML = "";
+      // Chỉ hiển thị 10 mục gần nhất
+      const recentHistory = history.slice(-10);
+      
+      recentHistory.forEach((item, index) => {
+        const btn = document.createElement("button");
+        btn.innerText = item.question.length > 30 ? item.question.substring(0, 30) + "..." : item.question;
+        btn.title = item.question;
+        btn.onclick = () => showFromHistory(history.indexOf(item));
+        historyDiv.appendChild(btn);
+      });
+    }
+
+    function showFromHistory(index) {
+      chat.innerHTML = "";
+      const {question, answer} = history[index];
+      createMessage("user", question);
+      createMessage("bot", answer);
+      
+      // Lưu tin nhắn bot cuối cùng để đọc
+      localStorage.setItem("lastBotMessage", answer);
+    }
+
+    function clearHistory() {
+      if (confirm("Bạn có chắc chắn muốn xóa toàn bộ lịch sử trò chuyện không?")) {
+        history = [];
+        localStorage.removeItem("chatHistory");
+        historyDiv.innerHTML = "";
+        chat.innerHTML = "";
+        createMessage("bot", "🤖 Xin chào, hãy chọn câu hỏi bên trái hoặc nhập câu hỏi của bạn để bắt đầu!", true, true);
+        showToast("Đã xóa lịch sử trò chuyện");
+      }
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark"));
+      
+      // Đổi icon
+      const darkModeBtn = document.querySelector('.tool-btn[onclick="toggleDarkMode()"]');
+      darkModeBtn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+      
+      showToast(document.body.classList.contains("dark") ? "Đã bật chế độ tối" : "Đã tắt chế độ tối");
+    }
+    
+    function toggleLeft() {
+      left.classList.toggle("collapsed");
+      showToast(left.classList.contains("collapsed") ? "Đã ẩn danh sách câu hỏi" : "Đã hiện danh sách câu hỏi");
+    }
+    
+    function toggleRight() {
+      right.classList.toggle("collapsed");
+      showToast(right.classList.contains("collapsed") ? "Đã ẩn lịch sử trò chuyện" : "Đã hiện lịch sử trò chuyện");
+    }
+    
+    function toggleMobileLayout() {
+      document.body.classList.toggle("mobile-layout");
+      mobileBtn.textContent = document.body.classList.contains("mobile-layout") ? "💻" : "📱";
+      showToast(document.body.classList.contains("mobile-layout") ? "Đã bật chế độ mobile" : "Đã tắt chế độ mobile");
+    }
+    
+    function speakCurrentMessage() {
+      if (synth.speaking) {
+        synth.cancel();
+        showToast("Đã dừng đọc tin nhắn");
+        return;
+      }
+      
+      const lastBotMessage = localStorage.getItem("lastBotMessage") || "Không có nội dung để đọc";
+      if (lastBotMessage) {
+        currentUtterance = new SpeechSynthesisUtterance(lastBotMessage);
+        currentUtterance.lang = 'vi-VN';
+        synth.speak(currentUtterance);
+        showToast("Đang đọc tin nhắn...");
+        
+        currentUtterance.onend = function() {
+          showToast("Đã đọc xong tin nhắn");
+        };
+      }
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark");
+        const darkModeBtn = document.querySelector('.tool-btn[onclick="toggleDarkMode()"]');
+        darkModeBtn.textContent = "☀️";
+      }
+      
+      createMessage("bot", "🤖 Xin chào! Mình là MIT GPT, trợ lý ảo của CLB Công nghệ Thông tin trường THPT Mỹ Đình. Hãy chọn câu hỏi bên trái hoặc nhập câu hỏi của bạn để bắt đầu!", true, true);
+      updateHistory();
+      
+      // Kiểm tra nếu là thiết bị di động
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        document.body.classList.add("mobile-layout");
+        mobileBtn.textContent = "💻";
+      }
+    };
+  </script>
+</body>
+</html>

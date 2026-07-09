@@ -1631,34 +1631,17 @@
       </div>
       <div class="update-log-content">
         <div class="dev-credit"><i class="fas fa-code"></i> Developed by Doan Phuc Uy Vu</div>
-        <div class="log-item"><strong> Log 1 – 09/2025:</strong> Nâng cấp giao diện web, bổ sung chế độ hiển thị sáng/tối, tích hợp chức năng đọc tin nhắn và xuất hội thoại. <span class="view-image-btn" data-log="1" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
-        <div class="log-item"><strong> Log 2 – 12/2025:</strong> Tái cấu trúc thiết kế, thêm chế độ tích hợp API, hỗ trợ chế độ hiển thị điện thoại và máy tính. <span class="view-image-btn" data-log="2" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
-        <div class="log-item"><strong> Log 3 – 02/2026:</strong> Cập nhật giao diện, tối ưu hóa chế độ hiển thị trên điện thoại và máy tính, tự động thích ứng với từng loại thiết bị. <span class="view-image-btn" data-log="3" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
-        <div class="log-item"><strong> Log 4 – 06/2026:</strong> Đại tu toàn bộ bố cục website, khắc phục lỗi chồng chéo nội dung. <span class="view-image-btn" data-log="4" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
-        <div class="log-item"><strong> Log 5 – 07/2026:</strong> Thêm ảnh đại diện (avatar) cho bot chat. Cải tiến khung nhập liệu. <span class="view-image-btn" data-log="5" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>       
+        <div class="log-item"><strong> Log 1 – 09/2025:</strong> Nâng cấp giao diện web, bổ sung chế độ hiển thị sáng/tối, tích hợp chức năng đọc tin nhắn và xuất hội thoại.</div>
+        <div class="log-item"><strong> Log 2 – 12/2025:</strong> Tái cấu trúc thiết kế, thêm chế độ tích hợp API, hỗ trợ chế độ hiển thị điện thoại và máy tính.</div>
+        <div class="log-item"><strong> Log 3 – 02/2026:</strong> Cập nhật giao diện, tối ưu hóa chế độ hiển thị trên điện thoại và máy tính, tự động thích ứng với từng loại thiết bị.</div>
+        <div class="log-item"><strong> Log 4 – 06/2026:</strong> Đại tu toàn bộ bố cục website, khắc phục lỗi chồng chéo nội dung.</div>
+        <div class="log-item"><strong> Log 5 – 07/2026:</strong> Thêm ảnh đại diện (avatar) cho bot chat. Cải tiến khung nhập liệu.</div>       
       </div>
       <div class="modal-footer">
         <button class="modal-btn secondary" id="updateLogCloseBtnFooter">Đóng</button>
       </div>
     </div>
   </div>
-
-  
-  <div class="modal" id="imageModal">
-    <div class="modal-content" style="max-width: 700px;">
-      <div class="modal-header">
-        <h2><i class="fas fa-image"></i> Ảnh cập nhật</h2>
-        <button class="modal-close" id="imageModalCloseBtn">×</button>
-      </div>
-      <div style="text-align:center; padding: 10px 0;">
-        <img id="imageModalPreview" src="" alt="Ảnh cập nhật" style="max-width:100%; max-height:70vh; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.15);">
-      </div>
-      <div class="modal-footer" style="justify-content:center;">
-        <button class="modal-btn secondary" id="imageModalCloseBtnFooter">Đóng</button>
-      </div>
-    </div>
-  </div>
- 
 
   <script>
     
@@ -2415,48 +2398,6 @@
       window.addEventListener('click', (e) => {
         if (e.target === updateLogModal) closeUpdateLogModal();
       });
-
-
-      const imageUrls = {
-        1: '1.jpg', 
-        2: '2.jpg',
-        3: '3.jpg',
-        4: '4.jpg',
-        5: '5.jpg'
-      };
-
-      const imageModal = document.getElementById('imageModal');
-      const imageModalPreview = document.getElementById('imageModalPreview');
-      const imageModalCloseBtn = document.getElementById('imageModalCloseBtn');
-      const imageModalCloseBtnFooter = document.getElementById('imageModalCloseBtnFooter');
-
-      function openImageModal(logNumber) {
-        const src = imageUrls[logNumber] || 'https://via.placeholder.com/600x400/cccccc/ffffff?text=Ch%C6%B0a+c%C3%B3+%E1%BA%A3nh';
-        imageModalPreview.src = src;
-        imageModal.classList.add('show');
-      }
-
-      function closeImageModal() {
-        imageModal.classList.remove('show');
-      }
-
-      // Gán sự kiện cho tất cả nút "Xem ảnh"
-      document.querySelectorAll('.view-image-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const log = parseInt(this.dataset.log, 10);
-          if (log) openImageModal(log);
-        });
-      });
-
-      // Đóng modal ảnh
-      imageModalCloseBtn.addEventListener('click', closeImageModal);
-      imageModalCloseBtnFooter.addEventListener('click', closeImageModal);
-      window.addEventListener('click', (e) => {
-        if (e.target === imageModal) closeImageModal();
-      });
-      // ===== KẾT THÚC THÊM MỚI =====
-
     });
   </script>
 

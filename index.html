@@ -1,12 +1,11 @@
-<html lang="vi" data-scribe-recorder-ready="true" class="brand-refresh">
-<head>
+<html lang="vi" data-scribe-recorder-ready="true" class="brand-refresh"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>SMY GPT</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
-    /* ===== ROOT & RESET ===== */
+    
     :root {
       --primary: #0071e3;
       --primary-dark: #0066cc;
@@ -82,7 +81,7 @@
       align-items: center;
     }
 
-    /* ===== CHAT MAIN (căn giữa) ===== */
+    
     .chat-main {
       width: 100%;
       max-width: 900px;
@@ -101,7 +100,7 @@
       }
     }
 
-    /* ===== SIDEBAR (overlay) ===== */
+    
     .sidebar {
       position: fixed;
       top: 0;
@@ -139,7 +138,7 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
     }
 
-    /* ===== SIDEBAR TOP (cố định) ===== */
+    
     .sidebar-top {
       padding: 16px 18px;
       display: flex;
@@ -190,7 +189,7 @@
       transform: scale(0.95);
     }
 
-    /* Vùng cuộn chung */
+    
     .sidebar-scroll {
       flex: 1;
       overflow-y: auto;
@@ -198,7 +197,7 @@
       scroll-behavior: smooth;
     }
 
-    /* ===== CÁC NÚT CHỨC NĂNG TRONG SIDEBAR ===== */
+    
     .sidebar-tools {
       display: flex;
       flex-direction: column;
@@ -241,7 +240,7 @@
       text-align: center;
     }
 
-    /* ===== LỊCH SỬ TRÒ CHUYỆN ===== */
+    
     .history-section {
       margin-bottom: 24px;
     }
@@ -335,7 +334,7 @@
       background: rgba(255, 59, 48, 0.2);
     }
 
-    /* ===== CÂU HỎI THƯỜNG GẶP ===== */
+    
     .faq-section .section-title {
       font-size: 0.7rem;
       font-weight: 600;
@@ -445,7 +444,7 @@
       transform: scale(0.97);
     }
 
-    /* ===== OVERLAY ===== */
+    
     .sidebar-overlay {
       position: fixed;
       top: 0;
@@ -466,7 +465,7 @@
       opacity: 1;
     }
 
-    /* ===== CHAT HEADER ===== */
+    
     .chat-header {
       padding: 14px 20px;
       border-bottom: 1px solid transparent;
@@ -497,7 +496,7 @@
       gap: 10px;
     }
 
-    /* Nút hamburger mới – thay thế logo */
+    
     .hamburger-btn {
       background: none;
       border: none;
@@ -547,7 +546,7 @@
       font-weight: 500;
     }
 
-    /* ===== CHAT MESSAGES ===== */
+    
     .chat-messages {
       flex: 1;
       overflow-y: auto;
@@ -582,7 +581,7 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
-    /* ===== THAY ĐỔI AVATAR BOT ===== */
+    
     .avatar.bot {
       background-image: url('smypic.jpg');
       background-size: cover;
@@ -725,25 +724,35 @@
       border-color: transparent;
     }
 
-    /* ===== CHAT INPUT ===== */
+    
+    /* ===== CẢI TIẾN KHUNG NHẬP CHAT ===== */
     .chat-input-container {
       padding: 12px 0;
       background: transparent;
       flex-shrink: 0;
       margin: 0 0 10px;
+      position: relative;
     }
 
     .chat-form {
       display: flex;
-      gap: 10px;
-      align-items: flex-end;
+      gap: 12px;
+      align-items: center;
       background: var(--glass-bg-strong);
       backdrop-filter: blur(var(--blur-amount)) saturate(var(--saturation));
       -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(var(--saturation));
-      border-radius: var(--radius-xl);
-      padding: 4px 4px 4px 16px;
+      border-radius: 60px; /* bo tròn nhiều hơn */
+      padding: 4px 4px 4px 20px;
       border: 1px solid var(--glass-border);
       box-shadow: var(--glass-shadow);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    .chat-form:focus-within {
+      box-shadow: 0 8px 30px rgba(0, 122, 255, 0.15), 0 0 0 3px rgba(0, 122, 255, 0.15);
+      border-color: var(--apple-blue);
+      transform: scale(1.005);
     }
 
     body.dark-mode .chat-form {
@@ -752,6 +761,11 @@
       -webkit-backdrop-filter: blur(24px) saturate(2);
       border: 1px solid var(--dark-border);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    body.dark-mode .chat-form:focus-within {
+      box-shadow: 0 8px 30px rgba(0, 122, 255, 0.2), 0 0 0 3px rgba(0, 122, 255, 0.15);
+      border-color: var(--apple-teal);
     }
 
     .chat-input {
@@ -767,6 +781,7 @@
       transition: all var(--transition-fast);
       letter-spacing: -0.01em;
       outline: none;
+      font-family: inherit;
     }
 
     body.dark-mode .chat-input {
@@ -775,32 +790,98 @@
 
     .chat-input::placeholder {
       color: #8e8e93;
+      font-weight: 400;
+      letter-spacing: -0.01em;
     }
 
+    /* Nút gửi mới - icon mũi tên */
     .send-btn {
-      padding: 0 18px;
-      height: 48px;
-      border-radius: var(--radius);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
       border: none;
       background: linear-gradient(135deg, #007aff, #5856d6);
       color: #fff;
       cursor: pointer;
-      transition: all var(--transition-fast);
-      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
       box-shadow: 0 4px 14px rgba(0, 122, 255, 0.35);
-      letter-spacing: -0.01em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .send-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 50%;
     }
 
     .send-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(0, 122, 255, 0.45);
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 8px 24px rgba(0, 122, 255, 0.5);
+    }
+
+    .send-btn:hover::after {
+      opacity: 1;
     }
 
     .send-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.92) rotate(0deg);
+      box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
     }
 
+    .send-btn i {
+      transition: transform 0.3s ease;
+    }
+
+    .send-btn:hover i {
+      transform: translateX(3px) scale(1.05);
+    }
+
+    /* Trạng thái loading khi gửi */
+    .send-btn.loading {
+      pointer-events: none;
+      opacity: 0.7;
+      transform: scale(0.96);
+    }
+
+    .send-btn.loading i {
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Hiệu ứng sóng khi gửi thành công */
+    .send-btn.success {
+      background: var(--success);
+      box-shadow: 0 4px 14px rgba(52, 199, 89, 0.4);
+    }
+
+    .send-btn.success i {
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    
     .suggestions-container {
       position: absolute;
       bottom: calc(100% + 10px);
@@ -846,7 +927,7 @@
       color: #fff;
     }
 
-    /* ===== TYPING ===== */
+    
     .typing-indicator {
       display: flex;
       padding: 14px 18px;
@@ -882,7 +963,7 @@
       animation-delay: 0.4s;
     }
 
-    /* ===== TOAST ===== */
+    
     .toast {
       position: fixed;
       bottom: 24px;
@@ -910,7 +991,7 @@
       opacity: 1;
     }
 
-    /* ===== MODAL ===== */
+    
     .modal {
       position: fixed;
       top: 0;
@@ -1129,7 +1210,7 @@
       opacity: 0.9;
     }
 
-    /* ===== KEYFRAMES ===== */
+    
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -1151,7 +1232,7 @@
       }
     }
 
-    /* ===== TOOLTIP ===== */
+    
     [data-tooltip] {
       position: relative;
     }
@@ -1184,7 +1265,7 @@
       transform: translateX(-50%) scale(1);
     }
 
-    /* ===== RESPONSIVE ===== */
+    
     @media (max-width: 1024px) {
       .chat-main {
         padding: 0 16px;
@@ -1207,6 +1288,20 @@
       .chat-messages {
         padding: 14px 0;
         gap: 14px;
+      }
+      .chat-form {
+        padding-left: 14px;
+        gap: 8px;
+      }
+      .send-btn {
+        width: 46px;
+        height: 46px;
+        font-size: 1.1rem;
+      }
+      .chat-input {
+        font-size: 14px;
+        min-height: 42px;
+        padding: 10px 0;
       }
     }
 
@@ -1238,17 +1333,19 @@
         font-size: 0.9rem;
       }
       .chat-form {
-        padding-left: 10px;
+        padding-left: 12px;
+        gap: 6px;
+        border-radius: 40px;
       }
       .chat-input {
-        padding: 10px 0;
+        padding: 8px 0;
         font-size: 14px;
-        min-height: 44px;
+        min-height: 40px;
       }
       .send-btn {
-        height: 44px;
-        padding: 0 14px;
-        font-size: 14px;
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
       }
       .suggestions-container {
         max-height: 150px;
@@ -1271,23 +1368,77 @@
         padding: 9px 12px;
         font-size: 0.85rem;
       }
+      .chat-input {
+        min-height: 36px;
+        padding: 6px 0;
+      }
+      .send-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
+      }
     }
 
-    /* Khi sidebar mở, overlay hiện */
+    
     .sidebar-overlay.active {
       display: block;
+    }
+
+    
+    .update-log-content {
+      max-height: 70vh;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .update-log-content .log-item {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    body.dark-mode .update-log-content .log-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .update-log-content .log-item:last-child {
+      border-bottom: none;
+    }
+    .update-log-content .log-item strong {
+      color: var(--apple-blue);
+      font-weight: 600;
+    }
+    body.dark-mode .update-log-content .log-item strong {
+      color: var(--apple-teal);
+    }
+    .update-log-content .dev-credit {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--apple-blue);
+      color: var(--light-text);
+    }
+    body.dark-mode .update-log-content .dev-credit {
+      color: var(--dark-text);
+      border-bottom-color: var(--apple-teal);
+    }
+    .update-log-content .dev-credit i {
+      color: var(--apple-blue);
+      margin-right: 6px;
+    }
+    body.dark-mode .update-log-content .dev-credit i {
+      color: var(--apple-teal);
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <!-- Overlay cho sidebar -->
+    
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- ===== SIDEBAR ===== -->
+    
     <div class="sidebar" id="mainSidebar">
-      <!-- Phần trên cố định -->
+      
       <div class="sidebar-top">
         <button class="btn-icon" id="closeSidebarBtn" data-tooltip="Ẩn thanh bên">
           <i class="fas fa-bars"></i>
@@ -1297,9 +1448,9 @@
         </button>
       </div>
 
-      <!-- Vùng cuộn chung -->
+      
       <div class="sidebar-scroll" id="sidebarScroll">
-        <!-- CÁC NÚT CHỨC NĂNG -->
+        
         <div class="sidebar-tools">
           <div class="tool-item" id="darkModeToggle" data-tooltip="Chuyển đổi chế độ tối/sáng"><i class="fas fa-moon"></i> Chế độ tối</div>
           <div class="tool-item" id="readAloud" data-tooltip="Đọc tin nhắn cuối">
@@ -1314,18 +1465,22 @@
           <div class="tool-item" id="mobileViewToggleToolbar" data-tooltip="Chuyển giao diện điện thoại/máy tính">
             <i class="fas fa-mobile-alt"></i> Chế độ điện thoại
           </div>
+          
+          <div class="tool-item" id="updateLogBtn" data-tooltip="Xem lịch sử cập nhật">
+            <i class="fas fa-history"></i> Update Log
+          </div>
         </div>
 
-        <!-- LỊCH SỬ TRÒ CHUYỆN -->
+        
         <div class="history-section">
           <div class="section-title">Lịch sử trò chuyện</div>
-          <div class="history-list" id="historyList"><div class="history-item" style="background: rgba(0, 122, 255, 0.15);"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div></div>
+          <div class="history-list" id="historyList"><div class="history-item" style="background: rgba(0, 122, 255, 0.15);"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div></div>
         </div>
 
-        <!-- CÂU HỎI THƯỜNG GẶP -->
+        
         <div class="faq-section">
           <div class="section-title">Câu hỏi thường gặp</div>
-          <!-- Nội dung FAQ giữ nguyên -->
+          
           <div class="category">
             <div class="category-header"><span><i class="fas fa-school"></i> TỔNG QUAN</span><i class="fas fa-chevron-down"></i></div>
             <div class="category-content active">
@@ -1404,11 +1559,11 @@
       </div>
     </div>
 
-    <!-- ===== CHAT MAIN ===== -->
+    
     <div class="chat-main">
       <div class="chat-header">
         <div class="chat-title">
-          <!-- Nút hamburger mới – thay thế logo -->
+          
           <button class="hamburger-btn" id="sidebarToggleBtn" data-tooltip="Hiện thanh bên">
             <i class="fas fa-bars"></i>
           </button>
@@ -1418,21 +1573,23 @@
           <span id="ai-model-info">Đang sử dụng: Dữ liệu cục bộ</span>
         </div>
       </div>
-      <div class="chat-messages" id="chatMessages"><div class="message bot"><div class="avatar bot"><i class="fas fa-robot"></i></div><div class="message-content">Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.<div class="message-actions"><button class="action-btn" data-tooltip="Sao chép tin nhắn"><i class="fas fa-copy"></i></button><button class="action-btn" data-tooltip="Đọc thành tiếng"><i class="fas fa-volume-up"></i></button></div><div class="feedback-container"><button class="feedback-btn"><i class="fas fa-thumbs-up"></i> Hữu ích</button><button class="feedback-btn"><i class="fas fa-thumbs-down"></i> Không hữu ích</button></div></div></div></div>
+      <div class="chat-messages" id="chatMessages"><div class="message bot"><div class="avatar bot"></div><div class="message-content">Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.<div class="message-actions"><button class="action-btn" data-tooltip="Sao chép tin nhắn"><i class="fas fa-copy"></i></button><button class="action-btn" data-tooltip="Đọc thành tiếng"><i class="fas fa-volume-up"></i></button></div><div class="feedback-container"><button class="feedback-btn"><i class="fas fa-thumbs-up"></i> Hữu ích</button><button class="feedback-btn"><i class="fas fa-thumbs-down"></i> Không hữu ích</button></div></div></div></div>
       <div class="chat-input-container">
         <div class="suggestions-container" id="suggestionsContainer" style="display: none;"></div>
         <form class="chat-form" id="chatForm">
           <textarea class="chat-input" placeholder="Nhập câu hỏi của bạn..." id="chatInput"></textarea>
-          <button type="submit" class="send-btn">Gửi</button>
+          <button type="submit" class="send-btn" id="sendBtn" data-tooltip="Gửi tin nhắn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- ===== TOAST ===== -->
+  
   <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span>Đã tạo cuộc trò chuyện mới</span></div>
 
-  <!-- ===== MODAL API ===== -->
+  
   <div class="modal" id="apiKeyModal">
     <div class="modal-content">
       <div class="modal-header">
@@ -1465,10 +1622,29 @@
     </div>
   </div>
 
+  
+  <div class="modal" id="updateLogModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-history"></i> Lịch sử cập nhật</h2>
+        <button class="modal-close" id="updateLogCloseBtn">×</button>
+      </div>
+      <div class="update-log-content">
+        <div class="dev-credit"><i class="fas fa-code"></i> Developed by Doan Phuc Uy Vu</div>
+        <div class="log-item"><strong> Log 1 – 09/2025:</strong> Nâng cấp giao diện web, bổ sung chế độ hiển thị sáng/tối, tích hợp chức năng đọc tin nhắn và xuất hội thoại.</div>
+        <div class="log-item"><strong> Log 2 – 12/2025:</strong> Tái cấu trúc thiết kế, thêm chế độ tích hợp API, hỗ trợ chế độ hiển thị điện thoại và máy tính.</div>
+        <div class="log-item"><strong> Log 3 – 02/2026:</strong> Cập nhật giao diện, tối ưu hóa chế độ hiển thị trên điện thoại và máy tính, tự động thích ứng với từng loại thiết bị.</div>
+        <div class="log-item"><strong> Log 4 – 06/2026:</strong> Đại tu toàn bộ bố cục website, khắc phục lỗi chồng chéo nội dung.</div>
+        <div class="log-item"><strong> Log 5 – 07/2026:</strong> Thêm ảnh đại diện (avatar) cho bot chat. Cải tiến khung nhập liệu.</div>       
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn secondary" id="updateLogCloseBtnFooter">Đóng</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // ============================================================
-    // DỮ LIỆU FAQ (giữ nguyên)
-    // ============================================================
+    
     const faqData = {
   "Thông tin liên hệ": "Nếu bạn muốn liên hệ với SMY, bạn có thể qua:\n\n• Fanpage: https://www.facebook.com/STEMofMyDinh/\n• Gmail: stemofmydinh@gmail.com",
 
@@ -1519,9 +1695,7 @@
   "Cách tham gia CLB SMY": "Vào đầu tháng 8 hằng năm, SMY sẽ tổ chức chương trình chào đón học sinh khóa mới với các hoạt động giới thiệu CLB, trình diễn thí nghiệm và tuyển thành viên.\n\nNếu muốn tham gia, bạn chỉ cần điền đơn đăng ký (có chữ ký xác nhận của phụ huynh) và gửi lại cho SMY.\n\nĐừng quên theo dõi fanpage để cập nhật thông tin mới nhất về đợt tuyển thành viên cũng như các sự kiện sắp tới nhé!"
 }
 
-    // ============================================================
-    // KHỞI TẠO
-    // ============================================================
+    
     document.addEventListener('DOMContentLoaded', function() {
       // DOM refs
       const sidebar = document.getElementById('mainSidebar');
@@ -1529,11 +1703,13 @@
       const chatMessages = document.getElementById('chatMessages');
       const chatForm = document.getElementById('chatForm');
       const chatInput = document.getElementById('chatInput');
+      const sendBtn = document.getElementById('sendBtn');
       const suggestionsContainer = document.getElementById('suggestionsContainer');
       const toast = document.getElementById('toast');
       const apiKeyModal = document.getElementById('apiKeyModal');
+      const updateLogModal = document.getElementById('updateLogModal');
 
-      // ===== Biến API (giữ nguyên) =====
+      
       let openaiApiKey = localStorage.getItem('openaiApiKey') || '';
       let geminiApiKey = localStorage.getItem('geminiApiKey') || '';
       let openaiModel = localStorage.getItem('openaiModel') || 'gpt-3.5-turbo';
@@ -1541,15 +1717,15 @@
       let currentAI = localStorage.getItem('currentAI') || 'none';
       let isMobileView = localStorage.getItem('mobileView') === 'true';
 
-      // ===== Quản lý Session =====
+      
       let currentSessionId = null;
       let sessions = [];
 
-      // ===== Trạng thái TTS =====
+      
       let currentSpeechUtterance = null;
       let isSpeaking = false;
 
-      // ===== Khởi tạo giao diện =====
+      
       if (isMobileView) {
         document.body.classList.add('mobile-view');
         updateMobileViewButtons(true);
@@ -1560,7 +1736,7 @@
       }
       updateAIModelInfo();
 
-      // Load sessions từ localStorage
+      
       loadSessions();
       if (sessions.length === 0) {
         createNewSession();
@@ -1568,7 +1744,7 @@
         loadSession(sessions[0].id);
       }
 
-      // ===== Hàm tiện ích =====
+      
       function showToast(message) {
         toast.querySelector('span').textContent = message;
         toast.classList.add('show');
@@ -1582,7 +1758,6 @@
         } else {
           darkBtn.innerHTML = '<i class="fas fa-moon"></i> Chế độ tối';
         }
-        // Cập nhật cả nút dark mode trên sidebar (đã được xử lý)
       }
 
       function updateMobileViewButtons(isMobile) {
@@ -1601,7 +1776,7 @@
         else info.textContent = 'Đang sử dụng: Dữ liệu cục bộ';
       }
 
-      // ===== Quản lý Session =====
+      
       function loadSessions() {
         try {
           const stored = localStorage.getItem('smy_sessions');
@@ -1660,7 +1835,7 @@
       }
 
       function updateChatTitle(title) {
-        // Không cần cập nhật
+        // không cần cập nhật
       }
 
       function addMessageToSession(role, content) {
@@ -1693,7 +1868,7 @@
         showToast('Đã xóa cuộc trò chuyện');
       }
 
-      // ===== Render lịch sử =====
+      
       function renderHistory() {
         const historyList = document.getElementById('historyList');
         historyList.innerHTML = '';
@@ -1733,7 +1908,7 @@
         });
       }
 
-      // ===== Thêm tin nhắn vào UI =====
+      
       function addMessage(text, sender, save = true) {
         const messageEl = document.createElement('div');
         messageEl.classList.add('message', sender);
@@ -1803,7 +1978,7 @@
         }
       }
 
-      // ===== TTS =====
+      
       function toggleSpeech(text, btn) {
         if (isSpeaking) {
           window.speechSynthesis.cancel();
@@ -1835,14 +2010,14 @@
         currentSpeechUtterance = utterance;
       }
 
-      // ===== Typing =====
+      
       function showTyping() {
         const typingEl = document.createElement('div');
         typingEl.classList.add('message', 'bot');
         typingEl.id = 'typing-indicator';
         const avatar = document.createElement('div');
         avatar.classList.add('avatar', 'bot');
-        // avatar không cần icon vì đã có ảnh nền CSS
+        
         const content = document.createElement('div');
         content.classList.add('typing-indicator');
         content.innerHTML = `<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>`;
@@ -1857,7 +2032,7 @@
         if (el) el.remove();
       }
 
-      // ===== Tìm câu trả lời từ FAQ =====
+      
       function findAnswer(question) {
         const qLower = question.toLowerCase();
         for (const [key, value] of Object.entries(faqData)) {
@@ -1888,7 +2063,7 @@
         return best.score >= 3 ? faqData[best.key] : null;
       }
 
-      // ===== Gọi API (giữ nguyên) =====
+      
       async function callOpenAI(question) {
         try {
           const res = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -1938,11 +2113,7 @@
         }
       }
 
-      // ============================================================
-      // EVENT LISTENERS
-      // ============================================================
-
-      // ---- Sidebar toggle ----
+     
       function toggleSidebar(show) {
         if (show === undefined) {
           sidebar.classList.toggle('active');
@@ -1954,7 +2125,7 @@
           sidebar.classList.remove('active');
           sidebarOverlay.classList.remove('active');
         }
-        // Cập nhật tooltip cho nút hamburger
+        
         const isActive = sidebar.classList.contains('active');
         const btn = document.getElementById('sidebarToggleBtn');
         if (isActive) {
@@ -1964,18 +2135,18 @@
         }
       }
 
-      // Nút hamburger mới
+      
       document.getElementById('sidebarToggleBtn').addEventListener('click', function() {
         toggleSidebar();
       });
 
-      // Nút đóng sidebar (trong sidebar)
+      
       document.getElementById('closeSidebarBtn').addEventListener('click', () => toggleSidebar(false));
 
-      // Overlay đóng sidebar
+      
       sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
 
-      // ---- Dark mode ----
+      
       document.getElementById('darkModeToggle').addEventListener('click', function() {
         document.body.classList.toggle('dark-mode');
         const isDark = document.body.classList.contains('dark-mode');
@@ -1984,7 +2155,7 @@
         renderHistory();
       });
 
-      // ---- Mobile view toggle ----
+      
       function toggleMobileView() {
         document.body.classList.toggle('mobile-view');
         const isMobile = document.body.classList.contains('mobile-view');
@@ -1993,7 +2164,7 @@
       }
       document.getElementById('mobileViewToggleToolbar').addEventListener('click', toggleMobileView);
 
-      // ---- Đọc tin nhắn cuối ----
+      
       function readLastMessage() {
         const lastBot = document.querySelector('.message.bot:last-child .message-content');
         if (lastBot) {
@@ -2006,7 +2177,7 @@
       }
       document.getElementById('readAloud').addEventListener('click', readLastMessage);
 
-      // ---- API Modal ----
+      
       function openApiModal() {
         apiKeyModal.classList.add('show');
         document.getElementById('openaiKeyInput').value = openaiApiKey;
@@ -2053,7 +2224,7 @@
         });
       });
 
-      // ---- Export chat ----
+      
       function exportChat() {
         const msgs = Array.from(document.querySelectorAll('.message'));
         if (msgs.length === 0) {
@@ -2078,12 +2249,12 @@
       }
       document.getElementById('exportChat').addEventListener('click', exportChat);
 
-      // ---- Nút "Cuộc trò chuyện mới" ----
+      
       document.getElementById('newChatBtn').addEventListener('click', function() {
         createNewSession();
       });
 
-      // ---- Câu hỏi gợi ý ----
+      
       document.querySelectorAll('.question-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const question = this.textContent.trim();
@@ -2097,7 +2268,7 @@
         });
       });
 
-      // ---- Toggle category ----
+      
       document.querySelectorAll('.category-header').forEach(header => {
         header.addEventListener('click', function() {
           const content = this.nextElementSibling;
@@ -2107,7 +2278,7 @@
         });
       });
 
-      // ---- Suggestions ----
+      
       chatInput.addEventListener('input', function() {
         const val = this.value.trim().toLowerCase();
         if (val.length < 2) {
@@ -2140,7 +2311,7 @@
         }
       });
 
-      // ---- Submit form ----
+      
       chatForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const msg = chatInput.value.trim();
@@ -2154,28 +2325,46 @@
         suggestionsContainer.style.display = 'none';
         showTyping();
 
+        
+        sendBtn.classList.add('loading');
+        sendBtn.innerHTML = '<i class="fas fa-spinner"></i>';
+
         let answer = findAnswer(msg);
         if (answer) {
           setTimeout(() => {
             removeTyping();
             addMessage(answer, 'bot');
+            sendBtn.classList.remove('loading');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            sendBtn.classList.add('success');
+            setTimeout(() => sendBtn.classList.remove('success'), 400);
           }, 600);
           return;
         }
 
         if (currentAI === 'openai' && openaiApiKey) {
-          callOpenAI(msg);
+          callOpenAI(msg).finally(() => {
+            sendBtn.classList.remove('loading');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+          });
         } else if (currentAI === 'gemini' && geminiApiKey) {
-          callGemini(msg);
+          callGemini(msg).finally(() => {
+            sendBtn.classList.remove('loading');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+          });
         } else {
           setTimeout(() => {
             removeTyping();
             addMessage('Mọi thông tin thắc mắc xin liên hệ: Gmail: stemofmydinh@gmail.com. Chủ tịch: Đoàn Phúc Uy Vũ - K5A8; Phó chủ tịch: Đàm Đông Quân - K5A5 hoặc nhắn tin trực tiếp qua trang để nhận được phản hồi sớm nhất!', 'bot');
+            sendBtn.classList.remove('loading');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            sendBtn.classList.add('success');
+            setTimeout(() => sendBtn.classList.remove('success'), 400);
           }, 600);
         }
       });
 
-      // ---- Auto resize textarea ----
+      
       chatInput.addEventListener('input', function() {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
@@ -2188,15 +2377,77 @@
         }
       });
 
-      // ---- Khởi tạo lại dark mode cho nút trên sidebar ----
+      
       const isDark = document.body.classList.contains('dark-mode');
       updateDarkModeUI(isDark);
 
-      // Render history lần đầu
+      
       renderHistory();
+
+      
+      function openUpdateLogModal() {
+        updateLogModal.classList.add('show');
+      }
+      function closeUpdateLogModal() {
+        updateLogModal.classList.remove('show');
+      }
+
+      document.getElementById('updateLogBtn').addEventListener('click', openUpdateLogModal);
+      document.getElementById('updateLogCloseBtn').addEventListener('click', closeUpdateLogModal);
+      document.getElementById('updateLogCloseBtnFooter').addEventListener('click', closeUpdateLogModal);
+      window.addEventListener('click', (e) => {
+        if (e.target === updateLogModal) closeUpdateLogModal();
+      });
     });
   </script>
 
+  <script>
+    (function() {
+      // Ngăn chặn click chuột phải
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
 
-<scribe-shadow id="crxjs-ext" data-crx="okfkdaglfjjjfefdcppliegebpoegaii" style="position: fixed; width: 0px; height: 0px; top: 0px; left: 0px; z-index: 2147483647; overflow: visible; visibility: visible;"></scribe-shadow></body>
-</html>
+      // Ngăn chặn các tổ hợp phím liên quan đến dev tools và view source
+      document.addEventListener('keydown', function(e) {
+        // F12
+        if (e.key === 'F12') {
+          e.preventDefault();
+          return false;
+        }
+        // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C (Chrome/Edge/Firefox)
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+          e.preventDefault();
+          return false;
+        }
+        // Ctrl+U (view source)
+        if (e.ctrlKey && e.key === 'u') {
+          e.preventDefault();
+          return false;
+        }
+        // Ctrl+S (save page)
+        if (e.ctrlKey && e.key === 's') {
+          e.preventDefault();
+          return false;
+        }
+        // Ctrl+Shift+K (Firefox console)
+        if (e.ctrlKey && e.shiftKey && e.key === 'K') {
+          e.preventDefault();
+          return false;
+        }
+        // Ctrl+Shift+E (Firefox inspector) - có thể không cần nhưng thêm cho an toàn
+        if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+          e.preventDefault();
+          return false;
+        }
+        // Ctrl+Shift+U (Firefox view source?) - thực tế ít dùng
+        if (e.ctrlKey && e.shiftKey && e.key === 'U') {
+          e.preventDefault();
+          return false;
+        }
+      });
+    })();
+  </script>
+
+</body></html>

@@ -29,31 +29,16 @@
       letter-spacing: -0.01em;
       position: relative;
       transition: color 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
-      
-      /* ---- ÉP VẼ LẠI NỀN TRÊN MOBILE TRÁNH KẸT DARKMODE ---- */
+      /* ---- Nền gradient động rực rỡ (Crystal Liquid Glass environment) ---- */
       background-image: linear-gradient(45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
       background-size: 400% 400%;
       animation: gradientBGLight 15s ease infinite;
     }
-    
-    body.dark-mode {
-      color: #f5f5f7;
-      /* Đổi name animation để ép iOS Safari render lại nền ngay lập tức */
-      background-image: linear-gradient(45deg, #2b1a3a, #1a1a3e, #0f3460, #16213e) !important;
-      animation: gradientBGDark 18s ease infinite !important;
-    }
-
     @keyframes gradientBGLight {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    @keyframes gradientBGDark {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     /* Lớp phủ thêm để tăng chiều sâu cho kính */
     body::before {
       content: '';
@@ -66,6 +51,18 @@
       background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.15), transparent 60%),
                   radial-gradient(circle at 70% 80%, rgba(255,255,240,0.10), transparent 50%);
       pointer-events: none;
+    }
+
+    body.dark-mode {
+      color: #f5f5f7;
+      background-image: linear-gradient(45deg, #2b1a3a, #1a1a3e, #0f3460, #16213e) !important;
+      background-size: 400% 400%;
+      animation: gradientBGDark 18s ease infinite !important;
+    }
+    @keyframes gradientBGDark {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     body.dark-mode::before {
       background: radial-gradient(circle at 60% 30%, rgba(100,150,255,0.08), transparent 60%),
@@ -107,6 +104,7 @@
       height: 100%;
       width: 320px;
       max-width: 85%;
+      /* ---- CRYSTAL LIQUID GLASS ---- */
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -132,6 +130,8 @@
     }
     body.dark-mode .sidebar {
       background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       border-top: 1px solid rgba(255,255,255,0.3);
       border-left: 1px solid rgba(255,255,255,0.2);
       border-right: 1px solid rgba(255,255,255,0.02);
@@ -147,18 +147,29 @@
       gap: 12px;
       flex-shrink: 0;
       border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: transparent;
     }
 
-    /* ===== BUTTONS – CƠ SỞ (Đã chặn bôi đen văn bản khi kéo) ===== */
-    .btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, 
-    .feedback-btn, .modal-btn, .history-item .delete-btn, .tool-item, 
-    .question-btn, .category-header, .history-item, .suggestion-item {
+    /* ===== BUTTONS – SQUISHY PHYSICS (công thức chung) ===== */
+    .btn-icon,
+    .hamburger-btn,
+    .send-btn,
+    .modal-close,
+    .action-btn,
+    .feedback-btn,
+    .modal-btn,
+    .history-item .delete-btn,
+    .tool-item,
+    .question-btn,
+    .category-header {
       border: none;
       cursor: pointer;
-      /* Mặc định cho phép Transition các màu sắc - Transform sẽ bị JS tắt mở liên tục */
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  box-shadow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      /* ----- SQUISHY TRANSITION ----- */
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  background-color 0.15s ease,
+                  color 0.15s ease,
+                  border-color 0.15s ease;
       will-change: transform, box-shadow;
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -175,11 +186,17 @@
       user-select: none;
       -webkit-user-select: none;
     }
-    body.dark-mode .btn-icon, body.dark-mode .hamburger-btn, body.dark-mode .send-btn,
-    body.dark-mode .modal-close, body.dark-mode .action-btn, body.dark-mode .feedback-btn,
-    body.dark-mode .modal-btn, body.dark-mode .history-item .delete-btn, body.dark-mode .tool-item,
-    body.dark-mode .question-btn, body.dark-mode .category-header, body.dark-mode .history-item,
-    body.dark-mode .suggestion-item {
+    body.dark-mode .btn-icon,
+    body.dark-mode .hamburger-btn,
+    body.dark-mode .send-btn,
+    body.dark-mode .modal-close,
+    body.dark-mode .action-btn,
+    body.dark-mode .feedback-btn,
+    body.dark-mode .modal-btn,
+    body.dark-mode .history-item .delete-btn,
+    body.dark-mode .tool-item,
+    body.dark-mode .question-btn,
+    body.dark-mode .category-header {
       background: rgba(255, 255, 255, 0.03);
       border-top: 1px solid rgba(255,255,255,0.3);
       border-left: 1px solid rgba(255,255,255,0.2);
@@ -189,24 +206,37 @@
       color: #f5f5f7;
     }
 
-    /* ===== ISOLATING HOVER LỖI TRÊN MOBILE ===== */
-    /* Chỉ PC có chuột (pointer: fine) mới chạy hiệu ứng :hover này */
+    /* ----- CHỈ KÍCH HOẠT HOVER KHI CÓ CHUỘT (FIX LỖI KẸT ĐIỆN THOẠI) ----- */
     @media (hover: hover) and (pointer: fine) {
-      .btn-icon:hover, .hamburger-btn:hover, .send-btn:hover, .modal-close:hover,
-      .action-btn:hover, .feedback-btn:hover, .modal-btn:hover,
-      .tool-item:hover, .question-btn:hover, .category-header:hover {
+      .btn-icon:hover,
+      .hamburger-btn:hover,
+      .send-btn:hover,
+      .modal-close:hover,
+      .action-btn:hover,
+      .feedback-btn:hover,
+      .modal-btn:hover,
+      .history-item .delete-btn:hover,
+      .tool-item:hover,
+      .question-btn:hover,
+      .category-header:hover {
         transform: scale(1.08) translateY(-2px);
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
         border-color: rgba(255,255,255,0.5);
       }
-      body.dark-mode .btn-icon:hover, body.dark-mode .hamburger-btn:hover,
-      body.dark-mode .send-btn:hover, body.dark-mode .modal-close:hover,
-      body.dark-mode .action-btn:hover, body.dark-mode .feedback-btn:hover,
-      body.dark-mode .modal-btn:hover, body.dark-mode .tool-item:hover,
-      body.dark-mode .question-btn:hover, body.dark-mode .category-header:hover {
+      body.dark-mode .btn-icon:hover,
+      body.dark-mode .hamburger-btn:hover,
+      body.dark-mode .send-btn:hover,
+      body.dark-mode .modal-close:hover,
+      body.dark-mode .action-btn:hover,
+      body.dark-mode .feedback-btn:hover,
+      body.dark-mode .modal-btn:hover,
+      body.dark-mode .history-item .delete-btn:hover,
+      body.dark-mode .tool-item:hover,
+      body.dark-mode .question-btn:hover,
+      body.dark-mode .category-header:hover {
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
       }
-      
+
       .history-item:hover {
         transform: scale(1.04) translateY(-2px);
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
@@ -214,7 +244,7 @@
       body.dark-mode .history-item:hover {
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
       }
-      
+
       .suggestion-item:hover {
         background: rgba(255,255,255,0.08);
         transform: scale(1.04) translateX(4px);
@@ -224,19 +254,19 @@
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
       }
 
-      .message-content:hover .message-actions { opacity: 1; }
-      .message-content:hover .feedback-container { opacity: 1; }
       .history-item:hover .delete-btn { opacity: 0.7; }
       .history-item .delete-btn:hover { opacity: 1; }
+      .message-content:hover .message-actions { opacity: 1; }
+      .message-content:hover .feedback-container { opacity: 1; }
       .send-btn:hover i { transform: translateX(3px) scale(1.05); }
-      
+
+      ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.15); }
+      body.dark-mode ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.10); }
+
       [data-tooltip]:hover:before {
         opacity: 1;
         transform: translateX(-50%) scale(1);
       }
-
-      ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.15); }
-      body.dark-mode ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.10); }
 
       .view-image-btn:hover {
         color: #0055b3;
@@ -246,146 +276,1054 @@
       .modal-close:hover { color: #ff3b30; }
     }
 
-    /* ĐỐI VỚI ĐIỆN THOẠI (KHÔNG CÓ CHUỘT): CÁC NÚT ACTION LUÔN HIỆN ĐỂ TRÁNH PHẢI HOVER */
+    /* Cho phép hiện action trên di động không cần hover */
     @media (hover: none) {
       .message-actions, .feedback-container { opacity: 1 !important; }
       .history-item .delete-btn { opacity: 1 !important; }
     }
 
-    /* ===== CLASS IS-PRESSED ĐỂ LÚN BÓNG ĐỔ & MÀU NỀN (KHÔNG CHỨA TRANSFORM !IMPORTANT) ===== */
-    .btn-icon.is-pressed, .hamburger-btn.is-pressed, .send-btn.is-pressed, .modal-close.is-pressed,
-    .action-btn.is-pressed, .feedback-btn.is-pressed, .modal-btn.is-pressed, .tool-item.is-pressed,
-    .question-btn.is-pressed, .category-header.is-pressed, .history-item.is-pressed,
-    .suggestion-item.is-pressed, .history-item .delete-btn.is-pressed {
-      /* CHỈ thay đổi màu sắc và shadow. KHÔNG dùng transform ở đây để JS tự kéo dãn */
+    /* Nút riêng lẻ với kích thước */
+    .sidebar-top .btn-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .hamburger-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      background: transparent;
+    }
+    .send-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== SIDEBAR SCROLL ===== */
+    .sidebar-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 14px 20px;
+      scroll-behavior: smooth;
+    }
+
+    /* ===== TOOLS ===== */
+    .sidebar-tools {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .sidebar-tools .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1d1d1f;
+    }
+    body.dark-mode .sidebar-tools .tool-item {
+      color: #f5f5f7;
+    }
+    .sidebar-tools .tool-item i {
+      width: 20px;
+      text-align: center;
+    }
+
+    /* ===== HISTORY ===== */
+    .history-section {
+      margin-bottom: 24px;
+    }
+    .history-section .section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 10px;
+      padding-left: 4px;
+    }
+    body.dark-mode .history-section .section-title {
+      color: rgba(255,255,255,0.5);
+    }
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  background-color 0.15s ease,
+                  color 0.15s ease,
+                  border-color 0.15s ease;
+      will-change: transform, box-shadow;
+      font-size: 0.9rem;
+      color: #1d1d1f;
+      position: relative;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body.dark-mode .history-item {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
+      color: #f5f5f7;
+    }
+    .history-item .title {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 8px;
+    }
+    .history-item .delete-btn {
+      background: transparent;
+      color: rgba(0,0,0,0.4);
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      padding: 4px 8px;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      width: auto;
+      height: auto;
+      box-shadow: none;
+      backdrop-filter: none;
+      background: transparent;
+    }
+    body.dark-mode .history-item .delete-btn { color: rgba(255,255,255,0.5); }
+
+    /* ===== FAQ ===== */
+    .faq-section .section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 10px;
+      padding-left: 4px;
+    }
+    body.dark-mode .faq-section .section-title {
+      color: rgba(255,255,255,0.5);
+    }
+    .category {
+      margin-bottom: 8px;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      overflow: hidden;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    body.dark-mode .category {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
+    }
+    .category-header {
+      padding: 12px 15px;
+      background: transparent;
+      color: #1d1d1f;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: -0.01em;
+      border-radius: 40px;
+    }
+    body.dark-mode .category-header {
+      color: #f5f5f7;
+    }
+    .category-content {
+      padding: 6px 10px 10px;
+      display: grid;
+      gap: 6px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.25, 0.1, 0.25, 1), padding 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .category-content.active {
+      max-height: 500px;
+      padding: 6px 10px 12px;
+    }
+    .question-btn {
+      padding: 11px 14px;
+      border: none;
+      border-radius: 50px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 13.5px;
+      color: #1d1d1f;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    body.dark-mode .question-btn {
+      color: #f5f5f7;
+    }
+
+    /* ===== OVERLAY ===== */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: 90;
+      display: none;
+      transition: opacity 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+      opacity: 0;
+    }
+    .sidebar-overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* ===== CHAT HEADER ===== */
+    .chat-header {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* ---- CRYSTAL LIQUID GLASS ---- */
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      border-radius: 40px;
+      flex-shrink: 0;
+      margin: 10px 0 0;
+    }
+    body.dark-mode .chat-header {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+    }
+    .chat-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chat-title h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #1d1d1f 0%, #3a3a3c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    body.dark-mode .chat-title h1 {
+      background: linear-gradient(135deg, #f5f5f7 0%, #c7c7cc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    #ai-model-info {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+    body.dark-mode #ai-model-info {
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ===== CHAT MESSAGES ===== */
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      scroll-behavior: smooth;
+    }
+    .message {
+      display: flex;
+      gap: 10px;
+      max-width: 78%;
+      animation: fadeInUp 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .avatar.bot {
+      background-image: url('smypic.png');
+      background-size: cover;
+      background-position: center;
+      background-color: transparent;
+      color: #fff;
+    }
+    .avatar.user {
+      background: linear-gradient(135deg, #ff9500, #ff6b35);
+      color: #fff;
+    }
+    .message-content {
+      padding: 14px 18px;
+      border-radius: 28px;
+      line-height: 1.5;
+      position: relative;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+      white-space: pre-wrap;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.01);
+    }
+    .bot .message-content {
+      /* ---- CRYSTAL LIQUID GLASS ---- */
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      border-top-left-radius: 6px;
+      color: #1d1d1f;
+    }
+    body.dark-mode .bot .message-content {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+      color: #f5f5f7;
+    }
+    .user .message-content {
+      background: linear-gradient(135deg, rgba(0,122,255,0.6) 0%, rgba(88,86,214,0.6) 100%);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      color: #fff;
+      border-top-right-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-top-color: rgba(255,255,255,0.4);
+      border-left-color: rgba(255,255,255,0.3);
+      border-bottom-color: rgba(255,255,255,0.05);
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), 0 8px 24px rgba(0,122,255,0.10);
+    }
+    /* Message actions */
+    .message-actions {
+      display: flex;
+      gap: 6px;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .action-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+    .feedback-container {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      justify-content: flex-end;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .feedback-btn {
+      border-radius: 50px;
+      padding: 5px 12px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .feedback-btn.liked {
+      background: rgba(52, 199, 89, 0.2);
+      color: #34c759;
+      border-color: rgba(52,199,89,0.3);
+    }
+    .feedback-btn.disliked {
+      background: rgba(255, 59, 48, 0.2);
+      color: #ff3b30;
+      border-color: rgba(255,59,48,0.3);
+    }
+
+    /* ===== CHAT INPUT ===== */
+    .chat-input-container {
+      padding: 12px 0;
+      background: transparent;
+      flex-shrink: 0;
+      margin: 0 0 10px;
+      position: relative;
+    }
+    .chat-form {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      /* ---- CRYSTAL LIQUID GLASS ---- */
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      border-radius: 999px;
+      padding: 4px 4px 4px 20px;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+    .chat-form:focus-within {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 2px 8px rgba(255,255,255,0.9), 0 0 0 3px rgba(0,122,255,0.1);
+      border-color: rgba(0,122,255,0.3);
+      transform: scale(1.005);
+    }
+    body.dark-mode .chat-form {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+    }
+    body.dark-mode .chat-form:focus-within {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 2px 8px rgba(255,255,255,0.3), 0 0 0 3px rgba(0,122,255,0.05);
+      border-color: rgba(90,200,250,0.2);
+    }
+    .chat-input {
+      flex: 1;
+      padding: 12px 0;
+      border: none;
+      background: transparent;
+      color: #1d1d1f;
+      font-size: 15px;
+      resize: none;
+      min-height: 48px;
+      max-height: 120px;
+      outline: none;
+      font-family: inherit;
+      letter-spacing: -0.01em;
+    }
+    body.dark-mode .chat-input {
+      color: #f5f5f7;
+    }
+    .chat-input::placeholder {
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+    }
+    .send-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      background: rgba(0,122,255,0.12);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(0,122,255,0.3);
+      border-left: 1px solid rgba(0,122,255,0.2);
+      border-right: 1px solid rgba(0,122,255,0.02);
+      border-bottom: 1px solid rgba(0,122,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      color: #007aff;
+    }
+    body.dark-mode .send-btn {
+      background: rgba(0,122,255,0.08);
+      border-top: 1px solid rgba(0,122,255,0.2);
+      border-left: 1px solid rgba(0,122,255,0.15);
+      border-right: 1px solid rgba(0,122,255,0.02);
+      border-bottom: 1px solid rgba(0,122,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
+      color: #5ac8fa;
+    }
+    .send-btn i { transition: transform 0.3s ease; }
+    
+    .send-btn.loading {
+      pointer-events: none;
+      opacity: 0.6;
+      transform: scale(0.96);
+    }
+    .send-btn.loading i { animation: spin 0.8s linear infinite; }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .send-btn.success {
+      background: rgba(52, 199, 89, 0.15);
+      color: #34c759;
+      border-color: rgba(52,199,89,0.2);
+    }
+    .send-btn.success i { animation: pop 0.4s ease; }
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    /* ===== SUGGESTIONS ===== */
+    .suggestions-container {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      border-radius: 24px;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
+      z-index: 10;
+    }
+    body.dark-mode .suggestions-container {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+    }
+    .suggestion-item {
+      padding: 11px 16px;
+      cursor: pointer;
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  background-color 0.15s ease,
+                  color 0.15s ease,
+                  border-color 0.15s ease;
+      will-change: transform, box-shadow;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      color: #1d1d1f;
+      border-radius: 50px;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body.dark-mode .suggestion-item {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #f5f5f7;
+    }
+    .suggestion-item:last-child { border-bottom: none; }
+
+    /* ===== TYPING INDICATOR ===== */
+    .typing-indicator {
+      display: flex;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      border-radius: 24px;
+      border-top-left-radius: 6px;
+      width: fit-content;
+      gap: 5px;
+    }
+    body.dark-mode .typing-indicator {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+    }
+    .typing-dot {
+      width: 7px;
+      height: 7px;
+      background: #007aff;
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(28, 28, 30, 0.8);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 50px;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      border-left: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+    }
+    .toast.show { opacity: 1; }
+
+    /* ===== MODAL ===== */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+                  visibility 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      /* ---- CRYSTAL LIQUID GLASS ---- */
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      border-radius: 40px;
+      padding: 24px;
+      width: 90%;
+      max-width: 500px;
+    }
+    body.dark-mode .modal-content {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .modal-header h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+    }
+    body.dark-mode .modal-header h2 {
+      color: #f5f5f7;
+    }
+    .modal-close {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: rgba(0,0,0,0.5);
+      transition: color 0.2s ease;
+      padding: 4px 8px;
+      border-radius: 50%;
+    }
+    body.dark-mode .modal-close { color: rgba(255,255,255,0.5); }
+
+    .api-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    body.dark-mode .api-tabs {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .api-tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+      font-weight: 500;
+      color: #1d1d1f;
+      border-radius: 50px 50px 0 0;
+    }
+    body.dark-mode .api-tab { color: #f5f5f7; }
+    .api-tab.active {
+      border-bottom: 3px solid #007aff;
+      color: #007aff;
+      font-weight: 600;
+    }
+    .api-tab.gemini.active {
+      border-bottom: 3px solid #8e44ad;
+      color: #8e44ad;
+    }
+    .api-tab-content { display: none; }
+    .api-tab-content.active { display: block; }
+
+    .api-key-input, .ai-model-selector {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 50px;
+      border: none;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      margin-bottom: 14px;
+      font-size: 14px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.15s ease;
+      color: #1d1d1f;
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05), inset 0 2px 4px rgba(255,255,255,0.8);
+    }
+    body.dark-mode .api-key-input, body.dark-mode .ai-model-selector {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.15);
+      color: #f5f5f7;
+    }
+    .api-key-input:focus, .ai-model-selector:focus {
+      outline: none;
+      border-color: rgba(0,122,255,0.3);
+      box-shadow: 0 0 0 3px rgba(0,122,255,0.05), inset 0 2px 8px rgba(255,255,255,0.9);
+    }
+    .api-info {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    body.dark-mode .api-info { color: rgba(255,255,255,0.5); }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .modal-btn {
+      padding: 10px 22px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  background-color 0.15s ease,
+                  color 0.15s ease,
+                  border-color 0.15s ease;
+      will-change: transform, box-shadow;
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-left: 1px solid rgba(255,255,255,0.4);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+      color: #1d1d1f;
+    }
+    body.dark-mode .modal-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
+      color: #f5f5f7;
+    }
+    .modal-btn.primary {
+      background: rgba(0,122,255,0.15);
+      color: #007aff;
+      border-color: rgba(0,122,255,0.2);
+    }
+    body.dark-mode .modal-btn.primary {
+      background: rgba(0,122,255,0.08);
+      color: #5ac8fa;
+    }
+    .modal-btn.gemini {
+      background: rgba(142,68,173,0.15);
+      color: #8e44ad;
+      border-color: rgba(142,68,173,0.2);
+    }
+    body.dark-mode .modal-btn.gemini {
+      background: rgba(142,68,173,0.08);
+      color: #b87cdf;
+    }
+
+    /* ===== KEYFRAMES ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== TOOLTIP ===== */
+    [data-tooltip] { position: relative; }
+    [data-tooltip]:before {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.08);
+      border-radius: 10px;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    body.dark-mode ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+
+    /* ===== UPDATE LOG ===== */
+    .update-log-content {
+      max-height: 70vh;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .update-log-content .log-item {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #1d1d1f;
+    }
+    body.dark-mode .update-log-content .log-item {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #f5f5f7;
+    }
+    .update-log-content .log-item:last-child { border-bottom: none; }
+    .update-log-content .log-item strong {
+      color: #007aff;
+      font-weight: 600;
+    }
+    body.dark-mode .update-log-content .log-item strong { color: #5ac8fa; }
+    .update-log-content .dev-credit {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #007aff;
+      color: #1d1d1f;
+    }
+    body.dark-mode .update-log-content .dev-credit {
+      color: #f5f5f7;
+      border-bottom-color: #5ac8fa;
+    }
+    .update-log-content .dev-credit i {
+      color: #007aff;
+      margin-right: 6px;
+    }
+    body.dark-mode .update-log-content .dev-credit i { color: #5ac8fa; }
+    .view-image-btn {
+      text-decoration: underline;
+      cursor: pointer;
+      color: #007aff;
+      margin-left: 10px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    body.dark-mode .view-image-btn {
+      color: #5ac8fa;
+    }
+
+    /* ===== HIỆU ỨNG LÚN TỨC THÌ (ĐÃ SỬA LỖI NỀN TRẮNG VÀ CHUẨN BỊ CHO VẬT LÝ JS) ===== */
+    .btn-icon.is-pressed,
+    .hamburger-btn.is-pressed,
+    .send-btn.is-pressed,
+    .modal-close.is-pressed,
+    .action-btn.is-pressed,
+    .feedback-btn.is-pressed,
+    .modal-btn.is-pressed,
+    .history-item .delete-btn.is-pressed,
+    .tool-item.is-pressed,
+    .question-btn.is-pressed,
+    .category-header.is-pressed,
+    .history-item.is-pressed,
+    .suggestion-item.is-pressed {
+      /* Bỏ dòng transform vì JS sẽ lo việc này */
       box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
       border-color: rgba(255,255,255,0.1) !important;
-      /* FIX LỖI NỀN TRẮNG: Ép buộc lớp nền kính mờ thay vì màu trắng tinh */
-      background-color: rgba(255, 255, 255, 0.05) !important;
+      /* Ép nền giữ màu kính đục, không bị override thành trắng tinh */
+      background-color: rgba(255, 255, 255, 0.05) !important; 
+      transition: box-shadow 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;
     }
-    body.dark-mode .btn-icon.is-pressed, body.dark-mode .hamburger-btn.is-pressed, 
-    body.dark-mode .send-btn.is-pressed, body.dark-mode .modal-close.is-pressed,
-    body.dark-mode .action-btn.is-pressed, body.dark-mode .feedback-btn.is-pressed,
-    body.dark-mode .modal-btn.is-pressed, body.dark-mode .tool-item.is-pressed,
-    body.dark-mode .question-btn.is-pressed, body.dark-mode .category-header.is-pressed,
-    body.dark-mode .history-item.is-pressed, body.dark-mode .suggestion-item.is-pressed,
-    body.dark-mode .history-item .delete-btn.is-pressed {
+    body.dark-mode .btn-icon.is-pressed,
+    body.dark-mode .hamburger-btn.is-pressed,
+    body.dark-mode .send-btn.is-pressed,
+    body.dark-mode .modal-close.is-pressed,
+    body.dark-mode .action-btn.is-pressed,
+    body.dark-mode .feedback-btn.is-pressed,
+    body.dark-mode .modal-btn.is-pressed,
+    body.dark-mode .history-item .delete-btn.is-pressed,
+    body.dark-mode .tool-item.is-pressed,
+    body.dark-mode .question-btn.is-pressed,
+    body.dark-mode .category-header.is-pressed,
+    body.dark-mode .history-item.is-pressed,
+    body.dark-mode .suggestion-item.is-pressed {
       box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
       background-color: rgba(255, 255, 255, 0.03) !important;
     }
 
-    /* Các css kích thước / cấu trúc khác giữ nguyên ... */
-    .sidebar-top .btn-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    .hamburger-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; background: transparent; }
-    .send-btn { width: 52px; height: 52px; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; overflow: hidden; background: rgba(0,122,255,0.12); color: #007aff; }
-    body.dark-mode .send-btn { background: rgba(0,122,255,0.08); color: #5ac8fa; border-top: 1px solid rgba(0,122,255,0.2); border-left: 1px solid rgba(0,122,255,0.15); }
-    .sidebar-scroll { flex: 1; overflow-y: auto; padding: 12px 14px 20px; scroll-behavior: smooth; }
-    .sidebar-tools { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
-    .sidebar-tools .tool-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; font-size: 0.9rem; font-weight: 500; }
-    .sidebar-tools .tool-item i { width: 20px; text-align: center; }
-    .history-section { margin-bottom: 24px; }
-    .history-section .section-title, .faq-section .section-title { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 10px; padding-left: 4px; }
-    body.dark-mode .history-section .section-title, body.dark-mode .faq-section .section-title { color: rgba(255,255,255,0.5); }
-    .history-list { display: flex; flex-direction: column; gap: 4px; }
-    .history-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; font-size: 0.9rem; }
-    .history-item .title { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 8px; }
-    .history-item .delete-btn { background: transparent; color: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.2s ease; padding: 4px 8px; border-radius: 50%; font-size: 0.9rem; width: auto; height: auto; box-shadow: none; backdrop-filter: none; }
-    body.dark-mode .history-item .delete-btn { color: rgba(255,255,255,0.5); }
-    .category { margin-bottom: 8px; border-radius: 40px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(2px); border-top: 1px solid rgba(255,255,255,0.7); border-left: 1px solid rgba(255,255,255,0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8); overflow: hidden; }
-    body.dark-mode .category { background: rgba(255, 255, 255, 0.03); border-top: 1px solid rgba(255,255,255,0.3); border-left: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15); }
-    .category-header { padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 0.9rem; }
-    .category-content { padding: 6px 10px 10px; display: grid; gap: 6px; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
-    .category-content.active { max-height: 500px; padding: 6px 10px 12px; }
-    .question-btn { padding: 11px 14px; text-align: left; font-size: 13.5px; display: flex; align-items: center; gap: 8px; font-weight: 500; }
-    .sidebar-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.25); backdrop-filter: blur(2px); z-index: 90; display: none; opacity: 0; transition: opacity 0.35s ease; }
-    .sidebar-overlay.active { display: block; opacity: 1; }
-    .chat-header { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(2px); border-radius: 40px; margin: 10px 0 0; }
-    body.dark-mode .chat-header { background: rgba(255, 255, 255, 0.03); }
-    .chat-title { display: flex; align-items: center; gap: 10px; }
-    .chat-title h1 { font-size: 1.35rem; font-weight: 700; background: linear-gradient(135deg, #1d1d1f 0%, #3a3a3c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    body.dark-mode .chat-title h1 { background: linear-gradient(135deg, #f5f5f7 0%, #c7c7cc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    #ai-model-info { font-size: 0.8rem; color: rgba(255,255,255,0.7); font-weight: 500; }
-    .chat-messages { flex: 1; overflow-y: auto; padding: 20px 0; display: flex; flex-direction: column; gap: 18px; scroll-behavior: smooth; }
-    .message { display: flex; gap: 10px; max-width: 78%; animation: fadeInUp 0.35s ease; }
-    .message.user { align-self: flex-end; flex-direction: row-reverse; }
-    .avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-    .avatar.bot { background-image: url('smypic.png'); background-size: cover; background-position: center; color: #fff; }
-    .avatar.user { background: linear-gradient(135deg, #ff9500, #ff6b35); color: #fff; }
-    .message-content { padding: 14px 18px; border-radius: 28px; line-height: 1.5; font-size: 0.95rem; white-space: pre-wrap; position: relative; }
-    .bot .message-content { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(2px); border-top-left-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-    body.dark-mode .bot .message-content { background: rgba(255, 255, 255, 0.03); color: #f5f5f7; }
-    .user .message-content { background: linear-gradient(135deg, rgba(0,122,255,0.6) 0%, rgba(88,86,214,0.6) 100%); color: #fff; border-top-right-radius: 6px; border: 1px solid rgba(255,255,255,0.25); box-shadow: inset 0 2px 4px rgba(255,255,255,0.3); }
-    .message-actions { display: flex; gap: 6px; position: absolute; top: 8px; right: 8px; opacity: 0; transition: opacity 0.2s ease; }
-    .action-btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
-    .feedback-container { display: flex; gap: 8px; margin-top: 8px; justify-content: flex-end; opacity: 0; transition: opacity 0.2s ease; }
-    .feedback-btn { padding: 5px 12px; font-size: 12px; display: flex; align-items: center; gap: 5px; }
-    .feedback-btn.liked { background: rgba(52, 199, 89, 0.2); color: #34c759; }
-    .feedback-btn.disliked { background: rgba(255, 59, 48, 0.2); color: #ff3b30; }
-    .chat-input-container { padding: 12px 0; flex-shrink: 0; margin: 0 0 10px; position: relative; }
-    .chat-form { display: flex; gap: 12px; align-items: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(2px); border-radius: 999px; padding: 4px 4px 4px 20px; transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease; }
-    .chat-form:focus-within { box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 2px 8px rgba(255,255,255,0.9), 0 0 0 3px rgba(0,122,255,0.1); transform: scale(1.005); }
-    body.dark-mode .chat-form { background: rgba(255, 255, 255, 0.03); }
-    body.dark-mode .chat-form:focus-within { border-color: rgba(90,200,250,0.2); }
-    .chat-input { flex: 1; padding: 12px 0; border: none; background: transparent; font-size: 15px; resize: none; min-height: 48px; max-height: 120px; outline: none; color: inherit; }
-    .chat-input::placeholder { color: rgba(255,255,255,0.5); }
-    .send-btn.loading { pointer-events: none; opacity: 0.6; transform: scale(0.96); }
-    .send-btn.loading i { animation: spin 0.8s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .send-btn.success { background: rgba(52, 199, 89, 0.15); color: #34c759; }
-    .send-btn.success i { animation: pop 0.4s ease; }
-    @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
-    .suggestions-container { position: absolute; bottom: calc(100% + 10px); left: 0; right: 0; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(2px); border-radius: 24px; max-height: 200px; overflow-y: auto; display: none; z-index: 10; }
-    body.dark-mode .suggestions-container { background: rgba(255, 255, 255, 0.03); }
-    .suggestion-item { padding: 11px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
-    .typing-indicator { display: flex; padding: 14px 18px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(2px); border-radius: 24px; border-top-left-radius: 6px; width: fit-content; gap: 5px; }
-    body.dark-mode .typing-indicator { background: rgba(255, 255, 255, 0.03); }
-    .typing-dot { width: 7px; height: 7px; background: #007aff; border-radius: 50%; animation: typingBounce 1.4s infinite ease-in-out; }
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: rgba(28, 28, 30, 0.8); backdrop-filter: blur(2px); color: #fff; padding: 12px 22px; border-radius: 50px; z-index: 1000; opacity: 0; transition: opacity 0.35s ease; display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.9rem; }
-    .toast.show { opacity: 1; }
-    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0.35s ease; }
-    .modal.show { opacity: 1; visibility: visible; }
-    .modal-content { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(2px); border-radius: 40px; padding: 24px; width: 90%; max-width: 500px; }
-    body.dark-mode .modal-content { background: rgba(255, 255, 255, 0.03); }
-    .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-    .modal-header h2 { font-size: 1.4rem; font-weight: 700; }
-    .modal-close { background: transparent; padding: 4px 8px; border-radius: 50%; font-size: 1.5rem; }
-    .api-tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .api-tab { padding: 10px 20px; font-weight: 500; border-radius: 50px 50px 0 0; border-bottom: 3px solid transparent; }
-    .api-tab.active { border-bottom: 3px solid #007aff; color: #007aff; }
-    .api-tab.gemini.active { border-bottom: 3px solid #8e44ad; color: #8e44ad; }
-    .api-tab-content { display: none; }
-    .api-tab-content.active { display: block; }
-    .api-key-input, .ai-model-selector { width: 100%; padding: 12px 15px; border-radius: 50px; border: none; background: rgba(255, 255, 255, 0.05); margin-bottom: 14px; font-size: 14px; color: inherit; }
-    body.dark-mode .api-key-input, body.dark-mode .ai-model-selector { background: rgba(255, 255, 255, 0.03); }
-    .api-key-input:focus, .ai-model-selector:focus { outline: none; border-color: rgba(0,122,255,0.3); box-shadow: 0 0 0 3px rgba(0,122,255,0.05); }
-    .api-info { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 14px; line-height: 1.5; }
-    body.dark-mode .api-info { color: rgba(255,255,255,0.5); }
-    .modal-footer { display: flex; justify-content: flex-end; gap: 10px; }
-    .modal-btn { padding: 10px 22px; font-size: 0.9rem; font-weight: 600; }
-    .modal-btn.primary { background: rgba(0,122,255,0.15); color: #007aff; border-color: rgba(0,122,255,0.2); }
-    body.dark-mode .modal-btn.primary { background: rgba(0,122,255,0.08); color: #5ac8fa; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 10px; }
-    body.dark-mode ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); }
-    .update-log-content { max-height: 70vh; overflow-y: auto; padding-right: 4px; }
-    .update-log-content .log-item { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.95rem; line-height: 1.5; }
-    body.dark-mode .update-log-content .log-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .update-log-content .log-item:last-child { border-bottom: none; }
-    .update-log-content .log-item strong { color: #007aff; font-weight: 600; }
-    body.dark-mode .update-log-content .log-item strong { color: #5ac8fa; }
-    .update-log-content .dev-credit { font-size: 1rem; font-weight: 600; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid #007aff; }
-    body.dark-mode .update-log-content .dev-credit { border-bottom-color: #5ac8fa; }
-    .update-log-content .dev-credit i { color: #007aff; margin-right: 6px; }
-    body.dark-mode .update-log-content .dev-credit i { color: #5ac8fa; }
-    .view-image-btn { text-decoration: underline; cursor: pointer; color: #007aff; margin-left: 10px; font-weight: 500; transition: all 0.2s ease; }
-    body.dark-mode .view-image-btn { color: #5ac8fa; }
-    
-    @media (max-width: 1024px) { .chat-main { padding: 0 16px; } .sidebar { border-radius: 40px 0 0 40px; } }
-    @media (max-width: 768px) { .message { max-width: 90%; } .chat-title h1 { font-size: 1.2rem; } .chat-header { padding: 10px 14px; } .chat-messages { padding: 14px 0; gap: 14px; } .chat-form { padding-left: 14px; gap: 8px; } .send-btn { width: 46px; height: 46px; font-size: 1.1rem; } .chat-input { font-size: 14px; min-height: 42px; padding: 10px 0; } }
-    @media (max-width: 480px) { .chat-main { padding: 0 10px; } .chat-title h1 { font-size: 1.1rem; } .chat-header { padding: 8px 10px; } .chat-messages { padding: 10px 0; gap: 12px; } .message { max-width: 95%; gap: 7px; } .avatar { width: 32px; height: 32px; font-size: 0.8rem; } .message-content { padding: 11px 14px; font-size: 0.9rem; } .chat-form { padding-left: 12px; gap: 6px; border-radius: 40px; } .chat-input { padding: 8px 0; font-size: 14px; min-height: 40px; } .send-btn { width: 42px; height: 42px; font-size: 1rem; } .suggestions-container { max-height: 150px; } .suggestion-item { padding: 8px 12px; font-size: 13px; } }
-    @media (max-height: 600px) and (max-width: 480px) { .chat-header { padding: 6px 8px; } .chat-messages { padding: 8px 0; gap: 10px; } .message-content { padding: 9px 12px; font-size: 0.85rem; } .chat-input { min-height: 36px; padding: 6px 0; } .send-btn { width: 38px; height: 38px; font-size: 0.9rem; } }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .chat-main { padding: 0 16px; }
+      .sidebar { border-radius: 40px 0 0 40px; }
+    }
+    @media (max-width: 768px) {
+      .message { max-width: 90%; }
+      .chat-title h1 { font-size: 1.2rem; }
+      .chat-header { padding: 10px 14px; }
+      .chat-messages { padding: 14px 0; gap: 14px; }
+      .chat-form { padding-left: 14px; gap: 8px; }
+      .send-btn { width: 46px; height: 46px; font-size: 1.1rem; }
+      .chat-input { font-size: 14px; min-height: 42px; padding: 10px 0; }
+    }
+    @media (max-width: 480px) {
+      .chat-main { padding: 0 10px; }
+      .chat-title h1 { font-size: 1.1rem; }
+      .chat-header { padding: 8px 10px; }
+      .chat-messages { padding: 10px 0; gap: 12px; }
+      .message { max-width: 95%; gap: 7px; }
+      .avatar { width: 32px; height: 32px; font-size: 0.8rem; }
+      .message-content { padding: 11px 14px; font-size: 0.9rem; }
+      .chat-form { padding-left: 12px; gap: 6px; border-radius: 40px; }
+      .chat-input { padding: 8px 0; font-size: 14px; min-height: 40px; }
+      .send-btn { width: 42px; height: 42px; font-size: 1rem; }
+      .suggestions-container { max-height: 150px; }
+      .suggestion-item { padding: 8px 12px; font-size: 13px; }
+    }
+    @media (max-height: 600px) and (max-width: 480px) {
+      .chat-header { padding: 6px 8px; }
+      .chat-messages { padding: 8px 0; gap: 10px; }
+      .message-content { padding: 9px 12px; font-size: 0.85rem; }
+      .chat-input { min-height: 36px; padding: 6px 0; }
+      .send-btn { width: 38px; height: 38px; font-size: 0.9rem; }
+    }
+    .sidebar-overlay.active { display: block; }
   </style>
 </head>
 <body>
@@ -432,7 +1370,7 @@
         
         <div class="history-section">
           <div class="section-title">Lịch sử trò chuyện</div>
-          <div class="history-list" id="historyList"><div class="history-item" style="background: rgba(0, 122, 255, 0.15);"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div></div>
+          <div class="history-list" id="historyList"><div class="history-item" style="background: rgba(0, 122, 255, 0.15);"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div></div>
         </div>
 
         
@@ -531,7 +1469,7 @@
           <span id="ai-model-info">Đang sử dụng: Dữ liệu cục bộ</span>
         </div>
       </div>
-      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-messages" id="chatMessages"><div class="message bot"><div class="avatar bot"></div><div class="message-content">Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.<div class="message-actions"><button class="action-btn" data-tooltip="Sao chép tin nhắn"><i class="fas fa-copy"></i></button><button class="action-btn" data-tooltip="Đọc thành tiếng"><i class="fas fa-volume-up"></i></button></div><div class="feedback-container"><button class="feedback-btn"><i class="fas fa-thumbs-up"></i> Hữu ích</button><button class="feedback-btn"><i class="fas fa-thumbs-down"></i> Không hữu ích</button></div></div></div></div>
       <div class="chat-input-container">
         <div class="suggestions-container" id="suggestionsContainer" style="display: none;"></div>
         <form class="chat-form" id="chatForm">
@@ -589,7 +1527,11 @@
       </div>
       <div class="update-log-content">
         <div class="dev-credit"><i class="fas fa-code"></i> Developed by Doan Phuc Uy Vu</div>
-        <div class="log-item"><strong> Log 1 – 09/2025:</strong> Nâng cấp giao diện web, bổ sung chế độ hiển thị sáng/tối...</div>
+        <div class="log-item"><strong> Log 1 – 09/2025:</strong> Nâng cấp giao diện web, bổ sung chế độ hiển thị sáng/tối, tích hợp chức năng đọc tin nhắn và xuất hội thoại. <span class="view-image-btn" data-log="1" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
+        <div class="log-item"><strong> Log 2 – 12/2025:</strong> Tái cấu trúc thiết kế, thêm chế độ tích hợp API, hỗ trợ chế độ hiển thị điện thoại và máy tính. <span class="view-image-btn" data-log="2" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
+        <div class="log-item"><strong> Log 3 – 02/2026:</strong> Cập nhật giao diện, tối ưu hóa chế độ hiển thị trên điện thoại và máy tính, tự động thích ứng với từng loại thiết bị. <span class="view-image-btn" data-log="3" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
+        <div class="log-item"><strong> Log 4 – 06/2026:</strong> Đại tu toàn bộ bố cục website, khắc phục lỗi chồng chéo nội dung. <span class="view-image-btn" data-log="4" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
+        <div class="log-item"><strong> Log 5 – 07/2026:</strong> Thêm ảnh đại diện (avatar) cho bot chat. Cải tiến khung nhập liệu. <span class="view-image-btn" data-log="5" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>       
       </div>
       <div class="modal-footer">
         <button class="modal-btn secondary" id="updateLogCloseBtnFooter">Đóng</button>
@@ -605,7 +1547,7 @@
         <button class="modal-close" id="imageModalCloseBtn">×</button>
       </div>
       <div style="text-align:center; padding: 10px 0;">
-        <img id="imageModalPreview" src="" alt="Ảnh cập nhật" style="max-width:100%; max-height:70vh; border-radius:8px;">
+        <img id="imageModalPreview" src="" alt="Ảnh cập nhật" style="max-width:100%; max-height:70vh; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.15);">
       </div>
       <div class="modal-footer" style="justify-content:center;">
         <button class="modal-btn secondary" id="imageModalCloseBtnFooter">Đóng</button>
@@ -613,36 +1555,62 @@
     </div>
   </div>
  
-  <!-- LOGIC HOẠT ĐỘNG GIỮ NGUYÊN HOÀN TOÀN TỪ FILE CŨ CỦA BẠN -->
-  <script>
-    const faqData = {
-      "Thông tin liên hệ": "Nếu bạn muốn liên hệ với SMY, bạn có thể qua:\n\n• Fanpage: https://www.facebook.com/STEMofMyDinh/\n• Gmail: stemofmydinh@gmail.com",
-      "Ban điều hành": "Ban điều hành hiện tại của SMY gồm:\n\n• Cố vấn: Thầy Phạm Văn Tùng – GVBM Vật Lý.\n• Chủ tịch: Đoàn Phúc Uy Vũ - K5A8.\n• Phó Chủ tịch: Đàm Đông Quân - K5A5.",
-      "Các phân ban": "Hiện tại, SMY có 3 ban chính:\n\n• Ban Chuyên Môn:\n  - Tiểu ban Khoa học.\n  - Tiểu ban Công nghệ thông tin.\n\n• Ban Truyền thông:\n  - Tiểu ban Thiết kế.\n  - Tiểu ban Media.\n  - Tiểu ban Nội dung.\n\n• Ban Sự kiện:\n  - Tiểu ban Tài chính.\n  - Tiểu ban Hậu cần. \n• Ban Nhân sự.",
-      "Tên gọi": "Tên tiếng Việt: Câu lạc bộ Khoa học.\nTên tiếng Anh: STEM Mỹ Đình.\nTên viết tắt: SMY.",
-      "Giới thiệu chung về CLB SMY": "STEM MyDinh (SMY) là câu lạc bộ trực thuộc trường THPT Mỹ Đình, được thành lập vào tháng 5 năm 2024. SMY ra đời với mong muốn mang đến cho bạn một cách tiếp cận khoa học mới mẻ, gần gũi và đậm dấu ấn của thế hệ trẻ.\n\nTại đây, bạn sẽ có cơ hội khám phá khả năng tư duy của bản thân, vượt qua những giới hạn trong trí tưởng tượng và nhìn khoa học dưới một góc nhìn sinh động, đầy màu sắc hơn.",
-      "Ý nghĩa tên gọi SMY": "Tên tiếng Việt của CLB là Câu lạc bộ Khoa học.\nTên tiếng Anh là SMY - STEM MyDinh.\n\nKhông chỉ là tên gọi mang tính biểu tượng của câu lạc bộ, SMY còn gợi đến ý nghĩa của 'tiếng cười' - đại diện cho tinh thần tuổi trẻ năng động, nhiệt huyết, luôn vui tươi và tràn đầy sức sống.",
-      "Sứ mệnh": "SMY mong muốn xây dựng một môi trường giao lưu và sinh hoạt lành mạnh, bổ ích, đồng thời tạo nền tảng học tập hiệu quả thông qua các hoạt động STEM.\n\nBên cạnh đó, SMY cũng hướng tới việc giúp bạn phát triển tư duy khoa học và nâng cao khả năng cạnh tranh trong thời đại công nghệ phát triển mạnh mẽ.",
-      "Tầm nhìn": "Thông qua các hoạt động và chương trình của mình, SMY mong muốn khơi dậy niềm yêu thích khoa học trong học sinh, đồng thời tạo cơ hội để bạn được trực tiếp trải nghiệm, thực hành và rèn luyện kỹ năng.",
-      "Thành viên trong từng ban": "Thông tin về thành viên của từng ban sẽ được SMY cập nhật trong thời gian tới.",
-      "Tôn chỉ": "SMY là nơi để bạn học tập, sáng tạo và thực hiện những thí nghiệm, dự án hoặc chương trình mà trên lớp chưa có nhiều thời gian để thực hành.",
-      "Mục đích": "SMY được thành lập với mục tiêu tạo nên một không gian sinh hoạt thoải mái, nơi bạn có thể tự do sáng tạo, kết nối với những người có cùng đam mê và cùng phát triển kỹ năng trong các lĩnh vực STEM.",
-      "Chức năng": "SMY sẽ chia sẻ nhiều thông tin thú vị và bổ ích về STEM, đồng thời tổ chức các hoạt động thí nghiệm, trưng bày sản phẩm khoa học nhằm giúp bạn tìm hiểu và đào sâu kiến thức.",
-      "Nhiệm vụ": "SMY có nhiệm vụ xây dựng kế hoạch và triển khai các dự án của CLB cũng như của nhà trường.\n\nNgoài ra, CLB còn tham gia sáng tạo nội dung cho các chương trình STEM, chẳng hạn như Ngày hội STEM.",
-      "Tài chính": "Hiện tại, SMY hoạt động chủ yếu trên các nền tảng trực tuyến và mạng xã hội nên chưa thu quỹ hội viên.",
-      "Khen thưởng": "Nếu bạn hoặc nhóm của bạn có nhiều đóng góp tích cực cho SMY, những đóng góp đó sẽ được ghi nhận và Ban điều hành có thể đề xuất với BCH Đoàn trường THPT Mỹ Đình để xem xét khen thưởng.",
-      "Kỷ luật": "Nếu hội viên vi phạm quy chế, SMY sẽ xem xét xử lý tùy theo mức độ:\n\n• Mức 1: Nhắc nhở.\n• Mức 2: Kỷ luật trước toàn CLB.\n• Mức 3: Khai trừ khỏi CLB.",
-      "Tiêu chuẩn Hội viên": "Để trở thành hội viên của SMY, bạn cần là học sinh trường THPT Mỹ Đình có hạnh kiểm Tốt, không vi phạm pháp luật, nội quy nhà trường và điều lệ của CLB.",
-      "Quyền lợi của Hội viên": "Khi trở thành hội viên của SMY, bạn sẽ được tham gia các hoạt động của CLB, được đề xuất ý kiến và nguyện vọng chính đáng, đồng thời nhận được sự hỗ trợ trong quá trình sinh hoạt.",
-      "Nghĩa vụ của Hội viên": "Là hội viên của SMY, bạn cần tôn trọng và tuân thủ điều lệ CLB, giữ gìn tư cách hội viên, tích cực tham gia các hoạt động và hoàn thành những nhiệm vụ được phân công.",
-      "Đăng ký làm Hội viên": "Nếu bạn muốn trở thành hội viên chính thức của SMY, bạn cần tự nguyện nộp đơn và hồ sơ theo mẫu quy định.\n\nHồ sơ cần có xác nhận và sự đồng ý của phụ huynh.",
-      "Rút, xóa tên khỏi CLB": "Nếu muốn rời SMY, bạn có thể tự nguyện làm đơn xin rút khỏi CLB vì lý do cá nhân.\n\nNhững hội viên không tham gia sinh hoạt trong thời gian dài mà không có lý do chính đáng có thể bị xóa tên khỏi danh sách hội viên.",
-      "Đơn đăng ký tham gia CLB": "Đơn đăng ký gồm các thông tin cá nhân, thông tin phụ huynh, mục đích tham gia và cam kết của thành viên.\n\nNếu cần nhận mẫu đơn, bạn có thể liên hệ qua Gmail: stemofmydinh@gmail.com.",
-      "Quy chế hoạt động CLB": "Thông tin này sẽ được SMY cập nhật trong thời gian tới.",
-      "Cách tham gia CLB SMY": "Vào đầu tháng 8 hằng năm, SMY sẽ tổ chức chương trình chào đón học sinh khóa mới với các hoạt động giới thiệu CLB, trình diễn thí nghiệm và tuyển thành viên.\n\nNếu muốn tham gia, bạn chỉ cần điền đơn đăng ký (có chữ ký xác nhận của phụ huynh) và gửi lại cho SMY."
-    };
 
+  <script>
+    
+    const faqData = {
+  "Thông tin liên hệ": "Nếu bạn muốn liên hệ với SMY, bạn có thể qua:\n\n• Fanpage: https://www.facebook.com/STEMofMyDinh/\n• Gmail: stemofmydinh@gmail.com",
+
+  "Ban điều hành": "Ban điều hành hiện tại của SMY gồm:\n\n• Cố vấn: Thầy Phạm Văn Tùng – GVBM Vật Lý.\n• Chủ tịch: Đoàn Phúc Uy Vũ - K5A8.\n• Phó Chủ tịch: Đàm Đông Quân - K5A5.",
+
+  "Các phân ban": "Hiện tại, SMY có 3 ban chính:\n\n• Ban Chuyên Môn:\n  - Tiểu ban Khoa học.\n  - Tiểu ban Công nghệ thông tin.\n\n• Ban Truyền thông:\n  - Tiểu ban Thiết kế.\n  - Tiểu ban Media.\n  - Tiểu ban Nội dung.\n\n• Ban Sự kiện:\n  - Tiểu ban Tài chính.\n  - Tiểu ban Hậu cần. \n• Ban Nhân sự.",
+
+  "Tên gọi": "Tên tiếng Việt: Câu lạc bộ Khoa học.\nTên tiếng Anh: STEM Mỹ Đình.\nTên viết tắt: SMY.",
+
+  "Giới thiệu chung về CLB SMY": "STEM MyDinh (SMY) là câu lạc bộ trực thuộc trường THPT Mỹ Đình, được thành lập vào tháng 5 năm 2024. SMY ra đời với mong muốn mang đến cho bạn một cách tiếp cận khoa học mới mẻ, gần gũi và đậm dấu ấn của thế hệ trẻ.\n\nTại đây, bạn sẽ có cơ hội khám phá khả năng tư duy của bản thân, vượt qua những giới hạn trong trí tưởng tượng và nhìn khoa học dưới một góc nhìn sinh động, đầy màu sắc hơn.\n\nThông qua nhiều hoạt động tương tác xoay quanh các chủ đề khoa học quen thuộc, SMY giúp bạn rèn luyện tư duy khoa học, thể hiện góc nhìn cá nhân và tiếp cận tri thức một cách dễ dàng hơn.",
+
+  "Ý nghĩa tên gọi SMY": "Tên tiếng Việt của CLB là Câu lạc bộ Khoa học.\nTên tiếng Anh là SMY - STEM MyDinh.\n\nKhông chỉ là tên gọi mang tính biểu tượng của câu lạc bộ, SMY còn gợi đến ý nghĩa của 'tiếng cười' - đại diện cho tinh thần tuổi trẻ năng động, nhiệt huyết, luôn vui tươi và tràn đầy sức sống.",
+
+  "Sứ mệnh": "SMY mong muốn xây dựng một môi trường giao lưu và sinh hoạt lành mạnh, bổ ích, đồng thời tạo nền tảng học tập hiệu quả thông qua các hoạt động STEM (Science - Khoa học, Technology - Công nghệ, Engineering - Kỹ thuật, Mathematics - Toán học).\n\nBên cạnh đó, SMY cũng hướng tới việc giúp bạn phát triển tư duy khoa học và nâng cao khả năng cạnh tranh trong thời đại công nghệ phát triển mạnh mẽ.",
+
+  "Tầm nhìn": "Thông qua các hoạt động và chương trình của mình, SMY mong muốn khơi dậy niềm yêu thích khoa học trong học sinh, đồng thời tạo cơ hội để bạn được trực tiếp trải nghiệm, thực hành và rèn luyện kỹ năng.\n\nSMY cũng phối hợp cùng nhà trường xây dựng các chuyên đề khoa học với nhiều hình thức khác nhau để tiếp cận học sinh trong và ngoài trường.\n\nNgoài ra, CLB còn hướng tới việc xây dựng các nhóm học sinh nghiên cứu và phát triển những lĩnh vực phù hợp với khả năng của mình.",
+
+  "Thành viên trong từng ban": "Thông tin về thành viên của từng ban sẽ được SMY cập nhật trong thời gian tới.",
+
+  "Tôn chỉ": "SMY là nơi để bạn học tập, sáng tạo và thực hiện những thí nghiệm, dự án hoặc chương trình mà trên lớp chưa có nhiều thời gian để thực hành.\n\nCLB mong muốn tạo ra một môi trường sinh hoạt lành mạnh, bổ ích và góp phần thay đổi góc nhìn của mọi người về các môn khoa học.",
+
+  "Mục đích": "SMY được thành lập với mục tiêu tạo nên một không gian sinh hoạt thoải mái, nơi bạn có thể tự do sáng tạo, kết nối với những người có cùng đam mê và cùng phát triển kỹ năng trong các lĩnh vực STEM.\n\nĐồng thời, CLB hướng tới mô hình giáo dục STEM hiện đại, giúp bạn tiếp cận nhiều phương pháp học tập mới và phát triển theo hướng tích cực hơn.",
+
+  "Chức năng": "SMY sẽ chia sẻ nhiều thông tin thú vị và bổ ích về STEM, đồng thời tổ chức các hoạt động thí nghiệm, trưng bày sản phẩm khoa học nhằm giúp bạn tìm hiểu và đào sâu kiến thức.\n\nBên cạnh đó, CLB cũng góp phần lan tỏa hình ảnh và các phương pháp giáo dục hiệu quả, lành mạnh.",
+
+  "Nhiệm vụ": "SMY có nhiệm vụ xây dựng kế hoạch và triển khai các dự án của CLB cũng như của nhà trường.\n\nNgoài ra, CLB còn tham gia sáng tạo nội dung cho các chương trình STEM, chẳng hạn như Ngày hội STEM.",
+
+  "Tài chính": "Hiện tại, SMY hoạt động chủ yếu trên các nền tảng trực tuyến và mạng xã hội nên chưa thu quỹ hội viên.\n\nNếu có bất kỳ thay đổi nào liên quan đến tài chính, SMY sẽ thông báo chính thức đến các thành viên.",
+
+  "Khen thưởng": "Nếu bạn hoặc nhóm của bạn có nhiều đóng góp tích cực cho SMY, những đóng góp đó sẽ được ghi nhận và Ban điều hành có thể đề xuất với BCH Đoàn trường THPT Mỹ Đình để xem xét khen thưởng.",
+
+  "Kỷ luật": "Nếu hội viên vi phạm quy chế, SMY sẽ xem xét xử lý tùy theo mức độ:\n\n• Mức 1: Nhắc nhở.\n• Mức 2: Kỷ luật trước toàn CLB.\n• Mức 3: Khai trừ khỏi CLB.\n\nCác hình thức xử lý cụ thể sẽ do Ban điều hành đề xuất và được toàn CLB thống nhất theo nguyên tắc biểu quyết dân chủ với trên 50% số người tham gia biểu quyết đồng ý.",
+
+  "Tiêu chuẩn Hội viên": "Để trở thành hội viên của SMY, bạn cần là học sinh trường THPT Mỹ Đình có hạnh kiểm Tốt, không vi phạm pháp luật, nội quy nhà trường và điều lệ của CLB.",
+
+  "Quyền lợi của Hội viên": "Khi trở thành hội viên của SMY, bạn sẽ được tham gia các hoạt động của CLB, được đề xuất ý kiến và nguyện vọng chính đáng, đồng thời nhận được sự hỗ trợ trong quá trình sinh hoạt.\n\nNếu có những đóng góp tích cực hoặc thành tích nổi bật, bạn cũng sẽ được SMY ghi nhận và khen thưởng.",
+
+  "Nghĩa vụ của Hội viên": "Là hội viên của SMY, bạn cần tôn trọng và tuân thủ điều lệ CLB, giữ gìn tư cách hội viên, tích cực tham gia các hoạt động và hoàn thành những nhiệm vụ được phân công.\n\nBên cạnh đó, bạn cũng có trách nhiệm quảng bá hình ảnh của SMY và giới thiệu thêm hội viên mới.",
+
+  "Đăng ký làm Hội viên": "Nếu bạn muốn trở thành hội viên chính thức của SMY, bạn cần tự nguyện nộp đơn và hồ sơ theo mẫu quy định.\n\nHồ sơ cần có xác nhận và sự đồng ý của phụ huynh.",
+
+  "Rút, xóa tên khỏi CLB": "Nếu muốn rời SMY, bạn có thể tự nguyện làm đơn xin rút khỏi CLB vì lý do cá nhân.\n\nNhững hội viên không tham gia sinh hoạt trong thời gian dài mà không có lý do chính đáng có thể bị xóa tên khỏi danh sách hội viên.\n\nNhững trường hợp vi phạm pháp luật hoặc điều lệ CLB, gây ảnh hưởng đến uy tín của SMY sẽ bị khai trừ.",
+
+  "Đơn đăng ký tham gia CLB": "Đơn đăng ký gồm các thông tin cá nhân, thông tin phụ huynh, mục đích tham gia và cam kết của thành viên.\n\nNếu cần nhận mẫu đơn, bạn có thể liên hệ qua Gmail: stemofmydinh@gmail.com.",
+
+  "Quy chế hoạt động CLB": "Thông tin này sẽ được SMY cập nhật trong thời gian tới.",
+
+  "Cách tham gia CLB SMY": "Vào đầu tháng 8 hằng năm, SMY sẽ tổ chức chương trình chào đón học sinh khóa mới với các hoạt động giới thiệu CLB, trình diễn thí nghiệm và tuyển thành viên.\n\nNếu muốn tham gia, bạn chỉ cần điền đơn đăng ký (có chữ ký xác nhận của phụ huynh) và gửi lại cho SMY.\n\nĐừng quên theo dõi fanpage để cập nhật thông tin mới nhất về đợt tuyển thành viên cũng như các sự kiện sắp tới nhé!"
+}
+
+    
     document.addEventListener('DOMContentLoaded', function() {
+      // DOM refs
       const sidebar = document.getElementById('mainSidebar');
       const sidebarOverlay = document.getElementById('sidebarOverlay');
       const chatMessages = document.getElementById('chatMessages');
@@ -654,6 +1622,7 @@
       const apiKeyModal = document.getElementById('apiKeyModal');
       const updateLogModal = document.getElementById('updateLogModal');
 
+      
       let openaiApiKey = localStorage.getItem('openaiApiKey') || '';
       let geminiApiKey = localStorage.getItem('geminiApiKey') || '';
       let openaiModel = localStorage.getItem('openaiModel') || 'gpt-3.5-turbo';
@@ -661,11 +1630,15 @@
       let currentAI = localStorage.getItem('currentAI') || 'none';
       let isMobileView = localStorage.getItem('mobileView') === 'true';
 
+      
       let currentSessionId = null;
       let sessions = [];
+
+      
       let currentSpeechUtterance = null;
       let isSpeaking = false;
 
+      
       if (isMobileView) {
         document.body.classList.add('mobile-view');
         updateMobileViewButtons(true);
@@ -676,6 +1649,7 @@
       }
       updateAIModelInfo();
 
+      
       loadSessions();
       if (sessions.length === 0) {
         createNewSession();
@@ -683,6 +1657,7 @@
         loadSession(sessions[0].id);
       }
 
+      
       function showToast(message) {
         toast.querySelector('span').textContent = message;
         toast.classList.add('show');
@@ -714,6 +1689,7 @@
         else info.textContent = 'Đang sử dụng: Dữ liệu cục bộ';
       }
 
+      
       function loadSessions() {
         try {
           const stored = localStorage.getItem('smy_sessions');
@@ -735,14 +1711,21 @@
 
       function createNewSession() {
         const newId = Date.now().toString(36) + Math.random().toString(36).substr(2, 4);
-        const newSession = { id: newId, title: 'Cuộc trò chuyện mới', messages: [] };
+        const newSession = {
+          id: newId,
+          title: 'Cuộc trò chuyện mới',
+          messages: []
+        };
         sessions.unshift(newSession);
         saveSessions();
         currentSessionId = newId;
         chatMessages.innerHTML = '';
-        addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
+        addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
+        updateChatTitle('Cuộc trò chuyện mới');
         renderHistory();
-        if (window.innerWidth <= 1024) toggleSidebar(false);
+        if (window.innerWidth <= 1024) {
+          toggleSidebar(false);
+        }
         showToast('Đã tạo cuộc trò chuyện mới');
       }
 
@@ -751,12 +1734,21 @@
         if (!session) return;
         currentSessionId = sessionId;
         chatMessages.innerHTML = '';
-        session.messages.forEach(msg => addMessage(msg.content, msg.role, false));
+        session.messages.forEach(msg => {
+          addMessage(msg.content, msg.role, false);
+        });
+        updateChatTitle(session.title);
         if (session.messages.length === 0) {
-          addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
+          addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
         }
         renderHistory();
-        if (window.innerWidth <= 1024) toggleSidebar(false);
+        if (window.innerWidth <= 1024) {
+          toggleSidebar(false);
+        }
+      }
+
+      function updateChatTitle(title) {
+        // không cần cập nhật
       }
 
       function addMessageToSession(role, content) {
@@ -767,6 +1759,7 @@
           let title = content.trim().substring(0, 20);
           if (title.length < 3) title = 'Cuộc trò chuyện mới';
           session.title = title;
+          updateChatTitle(title);
         }
         saveSessions();
       }
@@ -774,16 +1767,21 @@
       function deleteSession(sessionId) {
         if (!confirm('Bạn có chắc muốn xóa cuộc trò chuyện này?')) return;
         sessions = sessions.filter(s => s.id !== sessionId);
-        if (sessions.length === 0) createNewSession();
-        else {
-          if (currentSessionId === sessionId) loadSession(sessions[0].id);
-          else saveSessions();
+        if (sessions.length === 0) {
+          createNewSession();
+        } else {
+          if (currentSessionId === sessionId) {
+            loadSession(sessions[0].id);
+          } else {
+            saveSessions();
+          }
         }
         saveSessions();
         renderHistory();
         showToast('Đã xóa cuộc trò chuyện');
       }
 
+      
       function renderHistory() {
         const historyList = document.getElementById('historyList');
         historyList.innerHTML = '';
@@ -795,7 +1793,10 @@
           const item = document.createElement('div');
           item.className = 'history-item';
           if (session.id === currentSessionId) {
-            item.style.background = document.body.classList.contains('dark-mode') ? 'rgba(0,122,255,0.25)' : 'rgba(0,122,255,0.15)';
+            item.style.background = 'rgba(0,122,255,0.15)';
+            if (document.body.classList.contains('dark-mode')) {
+              item.style.background = 'rgba(0,122,255,0.25)';
+            }
           }
           const titleSpan = document.createElement('span');
           titleSpan.className = 'title';
@@ -812,20 +1813,21 @@
           });
           item.appendChild(deleteBtn);
 
-          item.addEventListener('click', function() { loadSession(session.id); });
+          item.addEventListener('click', function() {
+            loadSession(session.id);
+          });
+
           historyList.appendChild(item);
         });
-        
-        // Re-bind physics for new dynamically created history buttons
-        bindPhysicsToElements(document.querySelectorAll('.history-item, .delete-btn'));
       }
 
+      
       function addMessage(text, sender, save = true) {
         const messageEl = document.createElement('div');
         messageEl.classList.add('message', sender);
         const avatar = document.createElement('div');
         avatar.classList.add('avatar', sender);
-        avatar.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : ''; 
+        avatar.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : ''; // bot avatar sẽ có ảnh nền CSS
         const messageContent = document.createElement('div');
         messageContent.classList.add('message-content');
         messageContent.textContent = text;
@@ -864,7 +1866,6 @@
           const dislikeBtn = document.createElement('button');
           dislikeBtn.classList.add('feedback-btn');
           dislikeBtn.innerHTML = '<i class="fas fa-thumbs-down"></i> Không hữu ích';
-          
           likeBtn.addEventListener('click', () => {
             likeBtn.classList.toggle('liked');
             if (likeBtn.classList.contains('liked')) dislikeBtn.classList.remove('disliked');
@@ -878,9 +1879,6 @@
           feedbackContainer.appendChild(likeBtn);
           feedbackContainer.appendChild(dislikeBtn);
           messageContent.appendChild(feedbackContainer);
-          
-          // Gắn hiệu ứng vật lý cho nút mới sinh ra
-          setTimeout(() => bindPhysicsToElements([copyBtn, volumeBtn, likeBtn, dislikeBtn]), 10);
         }
 
         messageEl.appendChild(avatar);
@@ -888,9 +1886,12 @@
         chatMessages.appendChild(messageEl);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        if (save && currentSessionId) addMessageToSession(sender, text);
+        if (save && currentSessionId) {
+          addMessageToSession(sender, text);
+        }
       }
 
+      
       function toggleSpeech(text, btn) {
         if (isSpeaking) {
           window.speechSynthesis.cancel();
@@ -901,19 +1902,35 @@
         }
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'vi-VN';
-        utterance.onstart = () => { isSpeaking = true; btn.innerHTML = '<i class="fas fa-stop"></i>'; btn.setAttribute('data-tooltip', 'Dừng đọc'); };
-        utterance.onend = () => { isSpeaking = false; btn.innerHTML = '<i class="fas fa-volume-up"></i>'; btn.setAttribute('data-tooltip', 'Đọc thành tiếng'); };
-        utterance.onerror = () => { isSpeaking = false; btn.innerHTML = '<i class="fas fa-volume-up"></i>'; };
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+        utterance.onstart = function() {
+          isSpeaking = true;
+          btn.innerHTML = '<i class="fas fa-stop"></i>';
+          btn.setAttribute('data-tooltip', 'Dừng đọc');
+        };
+        utterance.onend = function() {
+          isSpeaking = false;
+          btn.innerHTML = '<i class="fas fa-volume-up"></i>';
+          btn.setAttribute('data-tooltip', 'Đọc thành tiếng');
+        };
+        utterance.onerror = function() {
+          isSpeaking = false;
+          btn.innerHTML = '<i class="fas fa-volume-up"></i>';
+          btn.setAttribute('data-tooltip', 'Đọc thành tiếng');
+        };
         window.speechSynthesis.speak(utterance);
         currentSpeechUtterance = utterance;
       }
 
+      
       function showTyping() {
         const typingEl = document.createElement('div');
         typingEl.classList.add('message', 'bot');
         typingEl.id = 'typing-indicator';
         const avatar = document.createElement('div');
         avatar.classList.add('avatar', 'bot');
+        
         const content = document.createElement('div');
         content.classList.add('typing-indicator');
         content.innerHTML = `<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>`;
@@ -928,16 +1945,26 @@
         if (el) el.remove();
       }
 
+      
       function findAnswer(question) {
         const qLower = question.toLowerCase();
         for (const [key, value] of Object.entries(faqData)) {
           if (qLower.includes(key.toLowerCase())) return value;
         }
         const keywords = {
-          'giới thiệu': 'Giới thiệu chung về CLB SMY', 'liên hệ': 'Thông tin liên hệ', 'tham gia': 'Cách tham gia CLB SMY',
-          'đăng ký': 'Đăng ký làm Hội viên', 'sứ mệnh': 'Sứ mệnh', 'tầm nhìn': 'Tầm nhìn',
-          'ban điều hành': 'Ban điều hành', 'phân ban': 'Các phân ban', 'thành viên': 'Thành viên trong từng ban',
-          'quy chế': 'Quy chế hoạt động CLB', 'tài chính': 'Tài chính', 'khen thưởng': 'Khen thưởng', 'kỷ luật': 'Kỷ luật'
+          'giới thiệu': 'Giới thiệu chung về CLB SMY',
+          'liên hệ': 'Thông tin liên hệ',
+          'tham gia': 'Cách tham gia CLB SMY',
+          'đăng ký': 'Đăng ký làm Hội viên',
+          'sứ mệnh': 'Sứ mệnh',
+          'tầm nhìn': 'Tầm nhìn',
+          'ban điều hành': 'Ban điều hành',
+          'phân ban': 'Các phân ban',
+          'thành viên': 'Thành viên trong từng ban',
+          'quy chế': 'Quy chế hoạt động CLB',
+          'tài chính': 'Tài chính',
+          'khen thưởng': 'Khen thưởng',
+          'kỷ luật': 'Kỷ luật'
         };
         let best = { key: null, score: 0 };
         for (const [kw, ansKey] of Object.entries(keywords)) {
@@ -949,17 +1976,32 @@
         return best.score >= 3 ? faqData[best.key] : null;
       }
 
+      
       async function callOpenAI(question) {
         try {
           const res = await fetch('https://api.openai.com/v1/chat/completions', {
-            method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${openaiApiKey}` },
-            body: JSON.stringify({ model: openaiModel, messages: [{ role: 'system', content: 'Bạn là trợ lý của CLB Khoa học STEM MyDinh.' }, { role: 'user', content: question }], max_tokens: 500, temperature: 0.7 })
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${openaiApiKey}`
+            },
+            body: JSON.stringify({
+              model: openaiModel,
+              messages: [
+                { role: 'system', content: 'Bạn là trợ lý của CLB Khoa học STEM MyDinh (SMY). Trả lời thân thiện, chính xác.' },
+                { role: 'user', content: question }
+              ],
+              max_tokens: 500,
+              temperature: 0.7
+            })
           });
           if (!res.ok) throw new Error('Lỗi API');
           const data = await res.json();
-          removeTyping(); addMessage(data.choices[0].message.content, 'bot');
+          removeTyping();
+          addMessage(data.choices[0].message.content, 'bot');
         } catch (err) {
-          removeTyping(); addMessage('Lỗi kết nối OpenAI. Vui lòng kiểm tra API Key.', 'bot');
+          removeTyping();
+          addMessage('Lỗi kết nối OpenAI. Vui lòng kiểm tra API Key.', 'bot');
         }
       }
 
@@ -967,265 +2009,498 @@
         try {
           const url = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${geminiApiKey}`;
           const res = await fetch(url, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: `Bạn là trợ lý của CLB SMY. Trả lời: ${question}` }] }] })
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: `Bạn là trợ lý của CLB SMY. Trả lời: ${question}` }] }],
+              generationConfig: { temperature: 0.7, maxOutputTokens: 500 }
+            })
           });
           if (!res.ok) throw new Error('Lỗi API');
           const data = await res.json();
-          removeTyping(); addMessage(data.candidates[0].content.parts[0].text, 'bot');
+          removeTyping();
+          addMessage(data.candidates[0].content.parts[0].text, 'bot');
         } catch (err) {
-          removeTyping(); addMessage('Lỗi kết nối Gemini. Vui lòng kiểm tra API Key.', 'bot');
+          removeTyping();
+          addMessage('Lỗi kết nối Gemini. Vui lòng kiểm tra API Key.', 'bot');
         }
       }
 
+     
       function toggleSidebar(show) {
-        if (show === undefined) { sidebar.classList.toggle('active'); sidebarOverlay.classList.toggle('active'); }
-        else if (show) { sidebar.classList.add('active'); sidebarOverlay.classList.add('active'); }
-        else { sidebar.classList.remove('active'); sidebarOverlay.classList.remove('active'); }
+        if (show === undefined) {
+          sidebar.classList.toggle('active');
+          sidebarOverlay.classList.toggle('active');
+        } else if (show) {
+          sidebar.classList.add('active');
+          sidebarOverlay.classList.add('active');
+        } else {
+          sidebar.classList.remove('active');
+          sidebarOverlay.classList.remove('active');
+        }
+        
         const isActive = sidebar.classList.contains('active');
-        document.getElementById('sidebarToggleBtn').setAttribute('data-tooltip', isActive ? 'Ẩn thanh bên' : 'Hiện thanh bên');
+        const btn = document.getElementById('sidebarToggleBtn');
+        if (isActive) {
+          btn.setAttribute('data-tooltip', 'Ẩn thanh bên');
+        } else {
+          btn.setAttribute('data-tooltip', 'Hiện thanh bên');
+        }
       }
 
-      document.getElementById('sidebarToggleBtn').addEventListener('click', () => toggleSidebar());
+      
+      document.getElementById('sidebarToggleBtn').addEventListener('click', function() {
+        toggleSidebar();
+      });
+
+      
       document.getElementById('closeSidebarBtn').addEventListener('click', () => toggleSidebar(false));
+
+      
       sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
 
+      
       document.getElementById('darkModeToggle').addEventListener('click', function() {
         document.body.classList.toggle('dark-mode');
         const isDark = document.body.classList.contains('dark-mode');
         localStorage.setItem('darkMode', isDark ? 'true' : 'false');
         updateDarkModeUI(isDark);
-        renderHistory(); // Cập nhật lại màu select background
+        renderHistory();
       });
 
-      document.getElementById('mobileViewToggleToolbar').addEventListener('click', function() {
+      
+      function toggleMobileView() {
         document.body.classList.toggle('mobile-view');
         const isMobile = document.body.classList.contains('mobile-view');
         localStorage.setItem('mobileView', isMobile ? 'true' : 'false');
         updateMobileViewButtons(isMobile);
-      });
+      }
+      document.getElementById('mobileViewToggleToolbar').addEventListener('click', toggleMobileView);
 
-      document.getElementById('readAloud').addEventListener('click', function() {
+      
+      function readLastMessage() {
         const lastBot = document.querySelector('.message.bot:last-child .message-content');
-        if (lastBot) { const speech = new SpeechSynthesisUtterance(lastBot.textContent); speech.lang = 'vi-VN'; window.speechSynthesis.speak(speech); }
-        else showToast('Không có tin nhắn để đọc');
-      });
+        if (lastBot) {
+          const speech = new SpeechSynthesisUtterance(lastBot.textContent);
+          speech.lang = 'vi-VN';
+          window.speechSynthesis.speak(speech);
+        } else {
+          showToast('Không có tin nhắn để đọc');
+        }
+      }
+      document.getElementById('readAloud').addEventListener('click', readLastMessage);
 
+      
       function openApiModal() {
         apiKeyModal.classList.add('show');
         document.getElementById('openaiKeyInput').value = openaiApiKey;
         document.getElementById('geminiKeyInput').value = geminiApiKey;
+        document.getElementById('openaiModelSelector').value = openaiModel;
+        document.getElementById('geminiModelSelector').value = geminiModel;
       }
-      function closeApiModal() { apiKeyModal.classList.remove('show'); }
       document.getElementById('apiSettings').addEventListener('click', openApiModal);
+
+      function closeApiModal() {
+        apiKeyModal.classList.remove('show');
+      }
       document.getElementById('modalCloseBtn').addEventListener('click', closeApiModal);
       document.getElementById('cancelApiKey').addEventListener('click', closeApiModal);
+      window.addEventListener('click', (e) => {
+        if (e.target === apiKeyModal) closeApiModal();
+      });
 
       document.getElementById('saveApiKey').addEventListener('click', function() {
         openaiApiKey = document.getElementById('openaiKeyInput').value.trim();
         geminiApiKey = document.getElementById('geminiKeyInput').value.trim();
         openaiModel = document.getElementById('openaiModelSelector').value;
         geminiModel = document.getElementById('geminiModelSelector').value;
-        currentAI = openaiApiKey ? 'openai' : (geminiApiKey ? 'gemini' : 'none');
-        localStorage.setItem('openaiApiKey', openaiApiKey); localStorage.setItem('geminiApiKey', geminiApiKey);
-        localStorage.setItem('openaiModel', openaiModel); localStorage.setItem('geminiModel', geminiModel);
+        if (openaiApiKey) currentAI = 'openai';
+        else if (geminiApiKey) currentAI = 'gemini';
+        else currentAI = 'none';
+        localStorage.setItem('openaiApiKey', openaiApiKey);
+        localStorage.setItem('geminiApiKey', geminiApiKey);
+        localStorage.setItem('openaiModel', openaiModel);
+        localStorage.setItem('geminiModel', geminiModel);
         localStorage.setItem('currentAI', currentAI);
-        updateAIModelInfo(); showToast('Cài đặt API đã được lưu!'); closeApiModal();
+        updateAIModelInfo();
+        showToast('Cài đặt API đã được lưu!');
+        closeApiModal();
       });
 
       document.querySelectorAll('.api-tab').forEach(tab => {
         tab.addEventListener('click', function() {
-          document.querySelectorAll('.api-tab').forEach(t => t.classList.remove('active')); this.classList.add('active');
+          document.querySelectorAll('.api-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          const tabName = this.dataset.tab;
           document.querySelectorAll('.api-tab-content').forEach(c => c.classList.remove('active'));
-          document.getElementById(this.dataset.tab + '-tab').classList.add('active');
+          document.getElementById(tabName + '-tab').classList.add('active');
         });
       });
 
-      document.getElementById('exportChat').addEventListener('click', function() {
+      
+      function exportChat() {
         const msgs = Array.from(document.querySelectorAll('.message'));
-        if (msgs.length === 0) return showToast('Không có tin nhắn để xuất');
-        const content = msgs.map(msg => `${msg.classList.contains('user') ? 'User' : 'Bot'}: ${msg.querySelector('.message-content').textContent}`).join('\n\n');
-        const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([content], { type: 'text/plain' })); a.download = `smy-chat-${new Date().toISOString().slice(0,10)}.txt`;
-        document.body.appendChild(a); a.click(); document.body.removeChild(a); showToast('Đã xuất trò chuyện!');
+        if (msgs.length === 0) {
+          showToast('Không có tin nhắn để xuất');
+          return;
+        }
+        const content = msgs.map(msg => {
+          const sender = msg.classList.contains('user') ? 'User' : 'Bot';
+          const text = msg.querySelector('.message-content').textContent;
+          return `${sender}: ${text}`;
+        }).join('\n\n');
+        const blob = new Blob([content], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `smy-chat-${new Date().toISOString().slice(0,10)}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Đã xuất trò chuyện!');
+      }
+      document.getElementById('exportChat').addEventListener('click', exportChat);
+
+      
+      document.getElementById('newChatBtn').addEventListener('click', function() {
+        createNewSession();
       });
 
-      document.getElementById('newChatBtn').addEventListener('click', () => createNewSession());
-
+      
       document.querySelectorAll('.question-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const question = this.textContent.trim();
-          addMessage(question, 'user'); showTyping();
-          const answer = faqData[question] || "Mọi thông tin thắc mắc xin liên hệ: Gmail: stemofmydinh@gmail.com.";
-          setTimeout(() => { removeTyping(); addMessage(answer, 'bot'); }, 800);
+          addMessage(question, 'user');
+          showTyping();
+          const answer = faqData[question] || "Mọi thông tin thắc mắc xin liên hệ: Gmail: stemofmydinh@gmail.com. Chủ tịch: Đoàn Phúc Uy Vũ - K5A8; Phó chủ tịch: Đàm Đông Quân - K5A5 hoặc nhắn tin trực tiếp qua trang ( https://www.facebook.com/STEMofMyDinh/ ) để nhận được phản hồi sớm nhất!";
+          setTimeout(() => {
+            removeTyping();
+            addMessage(answer, 'bot');
+          }, 800);
         });
       });
 
+      
       document.querySelectorAll('.category-header').forEach(header => {
         header.addEventListener('click', function() {
-          this.nextElementSibling.classList.toggle('active');
-          const icon = this.querySelector('.fa-chevron-down'); if (icon) icon.classList.toggle('fa-rotate-180');
+          const content = this.nextElementSibling;
+          content.classList.toggle('active');
+          const icon = this.querySelector('.fa-chevron-down');
+          if (icon) icon.classList.toggle('fa-rotate-180');
         });
       });
 
+      
       chatInput.addEventListener('input', function() {
         const val = this.value.trim().toLowerCase();
-        if (val.length < 2) { suggestionsContainer.style.display = 'none'; return; }
+        if (val.length < 2) {
+          suggestionsContainer.style.display = 'none';
+          return;
+        }
         const matches = Object.keys(faqData).filter(q => q.toLowerCase().includes(val)).slice(0, 5);
-        if (matches.length === 0) { suggestionsContainer.style.display = 'none'; return; }
+        if (matches.length === 0) {
+          suggestionsContainer.style.display = 'none';
+          return;
+        }
         suggestionsContainer.innerHTML = '';
         matches.forEach(m => {
-          const div = document.createElement('div'); div.classList.add('suggestion-item'); div.textContent = m;
-          div.addEventListener('click', function() { chatInput.value = this.textContent; suggestionsContainer.style.display = 'none'; chatForm.dispatchEvent(new Event('submit')); });
+          const div = document.createElement('div');
+          div.classList.add('suggestion-item');
+          div.textContent = m;
+          div.addEventListener('click', function() {
+            chatInput.value = this.textContent;
+            suggestionsContainer.style.display = 'none';
+            chatForm.dispatchEvent(new Event('submit'));
+          });
           suggestionsContainer.appendChild(div);
         });
         suggestionsContainer.style.display = 'block';
-        bindPhysicsToElements(suggestionsContainer.querySelectorAll('.suggestion-item'));
       });
 
-      document.addEventListener('click', (e) => { if (!suggestionsContainer.contains(e.target) && e.target !== chatInput) suggestionsContainer.style.display = 'none'; });
+      document.addEventListener('click', (e) => {
+        if (!suggestionsContainer.contains(e.target) && e.target !== chatInput) {
+          suggestionsContainer.style.display = 'none';
+        }
+      });
 
+      
       chatForm.addEventListener('submit', function(e) {
-        e.preventDefault(); const msg = chatInput.value.trim(); if (!msg) return;
-        if (!currentSessionId || sessions.length === 0) createNewSession();
-        addMessage(msg, 'user'); chatInput.value = ''; chatInput.style.height = '48px'; suggestionsContainer.style.display = 'none'; showTyping();
-        sendBtn.classList.add('loading'); sendBtn.innerHTML = '<i class="fas fa-spinner"></i>';
+        e.preventDefault();
+        const msg = chatInput.value.trim();
+        if (!msg) return;
+        if (!currentSessionId || sessions.length === 0) {
+          createNewSession();
+        }
+        addMessage(msg, 'user');
+        chatInput.value = '';
+        chatInput.style.height = '48px';
+        suggestionsContainer.style.display = 'none';
+        showTyping();
+
+        
+        sendBtn.classList.add('loading');
+        sendBtn.innerHTML = '<i class="fas fa-spinner"></i>';
 
         let answer = findAnswer(msg);
         if (answer) {
-          setTimeout(() => { removeTyping(); addMessage(answer, 'bot'); sendBtn.classList.remove('loading'); sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>'; }, 600);
+          setTimeout(() => {
+            removeTyping();
+            addMessage(answer, 'bot');
+            sendBtn.classList.remove('loading');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            sendBtn.classList.add('success');
+            setTimeout(() => sendBtn.classList.remove('success'), 400);
+          }, 600);
           return;
         }
-        if (currentAI === 'openai' && openaiApiKey) callOpenAI(msg).finally(() => { sendBtn.classList.remove('loading'); sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>'; });
-        else if (currentAI === 'gemini' && geminiApiKey) callGemini(msg).finally(() => { sendBtn.classList.remove('loading'); sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>'; });
-        else {
-          setTimeout(() => { removeTyping(); addMessage('Mọi thông tin thắc mắc xin liên hệ: Gmail: stemofmydinh@gmail.com.', 'bot'); sendBtn.classList.remove('loading'); sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>'; }, 600);
+
+        if (currentAI === 'openai' && openaiApiKey) {
+          callOpenAI(msg).finally(() => {
+            sendBtn.classList.remove('loading');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+          });
+        } else if (currentAI === 'gemini' && geminiApiKey) {
+          callGemini(msg).finally(() => {
+            sendBtn.classList.remove('loading');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+          });
+        } else {
+          setTimeout(() => {
+            removeTyping();
+            addMessage('Mọi thông tin thắc mắc xin liên hệ: Gmail: stemofmydinh@gmail.com. Chủ tịch: Đoàn Phúc Uy Vũ - K5A8; Phó chủ tịch: Đàm Đông Quân - K5A5 hoặc nhắn tin trực tiếp qua trang để nhận được phản hồi sớm nhất!', 'bot');
+            sendBtn.classList.remove('loading');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            sendBtn.classList.add('success');
+            setTimeout(() => sendBtn.classList.remove('success'), 400);
+          }, 600);
         }
       });
 
-      chatInput.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px'; });
-      chatInput.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); chatForm.dispatchEvent(new Event('submit')); } });
+      
+      chatInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+      });
 
-      function closeUpdateLogModal() { updateLogModal.classList.remove('show'); }
-      document.getElementById('updateLogBtn').addEventListener('click', () => updateLogModal.classList.add('show'));
+      chatInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          chatForm.dispatchEvent(new Event('submit'));
+        }
+      });
+
+      
+      const isDark = document.body.classList.contains('dark-mode');
+      updateDarkModeUI(isDark);
+
+      
+      renderHistory();
+
+      
+      function openUpdateLogModal() {
+        updateLogModal.classList.add('show');
+      }
+      function closeUpdateLogModal() {
+        updateLogModal.classList.remove('show');
+      }
+
+      document.getElementById('updateLogBtn').addEventListener('click', openUpdateLogModal);
       document.getElementById('updateLogCloseBtn').addEventListener('click', closeUpdateLogModal);
       document.getElementById('updateLogCloseBtnFooter').addEventListener('click', closeUpdateLogModal);
-    });
+      window.addEventListener('click', (e) => {
+        if (e.target === updateLogModal) closeUpdateLogModal();
+      });
 
+
+      const imageUrls = {
+        1: '1.jpg', 
+        2: '2.jpg',
+        3: '3.jpg',
+        4: '4.jpg',
+        5: '5.jpg'
+      };
+
+      const imageModal = document.getElementById('imageModal');
+      const imageModalPreview = document.getElementById('imageModalPreview');
+      const imageModalCloseBtn = document.getElementById('imageModalCloseBtn');
+      const imageModalCloseBtnFooter = document.getElementById('imageModalCloseBtnFooter');
+
+      function openImageModal(logNumber) {
+        const src = imageUrls[logNumber] || 'https://via.placeholder.com/600x400/cccccc/ffffff?text=Ch%C6%B0a+c%C3%B3+%E1%BA%A3nh';
+        imageModalPreview.src = src;
+        imageModal.classList.add('show');
+      }
+
+      function closeImageModal() {
+        imageModal.classList.remove('show');
+      }
+
+      // Gán sự kiện cho tất cả nút "Xem ảnh"
+      document.querySelectorAll('.view-image-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const log = parseInt(this.dataset.log, 10);
+          if (log) openImageModal(log);
+        });
+      });
+
+      // Đóng modal ảnh
+      imageModalCloseBtn.addEventListener('click', closeImageModal);
+      imageModalCloseBtnFooter.addEventListener('click', closeImageModal);
+      window.addEventListener('click', (e) => {
+        if (e.target === imageModal) closeImageModal();
+      });
+
+    });
   </script>
 
-  <!-- ===== BỘ XỬ LÝ VẬT LÝ iOS 26 (TUYỆT ĐỐI MƯỢT & KHÔNG BỊ CSS CHẶN) ===== -->
   <script>
-    let activeEl = null;
-    let stX = 0, stY = 0;
-    let isPhysDragging = false;
+    (function() {
+      // ===== JS VẬT LÝ iOS 26 - ĐÃ ĐƯỢC TINH CHỈNH LẠI =====
+      let activeEl = null;
+      let stX = 0, stY = 0;
+      let isPhysDragging = false;
 
-    // Lấy tọa độ
-    function getPointerPos(e) {
-      if (e.touches && e.touches.length > 0) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      if (e.changedTouches && e.changedTouches.length > 0) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
-      return { x: e.clientX, y: e.clientY };
-    }
-
-    function onPhysStart(e) {
-      if (e.type === 'mousedown' && e.button !== 0) return; // Chỉ chuột trái
-      
-      activeEl = this;
-      isPhysDragging = true;
-      activeEl.classList.add('is-pressed');
-      
-      const pos = getPointerPos(e);
-      stX = pos.x; stY = pos.y;
-
-      // THÊM: Ngay lập tức áp dụng hiệu ứng nhún (squash) bằng JS
-      activeEl.style.transition = 'transform 0.2s cubic-bezier(0.2, 0, 0.2, 1)';
-      activeEl.style.transform = 'scale(0.85) translateY(4px) rotateX(5deg)';
-
-      window.addEventListener('mousemove', onPhysMove, { passive: true });
-      window.addEventListener('touchmove', onPhysMove, { passive: true });
-      window.addEventListener('mouseup', onPhysEnd);
-      window.addEventListener('touchend', onPhysEnd);
-      window.addEventListener('touchcancel', onPhysEnd);
-    }
-
-    function onPhysMove(e) {
-      if (!activeEl || !isPhysDragging) return;
-
-      const pos = getPointerPos(e);
-      const dx = pos.x - stX;
-      const dy = pos.y - stY;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-
-      if (dist > 2) {
-        // Tắt Transition ngay để nút di chuyển bám sát tay lập tức (0s delay)
-        activeEl.style.transition = 'none';
-
-        // Hệ số trượt dẻo
-        const friction = 0.35;
-        let pullX = dx * friction;
-        let pullY = dy * friction;
-
-        // Tính giới hạn kéo
-        const maxPull = 45;
-        const pullDist = Math.sqrt(pullX*pullX + pullY*pullY);
-        if (pullDist > maxPull) {
-          pullX = (pullX / pullDist) * maxPull;
-          pullY = (pullY / pullDist) * maxPull;
-        }
-
-        // Tính góc xoay và độ dãn dọc/ngang bảo toàn thể tích
-        const angle = Math.atan2(pullY, pullX);
-        const stretch = Math.min(dist * 0.004, 0.3); // max stretch là +30%
-
-        activeEl.style.transform = `
-          translate(${pullX}px, ${pullY}px)
-          rotate(${angle}rad)
-          scale(${0.85 + stretch}, ${0.85 - stretch * 0.5})
-          rotate(-${angle}rad)
-          rotateX(5deg)
-        `;
+      function getPointerPos(e) {
+        if (e.touches && e.touches.length > 0) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        if (e.changedTouches && e.changedTouches.length > 0) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+        return { x: e.clientX, y: e.clientY };
       }
-    }
 
-    function onPhysEnd(e) {
-      if (!activeEl) return;
-      
-      // Khôi phục quán tính nảy lò xo siêu búng bằng JS inline
-      activeEl.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      activeEl.style.transform = ''; // Xóa transform nội tuyến, fallback về hover CSS
-      
-      activeEl.classList.remove('is-pressed');
-      
-      let tempEl = activeEl;
-      activeEl = null;
-      isPhysDragging = false;
+      // 1. Áp dụng Event Delegation để bao quát cả các nút tạo bằng JS sau này (Lịch sử chat)
+      const targetSelector = '.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .delete-btn, .tool-item, .question-btn, .category-header, .history-item, .suggestion-item';
 
-      // Sau khi búng xong lò xo (600ms), xóa style nội tuyến để không đè CSS Hover
-      setTimeout(() => { if (tempEl) { tempEl.style.transition = ''; tempEl.style.transform = ''; } }, 600);
+      document.body.addEventListener('mousedown', onPhysStart);
+      document.body.addEventListener('touchstart', onPhysStart, { passive: true });
 
-      window.removeEventListener('mousemove', onPhysMove);
-      window.removeEventListener('touchmove', onPhysMove);
-      window.removeEventListener('mouseup', onPhysEnd);
-      window.removeEventListener('touchend', onPhysEnd);
-      window.removeEventListener('touchcancel', onPhysEnd);
-    }
+      function onPhysStart(e) {
+        const target = e.target.closest(targetSelector);
+        if (!target) return;
+        if (e.type === 'mousedown' && e.button !== 0) return; // Chỉ nhận chuột trái
+        
+        activeEl = target;
+        isPhysDragging = true;
+        activeEl.classList.add('is-pressed');
+        
+        const pos = getPointerPos(e);
+        stX = pos.x; stY = pos.y;
 
-    // Hàm gắn sự kiện vật lý
-    window.bindPhysicsToElements = function(elements) {
-      elements.forEach(function(el) {
-        // Tránh gắn đúp sự kiện
-        if(el.dataset.physBound) return;
-        el.addEventListener('touchstart', onPhysStart, { passive: true });
-        el.addEventListener('mousedown', onPhysStart);
-        el.dataset.physBound = "true";
+        // Bóp lún mượt mà xuống 0.92 thay vì giật mạnh về 0.8
+        activeEl.style.transition = 'transform 0.15s cubic-bezier(0.2, 0, 0.2, 1)';
+        activeEl.style.transform = 'scale(0.92) translateY(3px) rotateX(3deg)';
+
+        window.addEventListener('mousemove', onPhysMove, { passive: true });
+        window.addEventListener('touchmove', onPhysMove, { passive: true });
+        window.addEventListener('mouseup', onPhysEnd);
+        window.addEventListener('touchend', onPhysEnd);
+        window.addEventListener('touchcancel', onPhysEnd);
+      }
+
+      function onPhysMove(e) {
+        if (!activeEl || !isPhysDragging) return;
+        
+        const pos = getPointerPos(e);
+        const dx = pos.x - stX;
+        const dy = pos.y - stY;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+
+        if (dist > 2) {
+          activeEl.style.transition = 'none';
+
+          // Độ rít rất cao, khó kéo, tạo cảm giác đầm chắc
+          const friction = 0.2; 
+          let pullX = dx * friction;
+          let pullY = dy * friction;
+
+          // Giới hạn khoảng cách bị lệch tối đa (15px) để không bị biến dạng quá đà
+          const maxPull = 15;
+          const pullDist = Math.sqrt(pullX*pullX + pullY*pullY);
+          if (pullDist > maxPull) {
+            pullX = (pullX / pullDist) * maxPull;
+            pullY = (pullY / pullDist) * maxPull;
+          }
+
+          const angle = Math.atan2(pullY, pullX);
+          
+          // Giới hạn độ dãn dọc của nút ở mức 10%
+          const stretch = Math.min(dist * 0.001, 0.1); 
+
+          activeEl.style.transform = `
+            translate(${pullX}px, ${pullY}px)
+            rotate(${angle}rad)
+            scale(${0.92 + stretch}, ${0.92 - stretch * 0.3})
+            rotate(-${angle}rad)
+            rotateX(3deg)
+          `;
+        }
+      }
+
+      function onPhysEnd(e) {
+        if (!activeEl) return;
+        
+        // Trả về với cấu hình quán tính nảy lò xo mềm mại
+        activeEl.style.transition = 'transform 0.5s cubic-bezier(0.4, 2.5, 0.3, 0.8), box-shadow 0.5s cubic-bezier(0.4, 2.5, 0.3, 0.8)';
+        activeEl.style.transform = ''; 
+        
+        activeEl.classList.remove('is-pressed');
+        
+        let tempEl = activeEl;
+        activeEl = null;
+        isPhysDragging = false;
+
+        // Dọn dẹp thuộc tính nội tuyến để không bị xung đột CSS :hover
+        setTimeout(() => { 
+          if (tempEl) { 
+            tempEl.style.transition = ''; 
+            tempEl.style.transform = ''; 
+          } 
+        }, 500);
+
+        window.removeEventListener('mousemove', onPhysMove);
+        window.removeEventListener('touchmove', onPhysMove);
+        window.removeEventListener('mouseup', onPhysEnd);
+        window.removeEventListener('touchend', onPhysEnd);
+        window.removeEventListener('touchcancel', onPhysEnd);
+      }
+
+      // ===== KHÓA BẢN QUYỀN (GIỮ NGUYÊN TỪ BẢN GỐC CỦA BẠN) =====
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
       });
-    };
 
-    // Khởi chạy gắn sự kiện cho các element đã có sẵn lúc load trang
-    window.bindPhysicsToElements(document.querySelectorAll('.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .tool-item, .question-btn, .category-header, .history-item, .suggestion-item'));
-
-    // Chặn menu F12
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('keydown', e => { if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J'||e.key==='C'))||(e.ctrlKey&&(e.key==='u'||e.key==='s'))){ e.preventDefault(); } });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.key === 'u') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.key === 's') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.key === 'K') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.key === 'U') {
+          e.preventDefault();
+          return false;
+        }
+      });
+    })();
   </script>
 
 </body>

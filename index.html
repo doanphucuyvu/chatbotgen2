@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>SMY GPT</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ===== RESET & BASE ===== */
     * {
@@ -159,9 +159,9 @@
     .category-header {
       border: none;
       cursor: pointer;
-      /* ----- SQUISHY TRANSITION (lò xo nảy) – tách riêng transform/box-shadow để tránh lag theme ----- */
-      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+      /* ----- SQUISHY TRANSITION (lò xo nảy) – Cải tiến cubic-bezier lò xo ----- */
+      transition: transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
+                  box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
                   background-color 0.15s ease,
                   color 0.15s ease,
                   border-color 0.15s ease;
@@ -200,64 +200,77 @@
       color: #f5f5f7;
     }
 
-    /* ----- SQUISHY HOVER (phình căng mọng) ----- */
-    .btn-icon:hover,
-    .hamburger-btn:hover,
-    .send-btn:hover,
-    .modal-close:hover,
-    .action-btn:hover,
-    .feedback-btn:hover,
-    .modal-btn:hover,
-    .history-item .delete-btn:hover,
-    .tool-item:hover,
-    .question-btn:hover,
-    .category-header:hover {
-      transform: scale(1.08) translateY(-2px);
-      box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
-      border-color: rgba(255,255,255,0.5);
-    }
-    body.dark-mode .btn-icon:hover,
-    body.dark-mode .hamburger-btn:hover,
-    body.dark-mode .send-btn:hover,
-    body.dark-mode .modal-close:hover,
-    body.dark-mode .action-btn:hover,
-    body.dark-mode .feedback-btn:hover,
-    body.dark-mode .modal-btn:hover,
-    body.dark-mode .history-item .delete-btn:hover,
-    body.dark-mode .tool-item:hover,
-    body.dark-mode .question-btn:hover,
-    body.dark-mode .category-header:hover {
-      box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
-    }
+    /* ----- SQUISHY HOVER & ACTIVE BỌC TRONG MEDIA QUERY ----- */
+    /* Fix lỗi hover dính trên Mobile */
+    @media (hover: hover) and (pointer: fine) {
+      .btn-icon:hover,
+      .hamburger-btn:hover,
+      .send-btn:hover,
+      .modal-close:hover,
+      .action-btn:hover,
+      .feedback-btn:hover,
+      .modal-btn:hover,
+      .history-item .delete-btn:hover,
+      .tool-item:hover,
+      .question-btn:hover,
+      .category-header:hover {
+        transform: scale(1.08) translateY(-2px);
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
+        border-color: rgba(255,255,255,0.5);
+      }
+      body.dark-mode .btn-icon:hover,
+      body.dark-mode .hamburger-btn:hover,
+      body.dark-mode .send-btn:hover,
+      body.dark-mode .modal-close:hover,
+      body.dark-mode .action-btn:hover,
+      body.dark-mode .feedback-btn:hover,
+      body.dark-mode .modal-btn:hover,
+      body.dark-mode .history-item .delete-btn:hover,
+      body.dark-mode .tool-item:hover,
+      body.dark-mode .question-btn:hover,
+      body.dark-mode .category-header:hover {
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
+      }
+      
+      .history-item:hover {
+        transform: scale(1.04) translateY(-2px);
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
+      }
+      body.dark-mode .history-item:hover {
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
+      }
+      .history-item:hover .delete-btn { opacity: 0.7; }
+      .history-item .delete-btn:hover { opacity: 1; }
 
-    /* ----- SQUISHY ACTIVE (lún sâu như thạch) ----- */
-    .btn-icon:active,
-    .hamburger-btn:active,
-    .send-btn:active,
-    .modal-close:active,
-    .action-btn:active,
-    .feedback-btn:active,
-    .modal-btn:active,
-    .history-item .delete-btn:active,
-    .tool-item:active,
-    .question-btn:active,
-    .category-header:active {
-      transform: scale(0.8) translateY(6px) perspective(100px) rotateX(5deg) !important;
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
-      border-color: rgba(255,255,255,0.1);
-    }
-    body.dark-mode .btn-icon:active,
-    body.dark-mode .hamburger-btn:active,
-    body.dark-mode .send-btn:active,
-    body.dark-mode .modal-close:active,
-    body.dark-mode .action-btn:active,
-    body.dark-mode .feedback-btn:active,
-    body.dark-mode .modal-btn:active,
-    body.dark-mode .history-item .delete-btn:active,
-    body.dark-mode .tool-item:active,
-    body.dark-mode .question-btn:active,
-    body.dark-mode .category-header:active {
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
+      .message-content:hover .message-actions { opacity: 1; }
+      .message-content:hover .feedback-container { opacity: 1; }
+      
+      .send-btn:hover i { transform: translateX(3px) scale(1.05); }
+
+      .suggestion-item:hover {
+        background: rgba(255,255,255,0.08);
+        transform: scale(1.04) translateX(4px);
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
+      }
+      body.dark-mode .suggestion-item:hover {
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
+      }
+
+      [data-tooltip]:hover:before {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+
+      ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.15); }
+      body.dark-mode ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.10); }
+
+      .view-image-btn:hover {
+        color: #0055b3;
+        text-shadow: 0 0 8px rgba(0,122,255,0.1);
+      }
+      body.dark-mode .view-image-btn:hover { color: #64d2ff; }
+      
+      .modal-close:hover { color: #ff3b30; }
     }
 
     /* Nút riêng lẻ với kích thước */
@@ -360,8 +373,8 @@
       border-bottom: 1px solid rgba(255,255,255,0.01);
       box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
       cursor: pointer;
-      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+      transition: transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
+                  box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
                   background-color 0.15s ease,
                   color 0.15s ease,
                   border-color 0.15s ease;
@@ -379,20 +392,6 @@
       border-bottom: 1px solid rgba(255,255,255,0.01);
       box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
       color: #f5f5f7;
-    }
-    .history-item:hover {
-      transform: scale(1.04) translateY(-2px);
-      box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
-    }
-    body.dark-mode .history-item:hover {
-      box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
-    }
-    .history-item:active {
-      transform: scale(0.8) translateY(6px) perspective(100px) rotateX(5deg) !important;
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
-    }
-    body.dark-mode .history-item:active {
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
     }
     .history-item .title {
       flex: 1;
@@ -417,8 +416,6 @@
       backdrop-filter: none;
       background: transparent;
     }
-    .history-item:hover .delete-btn { opacity: 0.7; }
-    .history-item .delete-btn:hover { opacity: 1; }
     body.dark-mode .history-item .delete-btn { color: rgba(255,255,255,0.5); }
 
     /* ===== FAQ ===== */
@@ -467,7 +464,6 @@
       font-size: 0.9rem;
       letter-spacing: -0.01em;
       border-radius: 40px;
-      /* Squishy đã được áp dụng qua selector chung */
     }
     body.dark-mode .category-header {
       color: #f5f5f7;
@@ -497,7 +493,6 @@
       gap: 8px;
       font-weight: 500;
       letter-spacing: -0.01em;
-      /* Glass + Squishy đã áp dụng qua selector chung */
     }
     body.dark-mode .question-btn {
       color: #f5f5f7;
@@ -631,7 +626,6 @@
       text-shadow: 0 1px 2px rgba(0,0,0,0.01);
     }
     .bot .message-content {
-      /* ---- CRYSTAL LIQUID GLASS ---- */
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -674,7 +668,6 @@
       opacity: 0;
       transition: opacity 0.2s ease;
     }
-    .message-content:hover .message-actions { opacity: 1; }
     .action-btn {
       width: 28px;
       height: 28px;
@@ -692,7 +685,6 @@
       opacity: 0;
       transition: opacity 0.2s ease;
     }
-    .message-content:hover .feedback-container { opacity: 1; }
     .feedback-btn {
       border-radius: 50px;
       padding: 5px 12px;
@@ -809,7 +801,7 @@
       color: #5ac8fa;
     }
     .send-btn i { transition: transform 0.3s ease; }
-    .send-btn:hover i { transform: translateX(3px) scale(1.05); }
+    
     .send-btn.loading {
       pointer-events: none;
       opacity: 0.6;
@@ -863,8 +855,8 @@
     .suggestion-item {
       padding: 11px 16px;
       cursor: pointer;
-      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+      transition: transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
+                  box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
                   background-color 0.15s ease,
                   color 0.15s ease,
                   border-color 0.15s ease;
@@ -880,18 +872,6 @@
       color: #f5f5f7;
     }
     .suggestion-item:last-child { border-bottom: none; }
-    .suggestion-item:hover {
-      background: rgba(255,255,255,0.08);
-      transform: scale(1.04) translateX(4px);
-      box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
-    }
-    body.dark-mode .suggestion-item:hover {
-      box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
-    }
-    .suggestion-item:active {
-      transform: scale(0.8) translateY(6px) perspective(100px) rotateX(5deg) !important;
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
-    }
 
     /* ===== TYPING INDICATOR ===== */
     .typing-indicator {
@@ -1031,7 +1011,6 @@
       padding: 4px 8px;
       border-radius: 50%;
     }
-    .modal-close:hover { color: #ff3b30; }
     body.dark-mode .modal-close { color: rgba(255,255,255,0.5); }
 
     .api-tabs {
@@ -1115,8 +1094,8 @@
       border: none;
       cursor: pointer;
       font-weight: 600;
-      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+      transition: transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
+                  box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
                   background-color 0.15s ease,
                   color 0.15s ease,
                   border-color 0.15s ease;
@@ -1190,10 +1169,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       border: 1px solid rgba(255,255,255,0.06);
     }
-    [data-tooltip]:hover:before {
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-    }
 
     /* ===== SCROLLBAR ===== */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -1205,13 +1180,9 @@
       -webkit-backdrop-filter: blur(2px);
       border: 1px solid rgba(255,255,255,0.1);
     }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.15); }
     body.dark-mode ::-webkit-scrollbar-thumb {
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.02);
-    }
-    body.dark-mode ::-webkit-scrollbar-thumb:hover {
-      background: rgba(255,255,255,0.10);
     }
 
     /* ===== UPDATE LOG ===== */
@@ -1262,48 +1233,72 @@
       font-weight: 500;
       transition: all 0.2s ease;
     }
-    .view-image-btn:hover {
-      color: #0055b3;
-      text-shadow: 0 0 8px rgba(0,122,255,0.1);
-    }
     body.dark-mode .view-image-btn {
       color: #5ac8fa;
     }
-    body.dark-mode .view-image-btn:hover { color: #64d2ff; }
 
     /* ===== HIỆU ỨNG LÚN TỨC THÌ (dùng JS thay vì :active) ===== */
     .btn-icon.is-pressed,
+    .btn-icon:active,
     .hamburger-btn.is-pressed,
+    .hamburger-btn:active,
     .send-btn.is-pressed,
+    .send-btn:active,
     .modal-close.is-pressed,
+    .modal-close:active,
     .action-btn.is-pressed,
+    .action-btn:active,
     .feedback-btn.is-pressed,
+    .feedback-btn:active,
     .modal-btn.is-pressed,
+    .modal-btn:active,
     .history-item .delete-btn.is-pressed,
+    .history-item .delete-btn:active,
     .tool-item.is-pressed,
+    .tool-item:active,
     .question-btn.is-pressed,
+    .question-btn:active,
     .category-header.is-pressed,
+    .category-header:active,
     .history-item.is-pressed,
-    .suggestion-item.is-pressed {
+    .history-item:active,
+    .suggestion-item.is-pressed,
+    .suggestion-item:active {
       transform: scale(0.8) translateY(6px) perspective(100px) rotateX(5deg) !important;
       box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
-      border-color: rgba(255,255,255,0.1);
-      transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
+      border-color: rgba(255,255,255,0.1) !important;
+      /* FIX LỖI NỀN TRẮNG KHI CHẠM: Ép buộc lớp nền kính mờ thay vì bị trình duyệt reset */
+      background-color: rgba(255, 255, 255, 0.05) !important;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;
     }
     body.dark-mode .btn-icon.is-pressed,
+    body.dark-mode .btn-icon:active,
     body.dark-mode .hamburger-btn.is-pressed,
+    body.dark-mode .hamburger-btn:active,
     body.dark-mode .send-btn.is-pressed,
+    body.dark-mode .send-btn:active,
     body.dark-mode .modal-close.is-pressed,
+    body.dark-mode .modal-close:active,
     body.dark-mode .action-btn.is-pressed,
+    body.dark-mode .action-btn:active,
     body.dark-mode .feedback-btn.is-pressed,
+    body.dark-mode .feedback-btn:active,
     body.dark-mode .modal-btn.is-pressed,
+    body.dark-mode .modal-btn:active,
     body.dark-mode .history-item .delete-btn.is-pressed,
+    body.dark-mode .history-item .delete-btn:active,
     body.dark-mode .tool-item.is-pressed,
+    body.dark-mode .tool-item:active,
     body.dark-mode .question-btn.is-pressed,
+    body.dark-mode .question-btn:active,
     body.dark-mode .category-header.is-pressed,
+    body.dark-mode .category-header:active,
     body.dark-mode .history-item.is-pressed,
-    body.dark-mode .suggestion-item.is-pressed {
+    body.dark-mode .history-item:active,
+    body.dark-mode .suggestion-item.is-pressed,
+    body.dark-mode .suggestion-item:active {
       box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
+      background-color: rgba(255, 255, 255, 0.03) !important;
     }
 
     /* ===== RESPONSIVE ===== */
@@ -2376,22 +2371,127 @@
 
   <script>
     (function() {
-      // Thêm/xóa class .is-pressed khi chạm/nhấn để phản hồi tức thì
-      function addPressed(e) {
-        this.classList.add('is-pressed');
+      // ===== NÂNG CẤP HIỆU ỨNG VẬT LÝ iOS 26 FLUID EFFECT =====
+      let activeElement = null;
+      let startX = 0;
+      let startY = 0;
+
+      // Hàm lấy tọa độ con trỏ (hỗ trợ cả chạm và chuột)
+      function getClientPos(e) {
+        if (e.touches && e.touches.length > 0) {
+          return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+        return { x: e.clientX, y: e.clientY };
       }
-      function removePressed(e) {
-        this.classList.remove('is-pressed');
+
+      function onDragStart(e) {
+        // Nếu click vào icon bên trong, hãy target vào nút chính
+        activeElement = this;
+        activeElement.classList.add('is-pressed');
+
+        // Lấy tọa độ gốc
+        const pos = getClientPos(e);
+        startX = pos.x;
+        startY = pos.y;
+
+        // TẮT transition để nút di chuyển mượt mà bám sát ngón tay (60fps)
+        activeElement.style.transition = 'none';
+
+        // Lắng nghe sự kiện di chuyển và nhả ra
+        window.addEventListener('mousemove', onDragMove, { passive: false });
+        window.addEventListener('touchmove', onDragMove, { passive: true }); // passive để không block scroll mượt của thiết bị
+        window.addEventListener('mouseup', onDragEnd);
+        window.addEventListener('touchend', onDragEnd);
+        window.addEventListener('touchcancel', onDragEnd);
+        
+        // Hủy thao tác drag nếu người dùng cuộn màn hình (chuẩn iOS behavior)
+        window.addEventListener('scroll', onScrollCancel, true); 
       }
-      // Áp dụng cho tất cả các nút tương tác (dựa trên selector CSS đã có)
+
+      function onDragMove(e) {
+        if (!activeElement) return;
+
+        const pos = getClientPos(e);
+        const dx = pos.x - startX;
+        const dy = pos.y - startY;
+
+        // Hệ số ma sát (Kéo ngón tay 10px thì nút chỉ đi 4px)
+        const friction = 0.4;
+        let pullX = dx * friction;
+        let pullY = dy * friction;
+
+        // Giới hạn max drag (Không cho nút trượt ra quá xa)
+        const maxPull = 30;
+        pullX = Math.max(-maxPull, Math.min(maxPull, pullX));
+        pullY = Math.max(-maxPull, Math.min(maxPull, pullY));
+
+        // Tính khoảng cách để xác định độ kéo dãn
+        const distance = Math.sqrt(pullX * pullX + pullY * pullY);
+        
+        // Tính độ dãn (Stretch): càng kéo xa nút càng dài ra và dẹp lại
+        const stretch = distance * 0.006;
+
+        // Tính góc xoay bằng atan2 để nút luôn hướng đầu dãn về phía ngón tay
+        const angle = Math.atan2(pullY, pullX);
+
+        // Áp dụng Ma trận CSS (Di chuyển -> Xoay -> Dãn -> Trả góc xoay -> Lún)
+        activeElement.style.transform = `
+          translate(${pullX}px, ${pullY}px)
+          rotate(${angle}rad)
+          scale(${0.8 + stretch}, ${0.8 - stretch})
+          rotate(-${angle}rad)
+          rotateX(5deg)
+        `;
+      }
+
+      function onDragEnd(e) {
+        if (!activeElement) return;
+
+        // BẬT LẠI transition với cấu hình lò xo đàn hồi (Spring Physics)
+        activeElement.style.transition = 'transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8), box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8)';
+        
+        // Xóa style transform inline để nút giật ngược lại về trạng thái CSS gốc
+        activeElement.style.transform = '';
+        activeElement.classList.remove('is-pressed');
+
+        let tempEl = activeElement;
+        activeElement = null;
+
+        // Sau khi hoàn thành lò xo nảy (0.6s), dọn dẹp inline transition để không ghi đè :hover CSS
+        setTimeout(() => {
+          if (tempEl) tempEl.style.transition = '';
+        }, 600);
+
+        cleanUpEvents();
+      }
+
+      function onScrollCancel() {
+        // Tự động nhả nút nảy về nhanh chóng nếu người dùng vuốt để cuộn màn hình
+        if (activeElement) {
+            activeElement.style.transition = 'transform 0.3s ease';
+            activeElement.style.transform = '';
+            activeElement.classList.remove('is-pressed');
+            let tempEl = activeElement;
+            activeElement = null;
+            setTimeout(() => { if (tempEl) tempEl.style.transition = ''; }, 300);
+            cleanUpEvents();
+        }
+      }
+
+      function cleanUpEvents() {
+        window.removeEventListener('mousemove', onDragMove);
+        window.removeEventListener('touchmove', onDragMove);
+        window.removeEventListener('mouseup', onDragEnd);
+        window.removeEventListener('touchend', onDragEnd);
+        window.removeEventListener('touchcancel', onDragEnd);
+        window.removeEventListener('scroll', onScrollCancel, true);
+      }
+
+      // Áp dụng cho tất cả các nút tương tác
       var buttons = document.querySelectorAll('.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .tool-item, .question-btn, .category-header, .history-item, .suggestion-item');
       buttons.forEach(function(el) {
-        el.addEventListener('touchstart', addPressed, {passive: true});
-        el.addEventListener('touchend', removePressed);
-        el.addEventListener('touchcancel', removePressed);
-        el.addEventListener('mousedown', addPressed);
-        el.addEventListener('mouseup', removePressed);
-        el.addEventListener('mouseleave', removePressed);
+        el.addEventListener('touchstart', onDragStart, {passive: true});
+        el.addEventListener('mousedown', onDragStart);
       });
 
       // Chặn context menu và phím tắt debug

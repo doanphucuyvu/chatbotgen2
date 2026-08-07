@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>SMY GPT</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     /* ===== RESET & BASE ===== */
     * {
@@ -159,9 +159,9 @@
     .category-header {
       border: none;
       cursor: pointer;
-      /* ----- SQUISHY TRANSITION (lò xo nảy) – Cải tiến cubic-bezier lò xo ----- */
-      transition: transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
-                  box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
+      /* ----- SQUISHY TRANSITION (lò xo nảy) – tách riêng transform/box-shadow để tránh lag theme ----- */
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
                   background-color 0.15s ease,
                   color 0.15s ease,
                   border-color 0.15s ease;
@@ -200,8 +200,7 @@
       color: #f5f5f7;
     }
 
-    /* ----- SQUISHY HOVER & ACTIVE BỌC TRONG MEDIA QUERY ----- */
-    /* Fix lỗi hover dính trên Mobile */
+    /* ----- SQUISHY HOVER (phình căng mọng) – CHỈ áp dụng cho thiết bị có chuột chính xác (desktop) ----- */
     @media (hover: hover) and (pointer: fine) {
       .btn-icon:hover,
       .hamburger-btn:hover,
@@ -231,46 +230,38 @@
       body.dark-mode .category-header:hover {
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
       }
-      
-      .history-item:hover {
-        transform: scale(1.04) translateY(-2px);
-        box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
-      }
-      body.dark-mode .history-item:hover {
-        box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
-      }
-      .history-item:hover .delete-btn { opacity: 0.7; }
-      .history-item .delete-btn:hover { opacity: 1; }
+    }
 
-      .message-content:hover .message-actions { opacity: 1; }
-      .message-content:hover .feedback-container { opacity: 1; }
-      
-      .send-btn:hover i { transform: translateX(3px) scale(1.05); }
-
-      .suggestion-item:hover {
-        background: rgba(255,255,255,0.08);
-        transform: scale(1.04) translateX(4px);
-        box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
-      }
-      body.dark-mode .suggestion-item:hover {
-        box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
-      }
-
-      [data-tooltip]:hover:before {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
-      }
-
-      ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.15); }
-      body.dark-mode ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.10); }
-
-      .view-image-btn:hover {
-        color: #0055b3;
-        text-shadow: 0 0 8px rgba(0,122,255,0.1);
-      }
-      body.dark-mode .view-image-btn:hover { color: #64d2ff; }
-      
-      .modal-close:hover { color: #ff3b30; }
+    /* ----- SQUISHY ACTIVE (lún sâu như thạch) – không dùng trên các nút đã có hiệu ứng kéo giãn ----- */
+    .btn-icon:active,
+    .hamburger-btn:active,
+    .send-btn:active,
+    .modal-close:active,
+    .action-btn:active,
+    .feedback-btn:active,
+    .modal-btn:active,
+    .history-item .delete-btn:active,
+    .tool-item:active,
+    .question-btn:active,
+    .category-header:active {
+      transform: scale(0.8) translateY(6px) perspective(100px) rotateX(5deg) !important;
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
+      border-color: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    body.dark-mode .btn-icon:active,
+    body.dark-mode .hamburger-btn:active,
+    body.dark-mode .send-btn:active,
+    body.dark-mode .modal-close:active,
+    body.dark-mode .action-btn:active,
+    body.dark-mode .feedback-btn:active,
+    body.dark-mode .modal-btn:active,
+    body.dark-mode .history-item .delete-btn:active,
+    body.dark-mode .tool-item:active,
+    body.dark-mode .question-btn:active,
+    body.dark-mode .category-header:active {
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
+      background: rgba(255, 255, 255, 0.03);
     }
 
     /* Nút riêng lẻ với kích thước */
@@ -373,8 +364,8 @@
       border-bottom: 1px solid rgba(255,255,255,0.01);
       box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
       cursor: pointer;
-      transition: transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
-                  box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
                   background-color 0.15s ease,
                   color 0.15s ease,
                   border-color 0.15s ease;
@@ -392,6 +383,24 @@
       border-bottom: 1px solid rgba(255,255,255,0.01);
       box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
       color: #f5f5f7;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .history-item:hover {
+        transform: scale(1.04) translateY(-2px);
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
+      }
+      body.dark-mode .history-item:hover {
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
+      }
+    }
+    .history-item:active {
+      transform: scale(0.8) translateY(6px) perspective(100px) rotateX(5deg) !important;
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    body.dark-mode .history-item:active {
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
+      background: rgba(255, 255, 255, 0.03);
     }
     .history-item .title {
       flex: 1;
@@ -415,6 +424,10 @@
       box-shadow: none;
       backdrop-filter: none;
       background: transparent;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .history-item:hover .delete-btn { opacity: 0.7; }
+      .history-item .delete-btn:hover { opacity: 1; }
     }
     body.dark-mode .history-item .delete-btn { color: rgba(255,255,255,0.5); }
 
@@ -493,9 +506,19 @@
       gap: 8px;
       font-weight: 500;
       letter-spacing: -0.01em;
+      background: rgba(255, 255, 255, 0.05) !important;
     }
     body.dark-mode .question-btn {
       color: #f5f5f7;
+      background: rgba(255, 255, 255, 0.03) !important;
+    }
+    .question-btn:active,
+    .question-btn.is-pressed {
+      background: rgba(255, 255, 255, 0.05) !important;
+    }
+    body.dark-mode .question-btn:active,
+    body.dark-mode .question-btn.is-pressed {
+      background: rgba(255, 255, 255, 0.03) !important;
     }
 
     /* ===== OVERLAY ===== */
@@ -524,7 +547,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      /* ---- CRYSTAL LIQUID GLASS ---- */
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -668,6 +690,9 @@
       opacity: 0;
       transition: opacity 0.2s ease;
     }
+    @media (hover: hover) and (pointer: fine) {
+      .message-content:hover .message-actions { opacity: 1; }
+    }
     .action-btn {
       width: 28px;
       height: 28px;
@@ -684,6 +709,9 @@
       justify-content: flex-end;
       opacity: 0;
       transition: opacity 0.2s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .message-content:hover .feedback-container { opacity: 1; }
     }
     .feedback-btn {
       border-radius: 50px;
@@ -716,7 +744,6 @@
       display: flex;
       gap: 12px;
       align-items: center;
-      /* ---- CRYSTAL LIQUID GLASS ---- */
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -800,8 +827,10 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
       color: #5ac8fa;
     }
-    .send-btn i { transition: transform 0.3s ease; }
-    
+    @media (hover: hover) and (pointer: fine) {
+      .send-btn i { transition: transform 0.3s ease; }
+      .send-btn:hover i { transform: translateX(3px) scale(1.05); }
+    }
     .send-btn.loading {
       pointer-events: none;
       opacity: 0.6;
@@ -855,8 +884,8 @@
     .suggestion-item {
       padding: 11px 16px;
       cursor: pointer;
-      transition: transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
-                  box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
                   background-color 0.15s ease,
                   color 0.15s ease,
                   border-color 0.15s ease;
@@ -872,6 +901,24 @@
       color: #f5f5f7;
     }
     .suggestion-item:last-child { border-bottom: none; }
+    @media (hover: hover) and (pointer: fine) {
+      .suggestion-item:hover {
+        background: rgba(255,255,255,0.08);
+        transform: scale(1.04) translateX(4px);
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
+      }
+      body.dark-mode .suggestion-item:hover {
+        box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
+      }
+    }
+    .suggestion-item:active {
+      transform: scale(0.8) translateY(6px) perspective(100px) rotateX(5deg) !important;
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    body.dark-mode .suggestion-item:active {
+      background: rgba(255, 255, 255, 0.03);
+    }
 
     /* ===== TYPING INDICATOR ===== */
     .typing-indicator {
@@ -964,7 +1011,6 @@
       visibility: visible;
     }
     .modal-content {
-      /* ---- CRYSTAL LIQUID GLASS ---- */
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -1010,6 +1056,9 @@
       transition: color 0.2s ease;
       padding: 4px 8px;
       border-radius: 50%;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .modal-close:hover { color: #ff3b30; }
     }
     body.dark-mode .modal-close { color: rgba(255,255,255,0.5); }
 
@@ -1094,8 +1143,8 @@
       border: none;
       cursor: pointer;
       font-weight: 600;
-      transition: transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
-                  box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8),
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
                   background-color 0.15s ease,
                   color 0.15s ease,
                   border-color 0.15s ease;
@@ -1147,27 +1196,33 @@
 
     /* ===== TOOLTIP ===== */
     [data-tooltip] { position: relative; }
-    [data-tooltip]:before {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%) scale(0.9);
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
-      color: #fff;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 500;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      z-index: 999;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      border: 1px solid rgba(255,255,255,0.06);
+    @media (hover: hover) and (pointer: fine) {
+      [data-tooltip]:before {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%) scale(0.9);
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 999;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        border: 1px solid rgba(255,255,255,0.06);
+      }
+      [data-tooltip]:hover:before {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
     }
 
     /* ===== SCROLLBAR ===== */
@@ -1180,9 +1235,13 @@
       -webkit-backdrop-filter: blur(2px);
       border: 1px solid rgba(255,255,255,0.1);
     }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.15); }
     body.dark-mode ::-webkit-scrollbar-thumb {
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.02);
+    }
+    body.dark-mode ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.10);
     }
 
     /* ===== UPDATE LOG ===== */
@@ -1233,72 +1292,15 @@
       font-weight: 500;
       transition: all 0.2s ease;
     }
+    @media (hover: hover) and (pointer: fine) {
+      .view-image-btn:hover {
+        color: #0055b3;
+        text-shadow: 0 0 8px rgba(0,122,255,0.1);
+      }
+      body.dark-mode .view-image-btn:hover { color: #64d2ff; }
+    }
     body.dark-mode .view-image-btn {
       color: #5ac8fa;
-    }
-
-    /* ===== HIỆU ỨNG LÚN TỨC THÌ (dùng JS thay vì :active) ===== */
-    .btn-icon.is-pressed,
-    .btn-icon:active,
-    .hamburger-btn.is-pressed,
-    .hamburger-btn:active,
-    .send-btn.is-pressed,
-    .send-btn:active,
-    .modal-close.is-pressed,
-    .modal-close:active,
-    .action-btn.is-pressed,
-    .action-btn:active,
-    .feedback-btn.is-pressed,
-    .feedback-btn:active,
-    .modal-btn.is-pressed,
-    .modal-btn:active,
-    .history-item .delete-btn.is-pressed,
-    .history-item .delete-btn:active,
-    .tool-item.is-pressed,
-    .tool-item:active,
-    .question-btn.is-pressed,
-    .question-btn:active,
-    .category-header.is-pressed,
-    .category-header:active,
-    .history-item.is-pressed,
-    .history-item:active,
-    .suggestion-item.is-pressed,
-    .suggestion-item:active {
-      transform: scale(0.8) translateY(6px) perspective(100px) rotateX(5deg) !important;
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
-      border-color: rgba(255,255,255,0.1) !important;
-      /* FIX LỖI NỀN TRẮNG KHI CHẠM: Ép buộc lớp nền kính mờ thay vì bị trình duyệt reset */
-      background-color: rgba(255, 255, 255, 0.05) !important;
-      transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;
-    }
-    body.dark-mode .btn-icon.is-pressed,
-    body.dark-mode .btn-icon:active,
-    body.dark-mode .hamburger-btn.is-pressed,
-    body.dark-mode .hamburger-btn:active,
-    body.dark-mode .send-btn.is-pressed,
-    body.dark-mode .send-btn:active,
-    body.dark-mode .modal-close.is-pressed,
-    body.dark-mode .modal-close:active,
-    body.dark-mode .action-btn.is-pressed,
-    body.dark-mode .action-btn:active,
-    body.dark-mode .feedback-btn.is-pressed,
-    body.dark-mode .feedback-btn:active,
-    body.dark-mode .modal-btn.is-pressed,
-    body.dark-mode .modal-btn:active,
-    body.dark-mode .history-item .delete-btn.is-pressed,
-    body.dark-mode .history-item .delete-btn:active,
-    body.dark-mode .tool-item.is-pressed,
-    body.dark-mode .tool-item:active,
-    body.dark-mode .question-btn.is-pressed,
-    body.dark-mode .question-btn:active,
-    body.dark-mode .category-header.is-pressed,
-    body.dark-mode .category-header:active,
-    body.dark-mode .history-item.is-pressed,
-    body.dark-mode .history-item:active,
-    body.dark-mode .suggestion-item.is-pressed,
-    body.dark-mode .suggestion-item:active {
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
-      background-color: rgba(255, 255, 255, 0.03) !important;
     }
 
     /* ===== RESPONSIVE ===== */
@@ -1570,7 +1572,7 @@
  
 
   <script>
-    
+    // ===== DỮ LIỆU FAQ =====
     const faqData = {
   "Thông tin liên hệ": "Nếu bạn muốn liên hệ với SMY, bạn có thể qua:\n\n• Fanpage: https://www.facebook.com/STEMofMyDinh/\n• Gmail: stemofmydinh@gmail.com",
 
@@ -2369,165 +2371,153 @@
     });
   </script>
 
+  <!-- ===== NÂNG CẤP HIỆU ỨNG VẬT LÝ GIỌT NƯỚC ĐÀN HỒI (Elastic Fluid Drag) ===== -->
   <script>
     (function() {
-      // ===== NÂNG CẤP HIỆU ỨNG VẬT LÝ iOS 26 FLUID EFFECT =====
-      let activeElement = null;
-      let startX = 0;
-      let startY = 0;
+      // Cấu hình
+      const DRAG_THRESHOLD = 8;            // Khoảng cách (px) để bắt đầu kéo
+      const MAX_DRAG_DISTANCE = 32;        // Giới hạn kéo tối đa
+      const STRETCH_FACTOR = 0.15;         // Độ giãn tối đa (1 + factor)
+      const SPRING_CURVE = 'cubic-bezier(0.4, 2.2, 0.3, 0.8)';
 
-      // Hàm lấy tọa độ con trỏ (hỗ trợ cả chạm và chuột)
-      function getClientPos(e) {
-        if (e.touches && e.touches.length > 0) {
-          return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-        }
+      // Selector cho tất cả các nút cần hiệu ứng
+      const BUTTON_SELECTORS = [
+        '.btn-icon', '.hamburger-btn', '.send-btn', '.modal-close',
+        '.action-btn', '.feedback-btn', '.modal-btn', '.tool-item',
+        '.question-btn', '.category-header', '.history-item', '.suggestion-item',
+        '.history-item .delete-btn'
+      ].join(', ');
+
+      // Trạng thái cho mỗi nút
+      const stateMap = new WeakMap();
+
+      // Lấy tọa độ từ sự kiện
+      function getPos(e) {
+        if (e.touches && e.touches.length) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        if (e.changedTouches && e.changedTouches.length) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
         return { x: e.clientX, y: e.clientY };
       }
 
-      function onDragStart(e) {
-        // Nếu click vào icon bên trong, hãy target vào nút chính
-        activeElement = this;
-        activeElement.classList.add('is-pressed');
+      // Gắn sự kiện cho một nút
+      function attach(btn) {
+        if (stateMap.has(btn)) return;
+        stateMap.set(btn, {
+          dragging: false,
+          startX: 0, startY: 0,
+          centerX: 0, centerY: 0,
+          originTransform: ''
+        });
 
-        // Lấy tọa độ gốc
-        const pos = getClientPos(e);
-        startX = pos.x;
-        startY = pos.y;
-
-        // TẮT transition để nút di chuyển mượt mà bám sát ngón tay (60fps)
-        activeElement.style.transition = 'none';
-
-        // Lắng nghe sự kiện di chuyển và nhả ra
-        window.addEventListener('mousemove', onDragMove, { passive: false });
-        window.addEventListener('touchmove', onDragMove, { passive: true }); // passive để không block scroll mượt của thiết bị
-        window.addEventListener('mouseup', onDragEnd);
-        window.addEventListener('touchend', onDragEnd);
-        window.addEventListener('touchcancel', onDragEnd);
-        
-        // Hủy thao tác drag nếu người dùng cuộn màn hình (chuẩn iOS behavior)
-        window.addEventListener('scroll', onScrollCancel, true); 
+        btn.addEventListener('mousedown', onDown);
+        btn.addEventListener('mousemove', onMove);
+        btn.addEventListener('mouseup', onUp);
+        btn.addEventListener('mouseleave', onUp);
+        btn.addEventListener('touchstart', onDown, { passive: false });
+        btn.addEventListener('touchmove', onMove, { passive: false });
+        btn.addEventListener('touchend', onUp);
+        btn.addEventListener('touchcancel', onUp);
       }
 
-      function onDragMove(e) {
-        if (!activeElement) return;
-
-        const pos = getClientPos(e);
-        const dx = pos.x - startX;
-        const dy = pos.y - startY;
-
-        // Hệ số ma sát (Kéo ngón tay 10px thì nút chỉ đi 4px)
-        const friction = 0.4;
-        let pullX = dx * friction;
-        let pullY = dy * friction;
-
-        // Giới hạn max drag (Không cho nút trượt ra quá xa)
-        const maxPull = 30;
-        pullX = Math.max(-maxPull, Math.min(maxPull, pullX));
-        pullY = Math.max(-maxPull, Math.min(maxPull, pullY));
-
-        // Tính khoảng cách để xác định độ kéo dãn
-        const distance = Math.sqrt(pullX * pullX + pullY * pullY);
-        
-        // Tính độ dãn (Stretch): càng kéo xa nút càng dài ra và dẹp lại
-        const stretch = distance * 0.006;
-
-        // Tính góc xoay bằng atan2 để nút luôn hướng đầu dãn về phía ngón tay
-        const angle = Math.atan2(pullY, pullX);
-
-        // Áp dụng Ma trận CSS (Di chuyển -> Xoay -> Dãn -> Trả góc xoay -> Lún)
-        activeElement.style.transform = `
-          translate(${pullX}px, ${pullY}px)
-          rotate(${angle}rad)
-          scale(${0.8 + stretch}, ${0.8 - stretch})
-          rotate(-${angle}rad)
-          rotateX(5deg)
-        `;
+      function onDown(e) {
+        const btn = e.currentTarget;
+        const state = stateMap.get(btn);
+        const pos = getPos(e);
+        state.startX = pos.x;
+        state.startY = pos.y;
+        const rect = btn.getBoundingClientRect();
+        state.centerX = rect.left + rect.width / 2;
+        state.centerY = rect.top + rect.height / 2;
+        state.dragging = false;
+        state.originTransform = btn.style.transform || '';
+        // Thêm class lún tạm thời (sẽ bị gỡ nếu kéo)
+        btn.classList.add('is-pressed');
       }
 
-      function onDragEnd(e) {
-        if (!activeElement) return;
+      function onMove(e) {
+        const btn = e.currentTarget;
+        const state = stateMap.get(btn);
+        if (!state || state.startX === 0) return;
+        const pos = getPos(e);
+        const dx = pos.x - state.startX;
+        const dy = pos.y - state.startY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // BẬT LẠI transition với cấu hình lò xo đàn hồi (Spring Physics)
-        activeElement.style.transition = 'transform 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8), box-shadow 0.6s cubic-bezier(0.4, 2.5, 0.3, 0.8)';
-        
-        // Xóa style transform inline để nút giật ngược lại về trạng thái CSS gốc
-        activeElement.style.transform = '';
-        activeElement.classList.remove('is-pressed');
+        if (!state.dragging && dist > DRAG_THRESHOLD) {
+          state.dragging = true;
+          btn.classList.remove('is-pressed');
+          btn.style.transition = 'none'; // tắt transition khi kéo
+          if (e.cancelable) e.preventDefault();
+        }
 
-        let tempEl = activeElement;
-        activeElement = null;
+        if (state.dragging) {
+          if (e.cancelable) e.preventDefault();
+          // Vector từ tâm nút đến vị trí hiện tại
+          const toX = pos.x - state.centerX;
+          const toY = pos.y - state.centerY;
+          const toDist = Math.sqrt(toX * toX + toY * toY);
+          const clamped = Math.min(toDist, MAX_DRAG_DISTANCE);
+          const ratio = toDist ? clamped / toDist : 0;
+          const limitedX = toX * ratio;
+          const limitedY = toY * ratio;
 
-        // Sau khi hoàn thành lò xo nảy (0.6s), dọn dẹp inline transition để không ghi đè :hover CSS
-        setTimeout(() => {
-          if (tempEl) tempEl.style.transition = '';
-        }, 600);
+          // Tính stretch theo hướng kéo
+          const stretchAmount = (clamped / MAX_DRAG_DISTANCE) * STRETCH_FACTOR;
+          const scaleX = 1 + stretchAmount;
+          const scaleY = 1 - stretchAmount * 0.5;
 
-        cleanUpEvents();
-      }
+          // Góc xoay để scale theo đúng hướng
+          const angle = Math.atan2(limitedY, limitedX);
 
-      function onScrollCancel() {
-        // Tự động nhả nút nảy về nhanh chóng nếu người dùng vuốt để cuộn màn hình
-        if (activeElement) {
-            activeElement.style.transition = 'transform 0.3s ease';
-            activeElement.style.transform = '';
-            activeElement.classList.remove('is-pressed');
-            let tempEl = activeElement;
-            activeElement = null;
-            setTimeout(() => { if (tempEl) tempEl.style.transition = ''; }, 300);
-            cleanUpEvents();
+          btn.style.transform = `translate(${limitedX}px, ${limitedY}px) rotate(${angle}rad) scale(${scaleX}, ${scaleY}) rotate(${-angle}rad)`;
         }
       }
 
-      function cleanUpEvents() {
-        window.removeEventListener('mousemove', onDragMove);
-        window.removeEventListener('touchmove', onDragMove);
-        window.removeEventListener('mouseup', onDragEnd);
-        window.removeEventListener('touchend', onDragEnd);
-        window.removeEventListener('touchcancel', onDragEnd);
-        window.removeEventListener('scroll', onScrollCancel, true);
+      function onUp(e) {
+        const btn = e.currentTarget;
+        const state = stateMap.get(btn);
+        if (!state) return;
+        const wasDragging = state.dragging;
+        state.dragging = false;
+        state.startX = state.startY = 0;
+        btn.classList.remove('is-pressed');
+
+        if (wasDragging) {
+          // Bật transition lò xo nảy về
+          btn.style.transition = `transform 0.6s ${SPRING_CURVE}`;
+          btn.style.transform = '';
+          const handler = () => {
+            btn.style.transition = '';
+            btn.removeEventListener('transitionend', handler);
+          };
+          btn.addEventListener('transitionend', handler);
+        } else {
+          // Chỉ nhấn, không kéo -> class is-pressed sẽ tự xóa bởi CSS transition
+        }
       }
 
-      // Áp dụng cho tất cả các nút tương tác
-      var buttons = document.querySelectorAll('.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .tool-item, .question-btn, .category-header, .history-item, .suggestion-item');
-      buttons.forEach(function(el) {
-        el.addEventListener('touchstart', onDragStart, {passive: true});
-        el.addEventListener('mousedown', onDragStart);
-      });
+      // Gắn sự kiện cho tất cả nút hiện có
+      document.querySelectorAll(BUTTON_SELECTORS).forEach(attach);
 
-      // Chặn context menu và phím tắt debug
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        return false;
+      // Quan sát DOM để gắn cho nút được thêm động
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(m => {
+          m.addedNodes.forEach(node => {
+            if (node.nodeType === 1) {
+              if (node.matches && node.matches(BUTTON_SELECTORS)) attach(node);
+              if (node.querySelectorAll) node.querySelectorAll(BUTTON_SELECTORS).forEach(attach);
+            }
+          });
+        });
       });
+      observer.observe(document.body, { childList: true, subtree: true });
 
+      // Chặn context menu & phím debug
+      document.addEventListener('contextmenu', e => e.preventDefault());
       document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12') {
+        if (e.key === 'F12' || 
+           (e.ctrlKey && e.shiftKey && ['I','J','C','K','E','U'].includes(e.key)) ||
+           (e.ctrlKey && ['u','s'].includes(e.key))) {
           e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.key === 'u') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.key === 's') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.key === 'K') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.key === 'E') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.key === 'U') {
-          e.preventDefault();
-          return false;
         }
       });
     })();

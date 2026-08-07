@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="vi" data-scribe-recorder-ready="true" class="brand-refresh"><head>
+<html lang="vi" data-scribe-recorder-ready="true" class="brand-refresh">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>SMY GPT</title>
@@ -158,8 +159,13 @@
     .category-header {
       border: none;
       cursor: pointer;
-      /* ----- SQUISHY TRANSITION (lò xo nảy) ----- */
-      transition: all 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8);
+      /* ----- SQUISHY TRANSITION (lò xo nảy) – tách riêng transform/box-shadow để tránh lag theme ----- */
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  background-color 0.15s ease,
+                  color 0.15s ease,
+                  border-color 0.15s ease;
+      will-change: transform, box-shadow;
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -172,6 +178,7 @@
       border-radius: 50px;
       position: relative;
       overflow: hidden;
+      touch-action: manipulation; /* Loại bỏ 300ms delay trên mobile */
     }
     body.dark-mode .btn-icon,
     body.dark-mode .hamburger-btn,
@@ -353,10 +360,16 @@
       border-bottom: 1px solid rgba(255,255,255,0.01);
       box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
       cursor: pointer;
-      transition: all 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8);
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  background-color 0.15s ease,
+                  color 0.15s ease,
+                  border-color 0.15s ease;
+      will-change: transform, box-shadow;
       font-size: 0.9rem;
       color: #1d1d1f;
       position: relative;
+      touch-action: manipulation;
     }
     body.dark-mode .history-item {
       background: rgba(255, 255, 255, 0.03);
@@ -433,7 +446,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.01);
       box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
     }
     body.dark-mode .category {
       background: rgba(255, 255, 255, 0.03);
@@ -850,11 +863,17 @@
     .suggestion-item {
       padding: 11px 16px;
       cursor: pointer;
-      transition: all 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8);
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  background-color 0.15s ease,
+                  color 0.15s ease,
+                  border-color 0.15s ease;
+      will-change: transform, box-shadow;
       border-bottom: 1px solid rgba(255,255,255,0.1);
       font-size: 0.9rem;
       color: #1d1d1f;
       border-radius: 50px;
+      touch-action: manipulation;
     }
     body.dark-mode .suggestion-item {
       border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -957,7 +976,8 @@
       z-index: 2000;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transition: opacity 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+                  visibility 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
     .modal.show {
       opacity: 1;
@@ -1054,7 +1074,7 @@
       -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       margin-bottom: 14px;
       font-size: 14px;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.15s ease;
       color: #1d1d1f;
       border-top: 1px solid rgba(255,255,255,0.7);
       border-left: 1px solid rgba(255,255,255,0.4);
@@ -1095,7 +1115,12 @@
       border: none;
       cursor: pointer;
       font-weight: 600;
-      transition: all 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8);
+      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+                  background-color 0.15s ease,
+                  color 0.15s ease,
+                  border-color 0.15s ease;
+      will-change: transform, box-shadow;
       font-size: 0.9rem;
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -1245,6 +1270,41 @@
       color: #5ac8fa;
     }
     body.dark-mode .view-image-btn:hover { color: #64d2ff; }
+
+    /* ===== HIỆU ỨNG LÚN TỨC THÌ (dùng JS thay vì :active) ===== */
+    .btn-icon.is-pressed,
+    .hamburger-btn.is-pressed,
+    .send-btn.is-pressed,
+    .modal-close.is-pressed,
+    .action-btn.is-pressed,
+    .feedback-btn.is-pressed,
+    .modal-btn.is-pressed,
+    .history-item .delete-btn.is-pressed,
+    .tool-item.is-pressed,
+    .question-btn.is-pressed,
+    .category-header.is-pressed,
+    .history-item.is-pressed,
+    .suggestion-item.is-pressed {
+      transform: scale(0.8) translateY(6px) perspective(100px) rotateX(5deg) !important;
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
+      border-color: rgba(255,255,255,0.1);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
+    }
+    body.dark-mode .btn-icon.is-pressed,
+    body.dark-mode .hamburger-btn.is-pressed,
+    body.dark-mode .send-btn.is-pressed,
+    body.dark-mode .modal-close.is-pressed,
+    body.dark-mode .action-btn.is-pressed,
+    body.dark-mode .feedback-btn.is-pressed,
+    body.dark-mode .modal-btn.is-pressed,
+    body.dark-mode .history-item .delete-btn.is-pressed,
+    body.dark-mode .tool-item.is-pressed,
+    body.dark-mode .question-btn.is-pressed,
+    body.dark-mode .category-header.is-pressed,
+    body.dark-mode .history-item.is-pressed,
+    body.dark-mode .suggestion-item.is-pressed {
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
+    }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
@@ -2316,45 +2376,55 @@
 
   <script>
     (function() {
-      
+      // Thêm/xóa class .is-pressed khi chạm/nhấn để phản hồi tức thì
+      function addPressed(e) {
+        this.classList.add('is-pressed');
+      }
+      function removePressed(e) {
+        this.classList.remove('is-pressed');
+      }
+      // Áp dụng cho tất cả các nút tương tác (dựa trên selector CSS đã có)
+      var buttons = document.querySelectorAll('.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .tool-item, .question-btn, .category-header, .history-item, .suggestion-item');
+      buttons.forEach(function(el) {
+        el.addEventListener('touchstart', addPressed, {passive: true});
+        el.addEventListener('touchend', removePressed);
+        el.addEventListener('touchcancel', removePressed);
+        el.addEventListener('mousedown', addPressed);
+        el.addEventListener('mouseup', removePressed);
+        el.addEventListener('mouseleave', removePressed);
+      });
+
+      // Chặn context menu và phím tắt debug
       document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
         return false;
       });
 
-      
       document.addEventListener('keydown', function(e) {
-        // F12
         if (e.key === 'F12') {
           e.preventDefault();
           return false;
         }
-        // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C 
         if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
           e.preventDefault();
           return false;
         }
-        // Ctrl+U 
         if (e.ctrlKey && e.key === 'u') {
           e.preventDefault();
           return false;
         }
-        // Ctrl+S 
         if (e.ctrlKey && e.key === 's') {
           e.preventDefault();
           return false;
         }
-        // Ctrl+Shift+K 
         if (e.ctrlKey && e.shiftKey && e.key === 'K') {
           e.preventDefault();
           return false;
         }
-        // Ctrl+Shift+E (Firefox inspector)
         if (e.ctrlKey && e.shiftKey && e.key === 'E') {
           e.preventDefault();
           return false;
         }
-        // Ctrl+Shift+U (Firefox view source?)
         if (e.ctrlKey && e.shiftKey && e.key === 'U') {
           e.preventDefault();
           return false;
@@ -2363,4 +2433,5 @@
     })();
   </script>
 
-</body></html>
+</body>
+</html>

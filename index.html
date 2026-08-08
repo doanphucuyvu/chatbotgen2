@@ -34,11 +34,26 @@
       background-size: 400% 400%;
       animation: gradientBGLight 15s ease infinite;
     }
+    
+    /* Đổi keyframes để ép mobile vẽ lại nền khi chuyển Darkmode */
     @keyframes gradientBGLight {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+    @keyframes gradientBGDark {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body.dark-mode {
+      color: #f5f5f7;
+      background-image: linear-gradient(45deg, #2b1a3a, #1a1a3e, #0f3460, #16213e) !important;
+      background-size: 400% 400%;
+      animation: gradientBGDark 18s ease infinite !important;
+    }
+
     /* Lớp phủ thêm để tăng chiều sâu cho kính */
     body::before {
       content: '';
@@ -53,17 +68,6 @@
       pointer-events: none;
     }
 
-    body.dark-mode {
-      color: #f5f5f7;
-      background-image: linear-gradient(45deg, #2b1a3a, #1a1a3e, #0f3460, #16213e) !important;
-      background-size: 400% 400%;
-      animation: gradientBGDark 18s ease infinite !important;
-    }
-    @keyframes gradientBGDark {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
     body.dark-mode::before {
       background: radial-gradient(circle at 60% 30%, rgba(100,150,255,0.08), transparent 60%),
                   radial-gradient(circle at 80% 70%, rgba(200,100,255,0.05), transparent 50%);
@@ -150,7 +154,7 @@
       background: transparent;
     }
 
-    /* ===== BUTTONS – SQUISHY PHYSICS (công thức chung) ===== */
+    /* ===== BUTTONS – SQUISHY PHYSICS ===== */
     .btn-icon,
     .hamburger-btn,
     .send-btn,
@@ -161,12 +165,13 @@
     .history-item .delete-btn,
     .tool-item,
     .question-btn,
-    .category-header {
+    .category-header,
+    .history-item,
+    .suggestion-item {
       border: none;
       cursor: pointer;
-      /* ----- SQUISHY TRANSITION ----- */
-      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
                   background-color 0.15s ease,
                   color 0.15s ease,
                   border-color 0.15s ease;
@@ -186,6 +191,7 @@
       user-select: none;
       -webkit-user-select: none;
     }
+
     body.dark-mode .btn-icon,
     body.dark-mode .hamburger-btn,
     body.dark-mode .send-btn,
@@ -196,7 +202,9 @@
     body.dark-mode .history-item .delete-btn,
     body.dark-mode .tool-item,
     body.dark-mode .question-btn,
-    body.dark-mode .category-header {
+    body.dark-mode .category-header,
+    body.dark-mode .history-item,
+    body.dark-mode .suggestion-item {
       background: rgba(255, 255, 255, 0.03);
       border-top: 1px solid rgba(255,255,255,0.3);
       border-left: 1px solid rgba(255,255,255,0.2);
@@ -206,7 +214,7 @@
       color: #f5f5f7;
     }
 
-    /* ----- CHỈ KÍCH HOẠT HOVER KHI CÓ CHUỘT (FIX LỖI KẸT ĐIỆN THOẠI) ----- */
+    /* ---- LỌC CHỈ CHO CHUỘT THẬT HOVER ---- */
     @media (hover: hover) and (pointer: fine) {
       .btn-icon:hover,
       .hamburger-btn:hover,
@@ -215,7 +223,6 @@
       .action-btn:hover,
       .feedback-btn:hover,
       .modal-btn:hover,
-      .history-item .delete-btn:hover,
       .tool-item:hover,
       .question-btn:hover,
       .category-header:hover {
@@ -230,7 +237,6 @@
       body.dark-mode .action-btn:hover,
       body.dark-mode .feedback-btn:hover,
       body.dark-mode .modal-btn:hover,
-      body.dark-mode .history-item .delete-btn:hover,
       body.dark-mode .tool-item:hover,
       body.dark-mode .question-btn:hover,
       body.dark-mode .category-header:hover {
@@ -244,7 +250,9 @@
       body.dark-mode .history-item:hover {
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
       }
-
+      .history-item:hover .delete-btn { opacity: 0.7; }
+      .history-item .delete-btn:hover { opacity: 1; }
+      
       .suggestion-item:hover {
         background: rgba(255,255,255,0.08);
         transform: scale(1.04) translateX(4px);
@@ -254,8 +262,6 @@
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
       }
 
-      .history-item:hover .delete-btn { opacity: 0.7; }
-      .history-item .delete-btn:hover { opacity: 1; }
       .message-content:hover .message-actions { opacity: 1; }
       .message-content:hover .feedback-container { opacity: 1; }
       .send-btn:hover i { transform: translateX(3px) scale(1.05); }
@@ -276,10 +282,21 @@
       .modal-close:hover { color: #ff3b30; }
     }
 
-    /* Cho phép hiện action trên di động không cần hover */
+    /* Ép hiện menu trên Mobile để không bị mất chức năng do tắt hover */
     @media (hover: none) {
       .message-actions, .feedback-container { opacity: 1 !important; }
       .history-item .delete-btn { opacity: 1 !important; }
+    }
+
+    /* ---- CLASS LÚN DO JS ĐIỀU KHIỂN ---- */
+    .is-pressed {
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
+      border-color: rgba(255,255,255,0.1) !important;
+      background-color: rgba(255, 255, 255, 0.05) !important; /* Fix lỗi nền trắng */
+    }
+    body.dark-mode .is-pressed {
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
+      background-color: rgba(255, 255, 255, 0.03) !important;
     }
 
     /* Nút riêng lẻ với kích thước */
@@ -372,36 +389,7 @@
       justify-content: space-between;
       padding: 10px 12px;
       border-radius: 50px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
-      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
-      border-top: 1px solid rgba(255,255,255,0.7);
-      border-left: 1px solid rgba(255,255,255,0.4);
-      border-right: 1px solid rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.01);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
-      cursor: pointer;
-      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  background-color 0.15s ease,
-                  color 0.15s ease,
-                  border-color 0.15s ease;
-      will-change: transform, box-shadow;
       font-size: 0.9rem;
-      color: #1d1d1f;
-      position: relative;
-      touch-action: manipulation;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-    body.dark-mode .history-item {
-      background: rgba(255, 255, 255, 0.03);
-      border-top: 1px solid rgba(255,255,255,0.3);
-      border-left: 1px solid rgba(255,255,255,0.2);
-      border-right: 1px solid rgba(255,255,255,0.02);
-      border-bottom: 1px solid rgba(255,255,255,0.01);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
-      color: #f5f5f7;
     }
     .history-item .title {
       flex: 1;
@@ -492,20 +480,12 @@
     }
     .question-btn {
       padding: 11px 14px;
-      border: none;
-      border-radius: 50px;
       text-align: left;
-      cursor: pointer;
       font-size: 13.5px;
-      color: #1d1d1f;
       display: flex;
       align-items: center;
       gap: 8px;
       font-weight: 500;
-      letter-spacing: -0.01em;
-    }
-    body.dark-mode .question-btn {
-      color: #f5f5f7;
     }
 
     /* ===== OVERLAY ===== */
@@ -866,19 +846,10 @@
     .suggestion-item {
       padding: 11px 16px;
       cursor: pointer;
-      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  background-color 0.15s ease,
-                  color 0.15s ease,
-                  border-color 0.15s ease;
-      will-change: transform, box-shadow;
       border-bottom: 1px solid rgba(255,255,255,0.1);
       font-size: 0.9rem;
       color: #1d1d1f;
       border-radius: 50px;
-      touch-action: manipulation;
-      user-select: none;
-      -webkit-user-select: none;
     }
     body.dark-mode .suggestion-item {
       border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -1107,31 +1078,7 @@
       border: none;
       cursor: pointer;
       font-weight: 600;
-      transition: transform 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  box-shadow 0.5s cubic-bezier(0.5, 2.5, 0.4, 0.8),
-                  background-color 0.15s ease,
-                  color 0.15s ease,
-                  border-color 0.15s ease;
-      will-change: transform, box-shadow;
       font-size: 0.9rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(2px) brightness(110%) saturate(150%);
-      -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
-      border-top: 1px solid rgba(255,255,255,0.7);
-      border-left: 1px solid rgba(255,255,255,0.4);
-      border-right: 1px solid rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.01);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
-      color: #1d1d1f;
-    }
-    body.dark-mode .modal-btn {
-      background: rgba(255, 255, 255, 0.03);
-      border-top: 1px solid rgba(255,255,255,0.3);
-      border-left: 1px solid rgba(255,255,255,0.2);
-      border-right: 1px solid rgba(255,255,255,0.02);
-      border-bottom: 1px solid rgba(255,255,255,0.01);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
-      color: #f5f5f7;
     }
     .modal-btn.primary {
       background: rgba(0,122,255,0.15);
@@ -1248,44 +1195,6 @@
     }
     body.dark-mode .view-image-btn {
       color: #5ac8fa;
-    }
-
-    /* ===== HIỆU ỨNG LÚN TỨC THÌ (ĐÃ SỬA LỖI NỀN TRẮNG VÀ CHUẨN BỊ CHO VẬT LÝ JS) ===== */
-    .btn-icon.is-pressed,
-    .hamburger-btn.is-pressed,
-    .send-btn.is-pressed,
-    .modal-close.is-pressed,
-    .action-btn.is-pressed,
-    .feedback-btn.is-pressed,
-    .modal-btn.is-pressed,
-    .history-item .delete-btn.is-pressed,
-    .tool-item.is-pressed,
-    .question-btn.is-pressed,
-    .category-header.is-pressed,
-    .history-item.is-pressed,
-    .suggestion-item.is-pressed {
-      /* Bỏ dòng transform vì JS sẽ lo việc này */
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
-      border-color: rgba(255,255,255,0.1) !important;
-      /* Ép nền giữ màu kính đục, không bị override thành trắng tinh */
-      background-color: rgba(255, 255, 255, 0.05) !important; 
-      transition: box-shadow 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;
-    }
-    body.dark-mode .btn-icon.is-pressed,
-    body.dark-mode .hamburger-btn.is-pressed,
-    body.dark-mode .send-btn.is-pressed,
-    body.dark-mode .modal-close.is-pressed,
-    body.dark-mode .action-btn.is-pressed,
-    body.dark-mode .feedback-btn.is-pressed,
-    body.dark-mode .modal-btn.is-pressed,
-    body.dark-mode .history-item .delete-btn.is-pressed,
-    body.dark-mode .tool-item.is-pressed,
-    body.dark-mode .question-btn.is-pressed,
-    body.dark-mode .category-header.is-pressed,
-    body.dark-mode .history-item.is-pressed,
-    body.dark-mode .suggestion-item.is-pressed {
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
-      background-color: rgba(255, 255, 255, 0.03) !important;
     }
 
     /* ===== RESPONSIVE ===== */
@@ -2355,150 +2264,128 @@
     });
   </script>
 
+  <!-- ===== VẬT LÝ iOS 26 LIQUID GLASS TUYỆT ĐỐI ===== -->
   <script>
     (function() {
-      // ===== JS VẬT LÝ iOS 26 - ĐÃ ĐƯỢC TINH CHỈNH LẠI =====
       let activeEl = null;
       let stX = 0, stY = 0;
-      let isPhysDragging = false;
+      let isDragging = false;
 
-      function getPointerPos(e) {
+      function getPointer(e) {
         if (e.touches && e.touches.length > 0) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-        if (e.changedTouches && e.changedTouches.length > 0) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
         return { x: e.clientX, y: e.clientY };
       }
 
-      // 1. Áp dụng Event Delegation để bao quát cả các nút tạo bằng JS sau này (Lịch sử chat)
-      const targetSelector = '.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .delete-btn, .tool-item, .question-btn, .category-header, .history-item, .suggestion-item';
+      // Mọi thành phần muốn đàn hồi đều nằm trong danh sách này
+      const targetSelectors = '.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .delete-btn, .tool-item, .question-btn, .category-header, .history-item, .suggestion-item';
 
-      document.body.addEventListener('mousedown', onPhysStart);
-      document.body.addEventListener('touchstart', onPhysStart, { passive: true });
-
-      function onPhysStart(e) {
-        const target = e.target.closest(targetSelector);
+      function onStart(e) {
+        // Nhờ .closest(), nó sẽ nhận cả các phần tử do JS tạo ra mà không bao giờ bị "điếc"
+        const target = e.target.closest(targetSelectors);
         if (!target) return;
-        if (e.type === 'mousedown' && e.button !== 0) return; // Chỉ nhận chuột trái
-        
+        if (e.type === 'mousedown' && e.button !== 0) return;
+
         activeEl = target;
-        isPhysDragging = true;
+        isDragging = true;
         activeEl.classList.add('is-pressed');
-        
-        const pos = getPointerPos(e);
-        stX = pos.x; stY = pos.y;
 
-        // Bóp lún mượt mà xuống 0.92 thay vì giật mạnh về 0.8
-        activeEl.style.transition = 'transform 0.15s cubic-bezier(0.2, 0, 0.2, 1)';
-        activeEl.style.transform = 'scale(0.92) translateY(3px) rotateX(3deg)';
+        const pos = getPointer(e);
+        stX = pos.x; 
+        stY = pos.y;
 
-        window.addEventListener('mousemove', onPhysMove, { passive: true });
-        window.addEventListener('touchmove', onPhysMove, { passive: true });
-        window.addEventListener('mouseup', onPhysEnd);
-        window.addEventListener('touchend', onPhysEnd);
-        window.addEventListener('touchcancel', onPhysEnd);
+        // Ép hiệu ứng lún cứng bằng setProperty để vô hiệu hóa hoàn toàn CSS cũ của bạn
+        activeEl.style.setProperty('transition', 'transform 0.15s cubic-bezier(0.2, 0, 0.2, 1)', 'important');
+        activeEl.style.setProperty('transform', 'scale(0.92) translateY(2px)', 'important');
+
+        window.addEventListener('mousemove', onMove, { passive: true });
+        window.addEventListener('touchmove', onMove, { passive: true });
+        window.addEventListener('mouseup', onEnd);
+        window.addEventListener('touchend', onEnd);
+        window.addEventListener('touchcancel', onEnd);
       }
 
-      function onPhysMove(e) {
-        if (!activeEl || !isPhysDragging) return;
+      function onMove(e) {
+        if (!activeEl || !isDragging) return;
         
-        const pos = getPointerPos(e);
+        const pos = getPointer(e);
         const dx = pos.x - stX;
         const dy = pos.y - stY;
         const dist = Math.sqrt(dx*dx + dy*dy);
 
-        if (dist > 2) {
-          activeEl.style.transition = 'none';
+        if (dist > 3) {
+          activeEl.style.setProperty('transition', 'none', 'important');
 
-          // Độ rít rất cao, khó kéo, tạo cảm giác đầm chắc
-          const friction = 0.2; 
-          let pullX = dx * friction;
-          let pullY = dy * friction;
+          const friction = 0.25; 
+          let px = dx * friction;
+          let py = dy * friction;
+          const pullDist = Math.sqrt(px*px + py*py);
+          
+          // --- GIỚI HẠN VẬT LÝ TUYỆT ĐỐI ---
+          // Giới hạn max xê dịch: 12px
+          let cappedDist = Math.min(pullDist, 12); 
 
-          // Giới hạn khoảng cách bị lệch tối đa (15px) để không bị biến dạng quá đà
-          const maxPull = 15;
-          const pullDist = Math.sqrt(pullX*pullX + pullY*pullY);
-          if (pullDist > maxPull) {
-            pullX = (pullX / pullDist) * maxPull;
-            pullY = (pullY / pullDist) * maxPull;
+          if (pullDist > 0) {
+            px = (px / pullDist) * cappedDist;
+            py = (py / pullDist) * cappedDist;
           }
 
-          const angle = Math.atan2(pullY, pullX);
+          const angle = Math.atan2(py, px);
           
-          // Giới hạn độ dãn dọc của nút ở mức 10%
-          const stretch = Math.min(dist * 0.001, 0.1); 
+          // Giới hạn max dãn nở: 6% (tỷ lệ rất nhỏ để tạo độ cứng của mặt kính)
+          const stretch = (cappedDist / 12) * 0.06; 
+          const baseScale = 0.92;
 
-          activeEl.style.transform = `
-            translate(${pullX}px, ${pullY}px)
+          activeEl.style.setProperty('transform', `
+            translate(${px}px, ${py}px)
             rotate(${angle}rad)
-            scale(${0.92 + stretch}, ${0.92 - stretch * 0.3})
+            scale(${baseScale + stretch}, ${baseScale - stretch * 0.5})
             rotate(-${angle}rad)
-            rotateX(3deg)
-          `;
+          `, 'important');
         }
       }
 
-      function onPhysEnd(e) {
+      function onEnd() {
         if (!activeEl) return;
         
-        // Trả về với cấu hình quán tính nảy lò xo mềm mại
-        activeEl.style.transition = 'transform 0.5s cubic-bezier(0.4, 2.5, 0.3, 0.8), box-shadow 0.5s cubic-bezier(0.4, 2.5, 0.3, 0.8)';
-        activeEl.style.transform = ''; 
-        
+        // Quán tính đàn hồi như lò xo iOS
+        activeEl.style.setProperty('transition', 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.2s ease', 'important');
+        activeEl.style.removeProperty('transform');
         activeEl.classList.remove('is-pressed');
         
-        let tempEl = activeEl;
+        let el = activeEl;
         activeEl = null;
-        isPhysDragging = false;
+        isDragging = false;
 
-        // Dọn dẹp thuộc tính nội tuyến để không bị xung đột CSS :hover
         setTimeout(() => { 
-          if (tempEl) { 
-            tempEl.style.transition = ''; 
-            tempEl.style.transform = ''; 
-          } 
-        }, 500);
+          if (el) el.style.removeProperty('transition'); 
+        }, 600);
 
-        window.removeEventListener('mousemove', onPhysMove);
-        window.removeEventListener('touchmove', onPhysMove);
-        window.removeEventListener('mouseup', onPhysEnd);
-        window.removeEventListener('touchend', onPhysEnd);
-        window.removeEventListener('touchcancel', onPhysEnd);
+        cleanEvents();
       }
 
-      // ===== KHÓA BẢN QUYỀN (GIỮ NGUYÊN TỪ BẢN GỐC CỦA BẠN) =====
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        return false;
-      });
+      function cleanEvents() {
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('touchmove', onMove);
+        window.removeEventListener('mouseup', onEnd);
+        window.removeEventListener('touchend', onEnd);
+        window.removeEventListener('touchcancel', onEnd);
+      }
 
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.key === 'u') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.key === 's') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.key === 'K') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.key === 'E') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.key === 'U') {
-          e.preventDefault();
-          return false;
-        }
+      // Xóa dãn nở lập tức nếu người dùng vuốt trên màn hình để cuộn list (chuẩn iOS)
+      window.addEventListener('scroll', function() {
+        if (isDragging) onEnd();
+      }, true);
+
+      // Nhận mọi sự kiện trên body
+      document.body.addEventListener('mousedown', onStart);
+      document.body.addEventListener('touchstart', onStart, { passive: true });
+
+      // ===== KHÓA BẢN QUYỀN =====
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', e => {
+        if (e.key === 'F12') { e.preventDefault(); return false; }
+        if (e.ctrlKey && e.shiftKey && ['I','J','C','K','E','U'].includes(e.key)) { e.preventDefault(); return false; }
+        if (e.ctrlKey && ['u','s'].includes(e.key)) { e.preventDefault(); return false; }
       });
     })();
   </script>

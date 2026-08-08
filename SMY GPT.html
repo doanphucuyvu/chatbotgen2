@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://doanphucuyvu.github.io/chatbotgen2/ -->
+<html lang="vi" data-scribe-recorder-ready="true" class="brand-refresh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>SMY GPT</title>
+  <link rel="stylesheet" href="./SMY GPT_files/all.min.css">
+  <link href="./SMY GPT_files/css2" rel="stylesheet">
+  <link rel="stylesheet" href="./SMY GPT_files/styles.css">
+</head>
+<body>
+
+  <!-- ĐÂY LÀ 2 LỚP NỀN HOẠT ĐỘNG CHÉO NHAU TẠO MÀU TRẮNG ĐEN (KHÔNG CÓ MÀU HỒNG XANH NỮA) -->
+  <div id="bg-light"></div>
+  <div id="bg-dark"></div>
+
+  <div class="container">
+    
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    
+    <div class="sidebar" id="mainSidebar">
+      
+      <div class="sidebar-top">
+        <button class="btn-icon" id="closeSidebarBtn" data-tooltip="Ẩn thanh bên" style="">
+          <i class="fas fa-bars"></i>
+        </button>
+        <button class="btn-icon" id="newChatBtn" data-tooltip="Trò chuyện mới" style="">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+      
+      <div class="sidebar-scroll" id="sidebarScroll">
+        
+        <div class="sidebar-tools">
+          <div class="tool-item" id="darkModeToggle" data-tooltip="Chuyển đổi chế độ tối/sáng" style=""><i class="fas fa-moon"></i> Chế độ tối</div>
+          <div class="tool-item" id="apiSettings" data-tooltip="Cấu hình API Key" style="">
+            <i class="fas fa-key"></i> Cài đặt API
+          </div>
+          <div class="tool-item" id="exportChat" data-tooltip="Xuất nội dung chat" style="">
+            <i class="fas fa-download"></i> Xuất trò chuyện
+          </div>
+        </div>
+        
+        <div class="faq-section">
+          <div class="section-title">Câu hỏi thường gặp</div>
+          
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-school"></i> TỔNG QUAN</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content active">
+              <button class="question-btn"><i class="fas fa-comment"></i> Giới thiệu chung về CLB SMY</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Ý nghĩa tên gọi SMY</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Thông tin liên hệ</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-bullseye"></i> SỨ MỆNH VÀ TẦM NHÌN</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Sứ mệnh</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Tầm nhìn</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-sitemap"></i> MÔ HÌNH TỔ CHỨC</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Ban điều hành</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Các phân ban</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Thành viên trong từng ban</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-file-alt"></i> QUY ĐỊNH CHUNG</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Tên gọi</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Tôn chỉ</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Mục đích</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-tasks"></i> CHỨC NĂNG VÀ NHIỆM VỤ</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Chức năng</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Nhiệm vụ</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-coins"></i> CÔNG TÁC TÀI CHÍNH</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Tài chính</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-award"></i> KHEN THƯỞNG, KỶ LUẬT</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Khen thưởng</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Kỷ luật</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-users"></i> HỘI VIÊN</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Tiêu chuẩn Hội viên</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Quyền lợi của Hội viên</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Nghĩa vụ của Hội viên</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Đăng ký làm Hội viên</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Rút, xóa tên khỏi CLB</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-file-contract"></i> GIẤY TỜ LIÊN QUAN</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Đơn đăng ký tham gia CLB</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Quy chế hoạt động CLB</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-door-open"></i> CÁCH THAM GIA CLB</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Cách tham gia CLB SMY</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="chat-main">
+      <div class="chat-header">
+        <div class="chat-title">
+          
+          <button class="hamburger-btn" id="sidebarToggleBtn" data-tooltip="Hiện thanh bên" style="">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1>SMY GPT Assistant</h1>
+        </div>
+        <div class="chat-info">
+          <span id="ai-model-info">Đang sử dụng: Dữ liệu cục bộ</span>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages"><div class="message bot"><div class="avatar bot"></div><div class="message-body"><div class="message-content">Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.</div><div class="message-bottom-actions"><button class="bottom-action-btn liquid-btn" data-tooltip="Tốt"><i class="far fa-thumbs-up"></i></button><button class="bottom-action-btn liquid-btn" data-tooltip="Không tốt"><i class="far fa-thumbs-down"></i></button><button class="bottom-action-btn liquid-btn" data-tooltip="Sao chép"><i class="far fa-copy"></i></button></div></div></div></div>
+      <div class="chat-input-container">
+        <div class="suggestions-container" id="suggestionsContainer" style="display: none;"></div>
+        <form class="chat-form" id="chatForm">
+          <textarea class="chat-input" placeholder="Nhập câu hỏi của bạn..." id="chatInput"></textarea>
+          <button type="submit" class="send-btn" id="sendBtn" data-tooltip="Gửi tin nhắn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span>Đã bắt đầu cuộc trò chuyện mới</span></div>
+
+  
+  <div class="modal" id="apiKeyModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-key"></i> Cài đặt API Key</h2>
+        <button class="modal-close" id="modalCloseBtn">×</button>
+      </div>
+      <div class="api-tabs">
+        <div class="api-tab active" data-tab="openai">OpenAI</div>
+        <div class="api-tab gemini" data-tab="gemini">Google Gemini</div>
+      </div>
+      <div class="api-tab-content active" id="openai-tab">
+        <p class="api-info">Nhập API Key từ OpenAI để sử dụng mô hình GPT. Bạn có thể lấy API Key từ trang web của OpenAI.</p>
+        <input type="password" class="api-key-input" id="openaiKeyInput" placeholder="sk-...">
+        <select class="ai-model-selector" id="openaiModelSelector">
+          <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+          <option value="gpt-4">GPT-4</option>
+        </select>
+      </div>
+      <div class="api-tab-content" id="gemini-tab">
+        <p class="api-info">Nhập API Key từ Google AI Studio để sử dụng mô hình Gemini. Bạn có thể lấy API Key từ Google AI Studio.</p>
+        <input type="password" class="api-key-input gemini-input" id="geminiKeyInput" placeholder="Nhập Gemini API Key">
+        <select class="ai-model-selector" id="geminiModelSelector">
+          <option value="gemini-pro">Gemini Pro</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn secondary" id="cancelApiKey">Hủy</button>
+        <button class="modal-btn primary" id="saveApiKey">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./SMY GPT_files/script.js.tải xuống"></script>
+
+<scribe-shadow id="crxjs-ext" data-crx="okfkdaglfjjjfefdcppliegebpoegaii" style="position: fixed; width: 0px; height: 0px; top: 0px; left: 0px; z-index: 2147483647; overflow: visible; visibility: visible;"><template shadowrootmode="open"><div id="root-scribe-elem" style="position: fixed; width: 0px; height: 0px; top: 0px; left: 0px; overflow: visible; color: var(--text-default);"><div class="brand-refresh brand-refresh-tokens" data-theme="light" style="display: contents;"><div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events: none;"><ol tabindex="-1" class="fixed bottom-auto right-0 top-0 z-[999999] flex max-h-screen w-[400px] max-w-full p-4 pointer-events-none"></ol></div></div></div><link rel="stylesheet" href="chrome-extension://okfkdaglfjjjfefdcppliegebpoegaii/assets/style.css"></template></scribe-shadow></body></html>

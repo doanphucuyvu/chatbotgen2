@@ -29,32 +29,33 @@
       letter-spacing: -0.01em;
       position: relative;
       transition: color 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
-      /* ---- Nền gradient động rực rỡ (Crystal Liquid Glass environment) ---- */
-      background-image: linear-gradient(45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
-      background-size: 400% 400%;
-      animation: gradientBGLight 15s ease infinite;
+      background-color: #000;
     }
-    
-    /* Đổi keyframes để ép mobile vẽ lại nền khi chuyển Darkmode */
-    @keyframes gradientBGLight {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+
+    /* ---- MÀU NỀN TỐI GIẢN CHUẨN iOS 26 (TRẮNG & ĐEN) ---- */
+    #bg-light, #bg-dark {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -2;
+      transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+      pointer-events: none;
     }
-    @keyframes gradientBGDark {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    #bg-light {
+      background-color: #f2f2f7; /* Màu xám sáng tiêu chuẩn iOS */
+      opacity: 1;
     }
+    #bg-dark {
+      background-color: #000000; /* Màu đen sâu tuyệt đối iOS */
+      opacity: 0;
+    }
+    body.dark-mode #bg-light { opacity: 0; }
+    body.dark-mode #bg-dark { opacity: 1; }
 
     body.dark-mode {
       color: #f5f5f7;
-      background-image: linear-gradient(45deg, #2b1a3a, #1a1a3e, #0f3460, #16213e) !important;
-      background-size: 400% 400%;
-      animation: gradientBGDark 18s ease infinite !important;
     }
 
-    /* Lớp phủ thêm để tăng chiều sâu cho kính */
+    /* Lớp phủ ánh sáng nhẹ tạo chiều sâu cho kính */
     body::before {
       content: '';
       position: fixed;
@@ -66,8 +67,8 @@
       background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.15), transparent 60%),
                   radial-gradient(circle at 70% 80%, rgba(255,255,240,0.10), transparent 50%);
       pointer-events: none;
+      transition: opacity 0.5s ease;
     }
-
     body.dark-mode::before {
       background: radial-gradient(circle at 60% 30%, rgba(100,150,255,0.08), transparent 60%),
                   radial-gradient(circle at 80% 70%, rgba(200,100,255,0.05), transparent 50%);
@@ -154,28 +155,12 @@
       background: transparent;
     }
 
-    /* ===== BUTTONS – SQUISHY PHYSICS ===== */
-    .btn-icon,
-    .hamburger-btn,
-    .send-btn,
-    .modal-close,
-    .action-btn,
-    .feedback-btn,
-    .modal-btn,
-    .history-item .delete-btn,
-    .tool-item,
-    .question-btn,
-    .category-header,
-    .history-item,
+    /* ===== iOS 26 LIQUID GLASS BASE BUTTONS ===== */
+    .btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, 
+    .feedback-btn, .modal-btn, .tool-item, .question-btn, .category-header, 
     .suggestion-item {
       border: none;
       cursor: pointer;
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  box-shadow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  background-color 0.15s ease,
-                  color 0.15s ease,
-                  border-color 0.15s ease;
-      will-change: transform, box-shadow;
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -190,21 +175,19 @@
       touch-action: manipulation;
       user-select: none;
       -webkit-user-select: none;
+      
+      /* Quán tính Hover cơ bản */
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  background-color 0.2s ease,
+                  border-color 0.2s ease, color 0.2s ease;
+      will-change: transform, box-shadow;
     }
 
-    body.dark-mode .btn-icon,
-    body.dark-mode .hamburger-btn,
-    body.dark-mode .send-btn,
-    body.dark-mode .modal-close,
-    body.dark-mode .action-btn,
-    body.dark-mode .feedback-btn,
-    body.dark-mode .modal-btn,
-    body.dark-mode .history-item .delete-btn,
-    body.dark-mode .tool-item,
-    body.dark-mode .question-btn,
-    body.dark-mode .category-header,
-    body.dark-mode .history-item,
-    body.dark-mode .suggestion-item {
+    body.dark-mode .btn-icon, body.dark-mode .hamburger-btn, body.dark-mode .send-btn,
+    body.dark-mode .modal-close, body.dark-mode .action-btn, body.dark-mode .feedback-btn,
+    body.dark-mode .modal-btn, body.dark-mode .tool-item, body.dark-mode .question-btn, 
+    body.dark-mode .category-header, body.dark-mode .suggestion-item {
       background: rgba(255, 255, 255, 0.03);
       border-top: 1px solid rgba(255,255,255,0.3);
       border-left: 1px solid rgba(255,255,255,0.2);
@@ -214,45 +197,48 @@
       color: #f5f5f7;
     }
 
-    /* ---- LỌC CHỈ CHO CHUỘT THẬT HOVER ---- */
+    /* ---- HIỆU ỨNG ÁNH SÁNG PHẢN QUANG (SPECULAR HIGHLIGHT) ---- */
+    .liquid-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .liquid-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle 50px at var(--lx, 50%) var(--ly, -100%), rgba(255,255,255,0.45) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      border-radius: inherit;
+      z-index: 10;
+      mix-blend-mode: overlay;
+    }
+    body.dark-mode .liquid-btn::after {
+      background: radial-gradient(circle 50px at var(--lx, 50%) var(--ly, -100%), rgba(255,255,255,0.2) 0%, transparent 100%);
+      mix-blend-mode: plus-lighter;
+    }
+    .liquid-btn.is-pressed::after {
+      opacity: 1; /* Hiện tia phản quang khi ấn */
+    }
+
+    /* ----- CHỈ KÍCH HOẠT HOVER KHI CÓ CHUỘT THẬT SỰ ----- */
     @media (hover: hover) and (pointer: fine) {
-      .btn-icon:hover,
-      .hamburger-btn:hover,
-      .send-btn:hover,
-      .modal-close:hover,
-      .action-btn:hover,
-      .feedback-btn:hover,
-      .modal-btn:hover,
-      .tool-item:hover,
-      .question-btn:hover,
-      .category-header:hover {
+      .btn-icon:hover, .hamburger-btn:hover, .send-btn:hover, .modal-close:hover,
+      .action-btn:hover, .feedback-btn:hover, .modal-btn:hover, .tool-item:hover, 
+      .question-btn:hover, .category-header:hover {
         transform: scale(1.08) translateY(-2px);
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
         border-color: rgba(255,255,255,0.5);
       }
-      body.dark-mode .btn-icon:hover,
-      body.dark-mode .hamburger-btn:hover,
-      body.dark-mode .send-btn:hover,
-      body.dark-mode .modal-close:hover,
-      body.dark-mode .action-btn:hover,
-      body.dark-mode .feedback-btn:hover,
-      body.dark-mode .modal-btn:hover,
-      body.dark-mode .tool-item:hover,
-      body.dark-mode .question-btn:hover,
-      body.dark-mode .category-header:hover {
+      body.dark-mode .btn-icon:hover, body.dark-mode .hamburger-btn:hover,
+      body.dark-mode .send-btn:hover, body.dark-mode .modal-close:hover,
+      body.dark-mode .action-btn:hover, body.dark-mode .feedback-btn:hover,
+      body.dark-mode .modal-btn:hover, body.dark-mode .tool-item:hover,
+      body.dark-mode .question-btn:hover, body.dark-mode .category-header:hover {
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
       }
 
-      .history-item:hover {
-        transform: scale(1.04) translateY(-2px);
-        box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
-      }
-      body.dark-mode .history-item:hover {
-        box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
-      }
-      .history-item:hover .delete-btn { opacity: 0.7; }
-      .history-item .delete-btn:hover { opacity: 1; }
-      
       .suggestion-item:hover {
         background: rgba(255,255,255,0.08);
         transform: scale(1.04) translateX(4px);
@@ -265,6 +251,8 @@
       .message-content:hover .message-actions { opacity: 1; }
       .message-content:hover .feedback-container { opacity: 1; }
       .send-btn:hover i { transform: translateX(3px) scale(1.05); }
+
+      .liquid-btn:hover::after { opacity: 0.5; }
 
       ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.15); }
       body.dark-mode ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.10); }
@@ -282,21 +270,20 @@
       .modal-close:hover { color: #ff3b30; }
     }
 
-    /* Ép hiện menu trên Mobile để không bị mất chức năng do tắt hover */
+    /* Ép hiện các nút Action nếu là màn hình cảm ứng */
     @media (hover: none) {
       .message-actions, .feedback-container { opacity: 1 !important; }
-      .history-item .delete-btn { opacity: 1 !important; }
     }
 
-    /* ---- CLASS LÚN DO JS ĐIỀU KHIỂN ---- */
-    .is-pressed {
-      box-shadow: inset 0 10px 25px rgba(0,0,0,0.4), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
+    /* ===== CLASS IS-PRESSED XỬ LÝ MÀU NỀN CỦA NÚT KHI ĐƯỢC CHẠM ===== */
+    .liquid-btn.is-pressed {
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.3), inset 0 -2px 5px rgba(255,255,255,0.2) !important;
       border-color: rgba(255,255,255,0.1) !important;
-      background-color: rgba(255, 255, 255, 0.05) !important; /* Fix lỗi nền trắng */
+      background-color: rgba(255, 255, 255, 0.08) !important;
     }
-    body.dark-mode .is-pressed {
+    body.dark-mode .liquid-btn.is-pressed {
       box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
-      background-color: rgba(255, 255, 255, 0.03) !important;
+      background-color: rgba(255, 255, 255, 0.04) !important;
     }
 
     /* Nút riêng lẻ với kích thước */
@@ -362,60 +349,6 @@
       text-align: center;
     }
 
-    /* ===== HISTORY ===== */
-    .history-section {
-      margin-bottom: 24px;
-    }
-    .history-section .section-title {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 10px;
-      padding-left: 4px;
-    }
-    body.dark-mode .history-section .section-title {
-      color: rgba(255,255,255,0.5);
-    }
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .history-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 12px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-    }
-    .history-item .title {
-      flex: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding-right: 8px;
-    }
-    .history-item .delete-btn {
-      background: transparent;
-      color: rgba(0,0,0,0.4);
-      border: none;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      padding: 4px 8px;
-      border-radius: 50%;
-      font-size: 0.9rem;
-      width: auto;
-      height: auto;
-      box-shadow: none;
-      backdrop-filter: none;
-      background: transparent;
-    }
-    body.dark-mode .history-item .delete-btn { color: rgba(255,255,255,0.5); }
-
     /* ===== FAQ ===== */
     .faq-section .section-title {
       font-size: 0.7rem;
@@ -480,12 +413,20 @@
     }
     .question-btn {
       padding: 11px 14px;
+      border: none;
+      border-radius: 50px;
       text-align: left;
+      cursor: pointer;
       font-size: 13.5px;
+      color: #1d1d1f;
       display: flex;
       align-items: center;
       gap: 8px;
       font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    body.dark-mode .question-btn {
+      color: #f5f5f7;
     }
 
     /* ===== OVERLAY ===== */
@@ -1237,6 +1178,10 @@
 </head>
 <body>
 
+  <!-- ĐÂY LÀ 2 LỚP NỀN HOẠT ĐỘNG CHÉO NHAU TẠO MÀU TRẮNG ĐEN -->
+  <div id="bg-light"></div>
+  <div id="bg-dark"></div>
+
   <div class="container">
     
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -1276,12 +1221,7 @@
           </div>
         </div>
 
-        
-        <div class="history-section">
-          <div class="section-title">Lịch sử trò chuyện</div>
-          <div class="history-list" id="historyList"><div class="history-item" style="background: rgba(0, 122, 255, 0.15);"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div><div class="history-item"><span class="title">Cuộc trò chuyện mới</span><button class="delete-btn" data-tooltip="Xóa cuộc trò chuyện"><i class="fas fa-trash"></i></button></div></div>
-        </div>
-
+        <!-- LỊCH SỬ TRÒ CHUYỆN ĐÃ ĐƯỢC XÓA SỔ HOÀN TOÀN TẠI ĐÂY -->
         
         <div class="faq-section">
           <div class="section-title">Câu hỏi thường gặp</div>
@@ -1378,7 +1318,7 @@
           <span id="ai-model-info">Đang sử dụng: Dữ liệu cục bộ</span>
         </div>
       </div>
-      <div class="chat-messages" id="chatMessages"><div class="message bot"><div class="avatar bot"></div><div class="message-content">Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.<div class="message-actions"><button class="action-btn" data-tooltip="Sao chép tin nhắn"><i class="fas fa-copy"></i></button><button class="action-btn" data-tooltip="Đọc thành tiếng"><i class="fas fa-volume-up"></i></button></div><div class="feedback-container"><button class="feedback-btn"><i class="fas fa-thumbs-up"></i> Hữu ích</button><button class="feedback-btn"><i class="fas fa-thumbs-down"></i> Không hữu ích</button></div></div></div></div>
+      <div class="chat-messages" id="chatMessages"></div>
       <div class="chat-input-container">
         <div class="suggestions-container" id="suggestionsContainer" style="display: none;"></div>
         <form class="chat-form" id="chatForm">
@@ -1540,10 +1480,6 @@
       let isMobileView = localStorage.getItem('mobileView') === 'true';
 
       
-      let currentSessionId = null;
-      let sessions = [];
-
-      
       let currentSpeechUtterance = null;
       let isSpeaking = false;
 
@@ -1558,13 +1494,9 @@
       }
       updateAIModelInfo();
 
-      
-      loadSessions();
-      if (sessions.length === 0) {
-        createNewSession();
-      } else {
-        loadSession(sessions[0].id);
-      }
+      // Bắt đầu một luồng chat mới ngay lập tức (XÓA TOÀN BỘ LỊCH SỬ LƯU TRỮ)
+      chatMessages.innerHTML = '';
+      addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
 
       
       function showToast(message) {
@@ -1598,140 +1530,7 @@
         else info.textContent = 'Đang sử dụng: Dữ liệu cục bộ';
       }
 
-      
-      function loadSessions() {
-        try {
-          const stored = localStorage.getItem('smy_sessions');
-          if (stored) {
-            sessions = JSON.parse(stored);
-            sessions = sessions.filter(s => s && s.id && s.messages);
-          } else {
-            sessions = [];
-          }
-        } catch (e) {
-          sessions = [];
-        }
-      }
-
-      function saveSessions() {
-        localStorage.setItem('smy_sessions', JSON.stringify(sessions));
-        renderHistory();
-      }
-
-      function createNewSession() {
-        const newId = Date.now().toString(36) + Math.random().toString(36).substr(2, 4);
-        const newSession = {
-          id: newId,
-          title: 'Cuộc trò chuyện mới',
-          messages: []
-        };
-        sessions.unshift(newSession);
-        saveSessions();
-        currentSessionId = newId;
-        chatMessages.innerHTML = '';
-        addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
-        updateChatTitle('Cuộc trò chuyện mới');
-        renderHistory();
-        if (window.innerWidth <= 1024) {
-          toggleSidebar(false);
-        }
-        showToast('Đã tạo cuộc trò chuyện mới');
-      }
-
-      function loadSession(sessionId) {
-        const session = sessions.find(s => s.id === sessionId);
-        if (!session) return;
-        currentSessionId = sessionId;
-        chatMessages.innerHTML = '';
-        session.messages.forEach(msg => {
-          addMessage(msg.content, msg.role, false);
-        });
-        updateChatTitle(session.title);
-        if (session.messages.length === 0) {
-          addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
-        }
-        renderHistory();
-        if (window.innerWidth <= 1024) {
-          toggleSidebar(false);
-        }
-      }
-
-      function updateChatTitle(title) {
-        // không cần cập nhật
-      }
-
-      function addMessageToSession(role, content) {
-        const session = sessions.find(s => s.id === currentSessionId);
-        if (!session) return;
-        session.messages.push({ role, content });
-        if (role === 'user' && session.messages.length === 1) {
-          let title = content.trim().substring(0, 20);
-          if (title.length < 3) title = 'Cuộc trò chuyện mới';
-          session.title = title;
-          updateChatTitle(title);
-        }
-        saveSessions();
-      }
-
-      function deleteSession(sessionId) {
-        if (!confirm('Bạn có chắc muốn xóa cuộc trò chuyện này?')) return;
-        sessions = sessions.filter(s => s.id !== sessionId);
-        if (sessions.length === 0) {
-          createNewSession();
-        } else {
-          if (currentSessionId === sessionId) {
-            loadSession(sessions[0].id);
-          } else {
-            saveSessions();
-          }
-        }
-        saveSessions();
-        renderHistory();
-        showToast('Đã xóa cuộc trò chuyện');
-      }
-
-      
-      function renderHistory() {
-        const historyList = document.getElementById('historyList');
-        historyList.innerHTML = '';
-        if (sessions.length === 0) {
-          historyList.innerHTML = '<div style="padding: 8px 12px; color: #8e8e93; font-size: 0.85rem;">Chưa có cuộc trò chuyện nào</div>';
-          return;
-        }
-        sessions.forEach(session => {
-          const item = document.createElement('div');
-          item.className = 'history-item';
-          if (session.id === currentSessionId) {
-            item.style.background = 'rgba(0,122,255,0.15)';
-            if (document.body.classList.contains('dark-mode')) {
-              item.style.background = 'rgba(0,122,255,0.25)';
-            }
-          }
-          const titleSpan = document.createElement('span');
-          titleSpan.className = 'title';
-          titleSpan.textContent = session.title || 'Cuộc trò chuyện mới';
-          item.appendChild(titleSpan);
-
-          const deleteBtn = document.createElement('button');
-          deleteBtn.className = 'delete-btn';
-          deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-          deleteBtn.setAttribute('data-tooltip', 'Xóa cuộc trò chuyện');
-          deleteBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            deleteSession(session.id);
-          });
-          item.appendChild(deleteBtn);
-
-          item.addEventListener('click', function() {
-            loadSession(session.id);
-          });
-
-          historyList.appendChild(item);
-        });
-      }
-
-      
-      function addMessage(text, sender, save = true) {
+      function addMessage(text, sender) {
         const messageEl = document.createElement('div');
         messageEl.classList.add('message', sender);
         const avatar = document.createElement('div');
@@ -1794,10 +1593,9 @@
         messageEl.appendChild(messageContent);
         chatMessages.appendChild(messageEl);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-
-        if (save && currentSessionId) {
-          addMessageToSession(sender, text);
-        }
+        
+        // Gọi hàm vật lý nếu nó đã tồn tại
+        if (window.initLiquidGlass) window.initLiquidGlass();
       }
 
       
@@ -1974,7 +1772,6 @@
         const isDark = document.body.classList.contains('dark-mode');
         localStorage.setItem('darkMode', isDark ? 'true' : 'false');
         updateDarkModeUI(isDark);
-        renderHistory();
       });
 
       
@@ -2073,7 +1870,10 @@
 
       
       document.getElementById('newChatBtn').addEventListener('click', function() {
-        createNewSession();
+        chatMessages.innerHTML = '';
+        addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
+        showToast('Đã bắt đầu cuộc trò chuyện mới');
+        if (window.innerWidth <= 1024) toggleSidebar(false);
       });
 
       
@@ -2138,9 +1938,7 @@
         e.preventDefault();
         const msg = chatInput.value.trim();
         if (!msg) return;
-        if (!currentSessionId || sessions.length === 0) {
-          createNewSession();
-        }
+
         addMessage(msg, 'user');
         chatInput.value = '';
         chatInput.style.height = '48px';
@@ -2198,13 +1996,6 @@
           chatForm.dispatchEvent(new Event('submit'));
         }
       });
-
-      
-      const isDark = document.body.classList.contains('dark-mode');
-      updateDarkModeUI(isDark);
-
-      
-      renderHistory();
 
       
       function openUpdateLogModal() {
@@ -2277,7 +2068,7 @@
       }
 
       // Mọi thành phần muốn đàn hồi đều nằm trong danh sách này
-      const targetSelectors = '.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .delete-btn, .tool-item, .question-btn, .category-header, .history-item, .suggestion-item';
+      const targetSelectors = '.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .delete-btn, .tool-item, .question-btn, .category-header, .suggestion-item';
 
       function onStart(e) {
         // Nhờ .closest(), nó sẽ nhận cả các phần tử do JS tạo ra mà không bao giờ bị "điếc"
@@ -2379,6 +2170,11 @@
       // Nhận mọi sự kiện trên body
       document.body.addEventListener('mousedown', onStart);
       document.body.addEventListener('touchstart', onStart, { passive: true });
+
+      // Cài đặt API Liquid Glass toàn cục để gắn lại cho các nút sinh động
+      window.initLiquidGlass = function() {
+         // Dummy function for compatibility if needed.
+      };
 
       // ===== KHÓA BẢN QUYỀN =====
       document.addEventListener('contextmenu', e => e.preventDefault());

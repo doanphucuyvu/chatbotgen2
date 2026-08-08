@@ -32,7 +32,7 @@
       background-color: #000;
     }
 
-    /* ---- MÀU NỀN TỐI GIẢN CHUẨN iOS 26 (TRẮNG & ĐEN) ---- */
+    /* ---- MÀU NỀN TỐI GIẢN CHUẨN iOS 26 (TRẮNG & ĐEN TĨNH) ---- */
     #bg-light, #bg-dark {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -156,9 +156,9 @@
     }
 
     /* ===== iOS 26 LIQUID GLASS BASE BUTTONS ===== */
-    .btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, 
-    .feedback-btn, .modal-btn, .tool-item, .question-btn, .category-header, 
-    .suggestion-item {
+    .btn-icon, .hamburger-btn, .send-btn, .modal-close, 
+    .modal-btn, .tool-item, .question-btn, .category-header, 
+    .suggestion-item, .bottom-action-btn {
       border: none;
       cursor: pointer;
       background: rgba(255, 255, 255, 0.05);
@@ -185,9 +185,9 @@
     }
 
     body.dark-mode .btn-icon, body.dark-mode .hamburger-btn, body.dark-mode .send-btn,
-    body.dark-mode .modal-close, body.dark-mode .action-btn, body.dark-mode .feedback-btn,
-    body.dark-mode .modal-btn, body.dark-mode .tool-item, body.dark-mode .question-btn, 
-    body.dark-mode .category-header, body.dark-mode .suggestion-item {
+    body.dark-mode .modal-close, body.dark-mode .modal-btn, body.dark-mode .tool-item, 
+    body.dark-mode .question-btn, body.dark-mode .category-header, body.dark-mode .suggestion-item,
+    body.dark-mode .bottom-action-btn {
       background: rgba(255, 255, 255, 0.03);
       border-top: 1px solid rgba(255,255,255,0.3);
       border-left: 1px solid rgba(255,255,255,0.2);
@@ -195,6 +195,32 @@
       border-bottom: 1px solid rgba(255,255,255,0.01);
       box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.15);
       color: #f5f5f7;
+    }
+
+    /* Định dạng lại nút bottom-action-btn tối giản hơn */
+    .bottom-action-btn {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+      color: rgba(0,0,0,0.5);
+    }
+    body.dark-mode .bottom-action-btn {
+      color: rgba(255,255,255,0.5);
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    .bottom-action-btn.active {
+      color: #007aff !important;
+    }
+    body.dark-mode .bottom-action-btn.active {
+      color: #5ac8fa !important;
     }
 
     /* ---- HIỆU ỨNG ÁNH SÁNG PHẢN QUANG (SPECULAR HIGHLIGHT) ---- */
@@ -225,15 +251,13 @@
     /* ----- CHỈ KÍCH HOẠT HOVER KHI CÓ CHUỘT THẬT SỰ ----- */
     @media (hover: hover) and (pointer: fine) {
       .btn-icon:hover, .hamburger-btn:hover, .send-btn:hover, .modal-close:hover,
-      .action-btn:hover, .feedback-btn:hover, .modal-btn:hover, .tool-item:hover, 
-      .question-btn:hover, .category-header:hover {
+      .modal-btn:hover, .tool-item:hover, .question-btn:hover, .category-header:hover {
         transform: scale(1.08) translateY(-2px);
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.15);
         border-color: rgba(255,255,255,0.5);
       }
       body.dark-mode .btn-icon:hover, body.dark-mode .hamburger-btn:hover,
       body.dark-mode .send-btn:hover, body.dark-mode .modal-close:hover,
-      body.dark-mode .action-btn:hover, body.dark-mode .feedback-btn:hover,
       body.dark-mode .modal-btn:hover, body.dark-mode .tool-item:hover,
       body.dark-mode .question-btn:hover, body.dark-mode .category-header:hover {
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
@@ -248,8 +272,15 @@
         box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), 0 8px 20px rgba(0,0,0,0.25);
       }
 
-      .message-content:hover .message-actions { opacity: 1; }
-      .message-content:hover .feedback-container { opacity: 1; }
+      .bottom-action-btn:hover {
+        color: #1d1d1f;
+        background: rgba(0,0,0,0.05) !important;
+      }
+      body.dark-mode .bottom-action-btn:hover {
+        color: #f5f5f7;
+        background: rgba(255,255,255,0.1) !important;
+      }
+
       .send-btn:hover i { transform: translateX(3px) scale(1.05); }
 
       .liquid-btn:hover::after { opacity: 0.5; }
@@ -261,18 +292,7 @@
         opacity: 1;
         transform: translateX(-50%) scale(1);
       }
-
-      .view-image-btn:hover {
-        color: #0055b3;
-        text-shadow: 0 0 8px rgba(0,122,255,0.1);
-      }
-      body.dark-mode .view-image-btn:hover { color: #64d2ff; }
       .modal-close:hover { color: #ff3b30; }
-    }
-
-    /* Ép hiện các nút Action nếu là màn hình cảm ứng */
-    @media (hover: none) {
-      .message-actions, .feedback-container { opacity: 1 !important; }
     }
 
     /* ===== CLASS IS-PRESSED XỬ LÝ MÀU NỀN CỦA NÚT KHI ĐƯỢC CHẠM ===== */
@@ -284,6 +304,15 @@
     body.dark-mode .liquid-btn.is-pressed {
       box-shadow: inset 0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(255,255,255,0.1) !important;
       background-color: rgba(255, 255, 255, 0.04) !important;
+    }
+    
+    .bottom-action-btn.is-pressed {
+      background-color: rgba(0,0,0,0.1) !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    body.dark-mode .bottom-action-btn.is-pressed {
+      background-color: rgba(255,255,255,0.15) !important;
     }
 
     /* Nút riêng lẻ với kích thước */
@@ -413,20 +442,12 @@
     }
     .question-btn {
       padding: 11px 14px;
-      border: none;
-      border-radius: 50px;
       text-align: left;
-      cursor: pointer;
       font-size: 13.5px;
-      color: #1d1d1f;
       display: flex;
       align-items: center;
       gap: 8px;
       font-weight: 500;
-      letter-spacing: -0.01em;
-    }
-    body.dark-mode .question-btn {
-      color: #f5f5f7;
     }
 
     /* ===== OVERLAY ===== */
@@ -524,6 +545,15 @@
       align-self: flex-end;
       flex-direction: row-reverse;
     }
+    .message-body {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 100%;
+    }
+    .user .message-body {
+      align-items: flex-end;
+    }
     .avatar {
       width: 38px;
       height: 38px;
@@ -557,7 +587,6 @@
       text-shadow: 0 1px 2px rgba(0,0,0,0.01);
     }
     .bot .message-content {
-      /* ---- CRYSTAL LIQUID GLASS ---- */
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(2px) brightness(110%) saturate(150%);
       -webkit-backdrop-filter: blur(2px) brightness(110%) saturate(150%);
@@ -590,50 +619,13 @@
       border-bottom-color: rgba(255,255,255,0.05);
       box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), 0 8px 24px rgba(0,122,255,0.10);
     }
-    /* Message actions */
-    .message-actions {
+    
+    /* Giao diện nút Like/Dislike/Copy nằm bên dưới tin nhắn giống Gemini */
+    .message-bottom-actions {
       display: flex;
-      gap: 6px;
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .action-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-    }
-    .feedback-container {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-      justify-content: flex-end;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .feedback-btn {
-      border-radius: 50px;
-      padding: 5px 12px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .feedback-btn.liked {
-      background: rgba(52, 199, 89, 0.2);
-      color: #34c759;
-      border-color: rgba(52,199,89,0.3);
-    }
-    .feedback-btn.disliked {
-      background: rgba(255, 59, 48, 0.2);
-      color: #ff3b30;
-      border-color: rgba(255,59,48,0.3);
+      gap: 12px;
+      margin-top: 6px;
+      padding-left: 4px;
     }
 
     /* ===== CHAT INPUT ===== */
@@ -1086,59 +1078,7 @@
       border: 1px solid rgba(255,255,255,0.02);
     }
 
-    /* ===== UPDATE LOG ===== */
-    .update-log-content {
-      max-height: 70vh;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-    .update-log-content .log-item {
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #1d1d1f;
-    }
-    body.dark-mode .update-log-content .log-item {
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      color: #f5f5f7;
-    }
-    .update-log-content .log-item:last-child { border-bottom: none; }
-    .update-log-content .log-item strong {
-      color: #007aff;
-      font-weight: 600;
-    }
-    body.dark-mode .update-log-content .log-item strong { color: #5ac8fa; }
-    .update-log-content .dev-credit {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #007aff;
-      color: #1d1d1f;
-    }
-    body.dark-mode .update-log-content .dev-credit {
-      color: #f5f5f7;
-      border-bottom-color: #5ac8fa;
-    }
-    .update-log-content .dev-credit i {
-      color: #007aff;
-      margin-right: 6px;
-    }
-    body.dark-mode .update-log-content .dev-credit i { color: #5ac8fa; }
-    .view-image-btn {
-      text-decoration: underline;
-      cursor: pointer;
-      color: #007aff;
-      margin-left: 10px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-    body.dark-mode .view-image-btn {
-      color: #5ac8fa;
-    }
-
-    /* ===== RESPONSIVE ===== */
+    /* ===== RESPONSIVE KHUNG NHẬP DI ĐỘNG KÍNH LỎNG NỔI BẬT ===== */
     @media (max-width: 1024px) {
       .chat-main { padding: 0 16px; }
       .sidebar { border-radius: 40px 0 0 40px; }
@@ -1148,9 +1088,28 @@
       .chat-title h1 { font-size: 1.2rem; }
       .chat-header { padding: 10px 14px; }
       .chat-messages { padding: 14px 0; gap: 14px; }
-      .chat-form { padding-left: 14px; gap: 8px; }
+      
+      /* -- KÍNH LỎNG NỔI BẬT KHUNG NHẬP CHO DI ĐỘNG -- */
+      .chat-input-container { 
+        padding: 10px 14px 20px; 
+        background: transparent;
+      }
+      .chat-form { 
+        padding-left: 14px; 
+        gap: 8px; 
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.9), 0 0 0 1px rgba(255,255,255,0.3);
+        backdrop-filter: blur(20px) saturate(200%);
+        -webkit-backdrop-filter: blur(20px) saturate(200%);
+        background: rgba(255, 255, 255, 0.25);
+        border: none;
+        padding: 6px 6px 6px 20px;
+      }
+      body.dark-mode .chat-form {
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.1), 0 0 0 1px rgba(255,255,255,0.05);
+        background: rgba(30, 30, 30, 0.45);
+      }
       .send-btn { width: 46px; height: 46px; font-size: 1.1rem; }
-      .chat-input { font-size: 14px; min-height: 42px; padding: 10px 0; }
+      .chat-input { font-size: 15px; min-height: 42px; padding: 10px 0; }
     }
     @media (max-width: 480px) {
       .chat-main { padding: 0 10px; }
@@ -1160,7 +1119,12 @@
       .message { max-width: 95%; gap: 7px; }
       .avatar { width: 32px; height: 32px; font-size: 0.8rem; }
       .message-content { padding: 11px 14px; font-size: 0.9rem; }
-      .chat-form { padding-left: 12px; gap: 6px; border-radius: 40px; }
+      
+      .chat-form { 
+        padding-left: 12px; 
+        gap: 6px; 
+        border-radius: 40px; 
+      }
       .chat-input { padding: 8px 0; font-size: 14px; min-height: 40px; }
       .send-btn { width: 42px; height: 42px; font-size: 1rem; }
       .suggestions-container { max-height: 150px; }
@@ -1178,7 +1142,7 @@
 </head>
 <body>
 
-  <!-- ĐÂY LÀ 2 LỚP NỀN HOẠT ĐỘNG CHÉO NHAU TẠO MÀU TRẮNG ĐEN -->
+  <!-- ĐÂY LÀ 2 LỚP NỀN HOẠT ĐỘNG CHÉO NHAU TẠO MÀU TRẮNG ĐEN (KHÔNG CÓ MÀU HỒNG XANH NỮA) -->
   <div id="bg-light"></div>
   <div id="bg-dark"></div>
 
@@ -1203,25 +1167,13 @@
         
         <div class="sidebar-tools">
           <div class="tool-item" id="darkModeToggle" data-tooltip="Chuyển đổi chế độ tối/sáng"><i class="fas fa-moon"></i> Chế độ tối</div>
-          <div class="tool-item" id="readAloud" data-tooltip="Đọc tin nhắn cuối">
-            <i class="fas fa-volume-up"></i> Đọc tin nhắn
-          </div>
           <div class="tool-item" id="apiSettings" data-tooltip="Cấu hình API Key">
             <i class="fas fa-key"></i> Cài đặt API
           </div>
           <div class="tool-item" id="exportChat" data-tooltip="Xuất nội dung chat">
             <i class="fas fa-download"></i> Xuất trò chuyện
           </div>
-          <div class="tool-item" id="mobileViewToggleToolbar" data-tooltip="Chuyển giao diện điện thoại/máy tính">
-            <i class="fas fa-mobile-alt"></i> Chế độ điện thoại
-          </div>
-          
-          <div class="tool-item" id="updateLogBtn" data-tooltip="Xem lịch sử cập nhật">
-            <i class="fas fa-history"></i> Update Log
-          </div>
         </div>
-
-        <!-- LỊCH SỬ TRÒ CHUYỆN ĐÃ ĐƯỢC XÓA SỔ HOÀN TOÀN TẠI ĐÂY -->
         
         <div class="faq-section">
           <div class="section-title">Câu hỏi thường gặp</div>
@@ -1332,7 +1284,7 @@
   </div>
 
   
-  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span>Đã tạo cuộc trò chuyện mới</span></div>
+  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span>Đã bắt đầu cuộc trò chuyện mới</span></div>
 
   
   <div class="modal" id="apiKeyModal">
@@ -1366,44 +1318,6 @@
       </div>
     </div>
   </div>
-
-  
-  <div class="modal" id="updateLogModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2><i class="fas fa-history"></i> Lịch sử cập nhật</h2>
-        <button class="modal-close" id="updateLogCloseBtn">×</button>
-      </div>
-      <div class="update-log-content">
-        <div class="dev-credit"><i class="fas fa-code"></i> Developed by Doan Phuc Uy Vu</div>
-        <div class="log-item"><strong> Log 1 – 09/2025:</strong> Nâng cấp giao diện web, bổ sung chế độ hiển thị sáng/tối, tích hợp chức năng đọc tin nhắn và xuất hội thoại. <span class="view-image-btn" data-log="1" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
-        <div class="log-item"><strong> Log 2 – 12/2025:</strong> Tái cấu trúc thiết kế, thêm chế độ tích hợp API, hỗ trợ chế độ hiển thị điện thoại và máy tính. <span class="view-image-btn" data-log="2" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
-        <div class="log-item"><strong> Log 3 – 02/2026:</strong> Cập nhật giao diện, tối ưu hóa chế độ hiển thị trên điện thoại và máy tính, tự động thích ứng với từng loại thiết bị. <span class="view-image-btn" data-log="3" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
-        <div class="log-item"><strong> Log 4 – 06/2026:</strong> Đại tu toàn bộ bố cục website, khắc phục lỗi chồng chéo nội dung. <span class="view-image-btn" data-log="4" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>
-        <div class="log-item"><strong> Log 5 – 07/2026:</strong> Thêm ảnh đại diện (avatar) cho bot chat. Cải tiến khung nhập liệu. <span class="view-image-btn" data-log="5" style="text-decoration:underline;cursor:pointer;color:#007aff;margin-left:10px;">Xem ảnh</span></div>       
-      </div>
-      <div class="modal-footer">
-        <button class="modal-btn secondary" id="updateLogCloseBtnFooter">Đóng</button>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="modal" id="imageModal">
-    <div class="modal-content" style="max-width: 700px;">
-      <div class="modal-header">
-        <h2><i class="fas fa-image"></i> Ảnh cập nhật</h2>
-        <button class="modal-close" id="imageModalCloseBtn">×</button>
-      </div>
-      <div style="text-align:center; padding: 10px 0;">
-        <img id="imageModalPreview" src="" alt="Ảnh cập nhật" style="max-width:100%; max-height:70vh; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.15);">
-      </div>
-      <div class="modal-footer" style="justify-content:center;">
-        <button class="modal-btn secondary" id="imageModalCloseBtnFooter">Đóng</button>
-      </div>
-    </div>
-  </div>
- 
 
   <script>
     
@@ -1469,7 +1383,6 @@
       const suggestionsContainer = document.getElementById('suggestionsContainer');
       const toast = document.getElementById('toast');
       const apiKeyModal = document.getElementById('apiKeyModal');
-      const updateLogModal = document.getElementById('updateLogModal');
 
       
       let openaiApiKey = localStorage.getItem('openaiApiKey') || '';
@@ -1477,24 +1390,15 @@
       let openaiModel = localStorage.getItem('openaiModel') || 'gpt-3.5-turbo';
       let geminiModel = localStorage.getItem('geminiModel') || 'gemini-pro';
       let currentAI = localStorage.getItem('currentAI') || 'none';
-      let isMobileView = localStorage.getItem('mobileView') === 'true';
 
       
-      let currentSpeechUtterance = null;
-      let isSpeaking = false;
-
-      
-      if (isMobileView) {
-        document.body.classList.add('mobile-view');
-        updateMobileViewButtons(true);
-      }
       if (localStorage.getItem('darkMode') === 'true') {
         document.body.classList.add('dark-mode');
         updateDarkModeUI(true);
       }
       updateAIModelInfo();
 
-      // Bắt đầu một luồng chat mới ngay lập tức (XÓA TOÀN BỘ LỊCH SỬ LƯU TRỮ)
+      // Bắt đầu một luồng chat mới ngay lập tức (KHÔNG LƯU LỊCH SỬ)
       chatMessages.innerHTML = '';
       addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
 
@@ -1514,15 +1418,6 @@
         }
       }
 
-      function updateMobileViewButtons(isMobile) {
-        const toggleToolbar = document.getElementById('mobileViewToggleToolbar');
-        if (isMobile) {
-          toggleToolbar.innerHTML = '<i class="fas fa-desktop"></i> Chế độ máy tính';
-        } else {
-          toggleToolbar.innerHTML = '<i class="fas fa-mobile-alt"></i> Chế độ điện thoại';
-        }
-      }
-
       function updateAIModelInfo() {
         const info = document.getElementById('ai-model-info');
         if (currentAI === 'openai') info.textContent = `Đang sử dụng: OpenAI (${openaiModel})`;
@@ -1533,104 +1428,76 @@
       function addMessage(text, sender) {
         const messageEl = document.createElement('div');
         messageEl.classList.add('message', sender);
+        
         const avatar = document.createElement('div');
         avatar.classList.add('avatar', sender);
-        avatar.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : ''; // bot avatar sẽ có ảnh nền CSS
+        avatar.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : ''; 
+        
+        const bodyEl = document.createElement('div');
+        bodyEl.classList.add('message-body');
+
         const messageContent = document.createElement('div');
         messageContent.classList.add('message-content');
         messageContent.textContent = text;
+        bodyEl.appendChild(messageContent);
 
+        // NẾU LÀ BOT: THÊM TOOLBAR CHUẨN GEMINI XUỐNG BÊN DƯỚI
         if (sender === 'bot') {
-          const actions = document.createElement('div');
-          actions.className = 'message-actions';
+          const actionsEl = document.createElement('div');
+          actionsEl.className = 'message-bottom-actions';
+
+          const likeBtn = document.createElement('button');
+          likeBtn.className = 'bottom-action-btn liquid-btn'; 
+          likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i>';
+          likeBtn.setAttribute('data-tooltip', 'Tốt');
+
+          const dislikeBtn = document.createElement('button');
+          dislikeBtn.className = 'bottom-action-btn liquid-btn'; 
+          dislikeBtn.innerHTML = '<i class="far fa-thumbs-down"></i>';
+          dislikeBtn.setAttribute('data-tooltip', 'Không tốt');
 
           const copyBtn = document.createElement('button');
-          copyBtn.className = 'action-btn';
-          copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-          copyBtn.setAttribute('data-tooltip', 'Sao chép tin nhắn');
-          copyBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navigator.clipboard.writeText(text).then(() => showToast('Đã sao chép!'));
+          copyBtn.className = 'bottom-action-btn liquid-btn'; 
+          copyBtn.innerHTML = '<i class="far fa-copy"></i>';
+          copyBtn.setAttribute('data-tooltip', 'Sao chép');
+
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(text).then(() => showToast('Đã sao chép tin nhắn!'));
           });
-          actions.appendChild(copyBtn);
 
-          const volumeBtn = document.createElement('button');
-          volumeBtn.className = 'action-btn';
-          volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-          volumeBtn.setAttribute('data-tooltip', 'Đọc thành tiếng');
-          volumeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleSpeech(text, volumeBtn);
-          });
-          actions.appendChild(volumeBtn);
-
-          messageContent.appendChild(actions);
-
-          const feedbackContainer = document.createElement('div');
-          feedbackContainer.classList.add('feedback-container');
-          const likeBtn = document.createElement('button');
-          likeBtn.classList.add('feedback-btn');
-          likeBtn.innerHTML = '<i class="fas fa-thumbs-up"></i> Hữu ích';
-          const dislikeBtn = document.createElement('button');
-          dislikeBtn.classList.add('feedback-btn');
-          dislikeBtn.innerHTML = '<i class="fas fa-thumbs-down"></i> Không hữu ích';
           likeBtn.addEventListener('click', () => {
-            likeBtn.classList.toggle('liked');
-            if (likeBtn.classList.contains('liked')) dislikeBtn.classList.remove('disliked');
-            showToast(likeBtn.classList.contains('liked') ? 'Cảm ơn!' : 'Đã bỏ thích');
+            likeBtn.classList.toggle('active');
+            likeBtn.innerHTML = likeBtn.classList.contains('active') ? '<i class="fas fa-thumbs-up"></i>' : '<i class="far fa-thumbs-up"></i>';
+            if(likeBtn.classList.contains('active')) {
+                dislikeBtn.classList.remove('active');
+                dislikeBtn.innerHTML = '<i class="far fa-thumbs-down"></i>';
+                showToast('Cảm ơn phản hồi của bạn!');
+            }
           });
+          
           dislikeBtn.addEventListener('click', () => {
-            dislikeBtn.classList.toggle('disliked');
-            if (dislikeBtn.classList.contains('disliked')) likeBtn.classList.remove('liked');
-            showToast(dislikeBtn.classList.contains('disliked') ? 'Chúng tôi sẽ cải thiện!' : 'Đã bỏ dislike');
+            dislikeBtn.classList.toggle('active');
+            dislikeBtn.innerHTML = dislikeBtn.classList.contains('active') ? '<i class="fas fa-thumbs-down"></i>' : '<i class="far fa-thumbs-down"></i>';
+            if(dislikeBtn.classList.contains('active')) {
+                likeBtn.classList.remove('active');
+                likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i>';
+                showToast('Chúng tôi sẽ cải thiện!');
+            }
           });
-          feedbackContainer.appendChild(likeBtn);
-          feedbackContainer.appendChild(dislikeBtn);
-          messageContent.appendChild(feedbackContainer);
+
+          actionsEl.appendChild(likeBtn);
+          actionsEl.appendChild(dislikeBtn);
+          actionsEl.appendChild(copyBtn);
+          bodyEl.appendChild(actionsEl);
         }
 
         messageEl.appendChild(avatar);
-        messageEl.appendChild(messageContent);
+        messageEl.appendChild(bodyEl);
         chatMessages.appendChild(messageEl);
         chatMessages.scrollTop = chatMessages.scrollHeight;
         
-        // Gọi hàm vật lý nếu nó đã tồn tại
-        if (window.initLiquidGlass) window.initLiquidGlass();
       }
 
-      
-      function toggleSpeech(text, btn) {
-        if (isSpeaking) {
-          window.speechSynthesis.cancel();
-          isSpeaking = false;
-          btn.innerHTML = '<i class="fas fa-volume-up"></i>';
-          btn.setAttribute('data-tooltip', 'Đọc thành tiếng');
-          return;
-        }
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'vi-VN';
-        utterance.rate = 1.0;
-        utterance.pitch = 1.0;
-        utterance.onstart = function() {
-          isSpeaking = true;
-          btn.innerHTML = '<i class="fas fa-stop"></i>';
-          btn.setAttribute('data-tooltip', 'Dừng đọc');
-        };
-        utterance.onend = function() {
-          isSpeaking = false;
-          btn.innerHTML = '<i class="fas fa-volume-up"></i>';
-          btn.setAttribute('data-tooltip', 'Đọc thành tiếng');
-        };
-        utterance.onerror = function() {
-          isSpeaking = false;
-          btn.innerHTML = '<i class="fas fa-volume-up"></i>';
-          btn.setAttribute('data-tooltip', 'Đọc thành tiếng');
-        };
-        window.speechSynthesis.speak(utterance);
-        currentSpeechUtterance = utterance;
-      }
-
-      
       function showTyping() {
         const typingEl = document.createElement('div');
         typingEl.classList.add('message', 'bot');
@@ -1775,28 +1642,6 @@
       });
 
       
-      function toggleMobileView() {
-        document.body.classList.toggle('mobile-view');
-        const isMobile = document.body.classList.contains('mobile-view');
-        localStorage.setItem('mobileView', isMobile ? 'true' : 'false');
-        updateMobileViewButtons(isMobile);
-      }
-      document.getElementById('mobileViewToggleToolbar').addEventListener('click', toggleMobileView);
-
-      
-      function readLastMessage() {
-        const lastBot = document.querySelector('.message.bot:last-child .message-content');
-        if (lastBot) {
-          const speech = new SpeechSynthesisUtterance(lastBot.textContent);
-          speech.lang = 'vi-VN';
-          window.speechSynthesis.speak(speech);
-        } else {
-          showToast('Không có tin nhắn để đọc');
-        }
-      }
-      document.getElementById('readAloud').addEventListener('click', readLastMessage);
-
-      
       function openApiModal() {
         apiKeyModal.classList.add('show');
         document.getElementById('openaiKeyInput').value = openaiApiKey;
@@ -1915,7 +1760,7 @@
         suggestionsContainer.innerHTML = '';
         matches.forEach(m => {
           const div = document.createElement('div');
-          div.classList.add('suggestion-item');
+          div.className = 'suggestion-item liquid-btn'; 
           div.textContent = m;
           div.addEventListener('click', function() {
             chatInput.value = this.textContent;
@@ -1997,61 +1842,6 @@
         }
       });
 
-      
-      function openUpdateLogModal() {
-        updateLogModal.classList.add('show');
-      }
-      function closeUpdateLogModal() {
-        updateLogModal.classList.remove('show');
-      }
-
-      document.getElementById('updateLogBtn').addEventListener('click', openUpdateLogModal);
-      document.getElementById('updateLogCloseBtn').addEventListener('click', closeUpdateLogModal);
-      document.getElementById('updateLogCloseBtnFooter').addEventListener('click', closeUpdateLogModal);
-      window.addEventListener('click', (e) => {
-        if (e.target === updateLogModal) closeUpdateLogModal();
-      });
-
-
-      const imageUrls = {
-        1: '1.jpg', 
-        2: '2.jpg',
-        3: '3.jpg',
-        4: '4.jpg',
-        5: '5.jpg'
-      };
-
-      const imageModal = document.getElementById('imageModal');
-      const imageModalPreview = document.getElementById('imageModalPreview');
-      const imageModalCloseBtn = document.getElementById('imageModalCloseBtn');
-      const imageModalCloseBtnFooter = document.getElementById('imageModalCloseBtnFooter');
-
-      function openImageModal(logNumber) {
-        const src = imageUrls[logNumber] || 'https://via.placeholder.com/600x400/cccccc/ffffff?text=Ch%C6%B0a+c%C3%B3+%E1%BA%A3nh';
-        imageModalPreview.src = src;
-        imageModal.classList.add('show');
-      }
-
-      function closeImageModal() {
-        imageModal.classList.remove('show');
-      }
-
-      // Gán sự kiện cho tất cả nút "Xem ảnh"
-      document.querySelectorAll('.view-image-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const log = parseInt(this.dataset.log, 10);
-          if (log) openImageModal(log);
-        });
-      });
-
-      // Đóng modal ảnh
-      imageModalCloseBtn.addEventListener('click', closeImageModal);
-      imageModalCloseBtnFooter.addEventListener('click', closeImageModal);
-      window.addEventListener('click', (e) => {
-        if (e.target === imageModal) closeImageModal();
-      });
-
     });
   </script>
 
@@ -2068,7 +1858,7 @@
       }
 
       // Mọi thành phần muốn đàn hồi đều nằm trong danh sách này
-      const targetSelectors = '.btn-icon, .hamburger-btn, .send-btn, .modal-close, .action-btn, .feedback-btn, .modal-btn, .delete-btn, .tool-item, .question-btn, .category-header, .suggestion-item';
+      const targetSelectors = '.btn-icon, .hamburger-btn, .send-btn, .modal-close, .modal-btn, .tool-item, .question-btn, .category-header, .suggestion-item, .bottom-action-btn';
 
       function onStart(e) {
         // Nhờ .closest(), nó sẽ nhận cả các phần tử do JS tạo ra mà không bao giờ bị "điếc"
@@ -2170,11 +1960,6 @@
       // Nhận mọi sự kiện trên body
       document.body.addEventListener('mousedown', onStart);
       document.body.addEventListener('touchstart', onStart, { passive: true });
-
-      // Cài đặt API Liquid Glass toàn cục để gắn lại cho các nút sinh động
-      window.initLiquidGlass = function() {
-         // Dummy function for compatibility if needed.
-      };
 
       // ===== KHÓA BẢN QUYỀN =====
       document.addEventListener('contextmenu', e => e.preventDefault());

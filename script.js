@@ -1,54 +1,33 @@
 const faqData = {
   "Thông tin liên hệ": "Nếu bạn muốn liên hệ với SMY, bạn có thể qua:\n\n• Fanpage: https://www.facebook.com/STEMofMyDinh/\n• Gmail: stemofmydinh@gmail.com",
-
   "Ban điều hành": "Ban điều hành hiện tại của SMY gồm:\n\n• Cố vấn: Thầy Phạm Văn Tùng – GVBM Vật Lý.\n• Chủ tịch: Đoàn Phúc Uy Vũ - K5A8.\n• Phó Chủ tịch: Đàm Đông Quân - K5A5.",
-
   "Các phân ban": "Hiện tại, SMY có 3 ban chính:\n\n• Ban Chuyên Môn:\n  - Tiểu ban Khoa học.\n  - Tiểu ban Công nghệ thông tin.\n\n• Ban Truyền thông:\n  - Tiểu ban Thiết kế.\n  - Tiểu ban Media.\n  - Tiểu ban Nội dung.\n\n• Ban Sự kiện:\n  - Tiểu ban Tài chính.\n  - Tiểu ban Hậu cần. \n• Ban Nhân sự.",
-
   "Tên gọi": "Tên tiếng Việt: Câu lạc bộ Khoa học.\nTên tiếng Anh: STEM Mỹ Đình.\nTên viết tắt: SMY.",
-
   "Giới thiệu chung về CLB SMY": "STEM MyDinh (SMY) là câu lạc bộ trực thuộc trường THPT Mỹ Đình, được thành lập vào tháng 5 năm 2024. SMY ra đời với mong muốn mang đến cho bạn một cách tiếp cận khoa học mới mẻ, gần gũi và đậm dấu ấn của thế hệ trẻ.\n\nTại đây, bạn sẽ có cơ hội khám phá khả năng tư duy của bản thân, vượt qua những giới hạn trong trí tưởng tượng và nhìn khoa học dưới một góc nhìn sinh động, đầy màu sắc hơn.\n\nThông qua nhiều hoạt động tương tác xoay quanh các chủ đề khoa học quen thuộc, SMY giúp bạn rèn luyện tư duy khoa học, thể hiện góc nhìn cá nhân và tiếp cận tri thức một cách dễ dàng hơn.",
-
   "Ý nghĩa tên gọi SMY": "Tên tiếng Việt của CLB là Câu lạc bộ Khoa học.\nTên tiếng Anh là SMY - STEM MyDinh.\n\nKhông chỉ là tên gọi mang tính biểu tượng của câu lạc bộ, SMY còn gợi đến ý nghĩa của 'tiếng cười' - đại diện cho tinh thần tuổi trẻ năng động, nhiệt huyết, luôn vui tươi và tràn đầy sức sống.",
-
   "Sứ mệnh": "SMY mong muốn xây dựng một môi trường giao lưu và sinh hoạt lành mạnh, bổ ích, đồng thời tạo nền tảng học tập hiệu quả thông qua các hoạt động STEM (Science - Khoa học, Technology - Công nghệ, Engineering - Kỹ thuật, Mathematics - Toán học).\n\nBên cạnh đó, SMY cũng hướng tới việc giúp bạn phát triển tư duy khoa học và nâng cao khả năng cạnh tranh trong thời đại công nghệ phát triển mạnh mẽ.",
-
   "Tầm nhìn": "Thông qua các hoạt động và chương trình của mình, SMY mong muốn khơi dậy niềm yêu thích khoa học trong học sinh, đồng thời tạo cơ hội để bạn được trực tiếp trải nghiệm, thực hành và rèn luyện kỹ năng.\n\nSMY cũng phối hợp cùng nhà trường xây dựng các chuyên đề khoa học với nhiều hình thức khác nhau để tiếp cận học sinh trong và ngoài trường.\n\nNgoài ra, CLB còn hướng tới việc xây dựng các nhóm học sinh nghiên cứu và phát triển những lĩnh vực phù hợp với khả năng của mình.",
-
   "Thành viên trong từng ban": "Thông tin về thành viên của từng ban sẽ được SMY cập nhật trong thời gian tới.",
-
   "Tôn chỉ": "SMY là nơi để bạn học tập, sáng tạo và thực hiện những thí nghiệm, dự án hoặc chương trình mà trên lớp chưa có nhiều thời gian để thực hành.\n\nCLB mong muốn tạo ra một môi trường sinh hoạt lành mạnh, bổ ích và góp phần thay đổi góc nhìn của mọi người về các môn khoa học.",
-
   "Mục đích": "SMY được thành lập với mục tiêu tạo nên một không gian sinh hoạt thoải mái, nơi bạn có thể tự do sáng tạo, kết nối với những người có cùng đam mê và cùng phát triển kỹ năng trong các lĩnh vực STEM.\n\nĐồng thời, CLB hướng tới mô hình giáo dục STEM hiện đại, giúp bạn tiếp cận nhiều phương pháp học tập mới và phát triển theo hướng tích cực hơn.",
-
   "Chức năng": "SMY sẽ chia sẻ nhiều thông tin thú vị và bổ ích về STEM, đồng thời tổ chức các hoạt động thí nghiệm, trưng bày sản phẩm khoa học nhằm giúp bạn tìm hiểu và đào sâu kiến thức.\n\nBên cạnh đó, CLB cũng góp phần lan tỏa hình ảnh và các phương pháp giáo dục hiệu quả, lành mạnh.",
-
   "Nhiệm vụ": "SMY có nhiệm vụ xây dựng kế hoạch và triển khai các dự án của CLB cũng như của nhà trường.\n\nNgoài ra, CLB còn tham gia sáng tạo nội dung cho các chương trình STEM, chẳng hạn như Ngày hội STEM.",
-
   "Tài chính": "Hiện tại, SMY hoạt động chủ yếu trên các nền tảng trực tuyến và mạng xã hội nên chưa thu quỹ hội viên.\n\nNếu có bất kỳ thay đổi nào liên quan đến tài chính, SMY sẽ thông báo chính thức đến các thành viên.",
-
   "Khen thưởng": "Nếu bạn hoặc nhóm của bạn có nhiều đóng góp tích cực cho SMY, những đóng góp đó sẽ được ghi nhận và Ban điều hành có thể đề xuất với BCH Đoàn trường THPT Mỹ Đình để xem xét khen thưởng.",
-
   "Kỷ luật": "Nếu hội viên vi phạm quy chế, SMY sẽ xem xét xử lý tùy theo mức độ:\n\n• Mức 1: Nhắc nhở.\n• Mức 2: Kỷ luật trước toàn CLB.\n• Mức 3: Khai trừ khỏi CLB.\n\nCác hình thức xử lý cụ thể sẽ do Ban điều hành đề xuất và được toàn CLB thống nhất theo nguyên tắc biểu quyết dân chủ với trên 50% số người tham gia biểu quyết đồng ý.",
-
   "Tiêu chuẩn Hội viên": "Để trở thành hội viên của SMY, bạn cần là học sinh trường THPT Mỹ Đình có hạnh kiểm Tốt, không vi phạm pháp luật, nội quy nhà trường và điều lệ của CLB.",
-
   "Quyền lợi của Hội viên": "Khi trở thành hội viên của SMY, bạn sẽ được tham gia các hoạt động của CLB, được đề xuất ý kiến và nguyện vọng chính đáng, đồng thời nhận được sự hỗ trợ trong quá trình sinh hoạt.\n\nNếu có những đóng góp tích cực hoặc thành tích nổi bật, bạn cũng sẽ được SMY ghi nhận và khen thưởng.",
-
   "Nghĩa vụ của Hội viên": "Là hội viên của SMY, bạn cần tôn trọng và tuân thủ điều lệ CLB, giữ gìn tư cách hội viên, tích cực tham gia các hoạt động và hoàn thành những nhiệm vụ được phân công.\n\nBên cạnh đó, bạn cũng có trách nhiệm quảng bá hình ảnh của SMY và giới thiệu thêm hội viên mới.",
-
   "Đăng ký làm Hội viên": "Nếu bạn muốn trở thành hội viên chính thức của SMY, bạn cần tự nguyện nộp đơn và hồ sơ theo mẫu quy định.\n\nHồ sơ cần có xác nhận và sự đồng ý của phụ huynh.",
-
   "Rút, xóa tên khỏi CLB": "Nếu muốn rời SMY, bạn có thể tự nguyện làm đơn xin rút khỏi CLB vì lý do cá nhân.\n\nNhững hội viên không tham gia sinh hoạt trong thời gian dài mà không có lý do chính đáng có thể bị xóa tên khỏi danh sách hội viên.\n\nNhững trường hợp vi phạm pháp luật hoặc điều lệ CLB, gây ảnh hưởng đến uy tín của SMY sẽ bị khai trừ.",
-
   "Đơn đăng ký tham gia CLB": "Đơn đăng ký gồm các thông tin cá nhân, thông tin phụ huynh, mục đích tham gia và cam kết của thành viên.\n\nNếu cần nhận mẫu đơn, bạn có thể liên hệ qua Gmail: stemofmydinh@gmail.com.",
-
   "Quy chế hoạt động CLB": "Thông tin này sẽ được SMY cập nhật trong thời gian tới.",
-
   "Cách tham gia CLB SMY": "Vào đầu tháng 8 hằng năm, SMY sẽ tổ chức chương trình chào đón học sinh khóa mới với các hoạt động giới thiệu CLB, trình diễn thí nghiệm và tuyển thành viên.\n\nNếu muốn tham gia, bạn chỉ cần điền đơn đăng ký (có chữ ký xác nhận của phụ huynh) và gửi lại cho SMY.\n\nĐừng quên theo dõi fanpage để cập nhật thông tin mới nhất về đợt tuyển thành viên cũng như các sự kiện sắp tới nhé!"
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  if (window.marked) marked.setOptions({ breaks: true, gfm: true });
+
   const sidebar = document.getElementById('mainSidebar');
   const sidebarOverlay = document.getElementById('sidebarOverlay');
   const chatMessages = document.getElementById('chatMessages');
@@ -56,14 +35,26 @@ document.addEventListener('DOMContentLoaded', function() {
   const chatInput = document.getElementById('chatInput');
   const sendBtn = document.getElementById('sendBtn');
   const suggestionsContainer = document.getElementById('suggestionsContainer');
-  const toast = document.getElementById('toast');
   const apiKeyModal = document.getElementById('apiKeyModal');
-
-  // Khởi tạo mặc định với API Key của bạn - Vào là chat luôn
-  let openrouterApiKey = localStorage.getItem('openrouterApiKey') || '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';
-  let openrouterModel = localStorage.getItem('openrouterModel') || 'inclusionai/ling-3.0-tiny:free';
+  const ambientGlow = document.getElementById('ambientGlow');
+  const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
   
-  // Trạng thái AI mặc định luôn là openrouter
+  // --- TÍCH HỢP DOM VĨNH VIỄN CHO DYNAMIC ISLAND ĐỂ CHỐNG LAG ---
+  sidebarToggleBtn.innerHTML = `
+      <i class="fas fa-bars menu-icon" style="position: relative; z-index: 10; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);"></i>
+      <div class="island-blur-backdrop"></div>
+      <div class="island-panel">
+          <div class="island-content">
+              <div class="island-title"><i class="fas fa-check-circle" style="color: #34c759;"></i> Thông báo</div>
+              <div class="island-text" id="islandMsgText"></div>
+          </div>
+      </div>
+  `;
+  
+  let lastClickedElement = null;
+
+  let openrouterApiKey = localStorage.getItem('openrouterApiKey') || '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';
+  let openrouterModel = localStorage.getItem('openrouterModel') || 'inclusionai/ling-3.0-tiny:free';
   let currentAI = 'openrouter';
 
   if (localStorage.getItem('darkMode') === 'true') {
@@ -75,10 +66,102 @@ document.addEventListener('DOMContentLoaded', function() {
   chatMessages.innerHTML = '';
   addMessage('Xin chào! Chào mừng bạn đến với SMY GPT. Mình được tạo ra để giúp bạn tìm hiểu nhanh về CLB Khoa học STEM MyDinh – từ thông tin CLB, cơ cấu tổ chức, quyền lợi hội viên cho đến cách tham gia. Bạn hãy click nút ☰ ở góc màn hình để chọn câu hỏi và bắt đầu.', 'bot');
 
+  let cursorX = window.innerWidth / 2, cursorY = window.innerHeight / 2;
+  let glowX = cursorX, glowY = cursorY;
+  let rafId = null;
+
+  window.addEventListener('mousemove', (e) => {
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+    if (!rafId) rafId = requestAnimationFrame(updateMouseEffects);
+  });
+
+  function updateMouseEffects() {
+    glowX += (cursorX - glowX) * 0.15;
+    glowY += (cursorY - glowY) * 0.15;
+    ambientGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0)`;
+
+    rafId = null;
+    if (Math.abs(cursorX - glowX) > 0.5 || Math.abs(cursorY - glowY) > 0.5) {
+      rafId = requestAnimationFrame(updateMouseEffects);
+    }
+  }
+
+  const magneticElements = document.querySelectorAll('.btn-icon, .send-btn, .hamburger-btn, .modal-close');
+  magneticElements.forEach(el => {
+    let magRaf = null;
+    el.addEventListener('mousemove', function(e) {
+      if (window.innerWidth <= 768) return; 
+      if (magRaf) cancelAnimationFrame(magRaf);
+      magRaf = requestAnimationFrame(() => {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        this.style.transition = 'none'; 
+        this.style.transform = `translate3d(${x * 0.3}px, ${y * 0.3}px, 0) scale(1.05)`;
+      });
+    });
+    el.addEventListener('mouseleave', function() {
+      if (magRaf) cancelAnimationFrame(magRaf);
+      this.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      this.style.transform = '';
+    });
+  });
+
+  let chatScrollY = 0;
+  let rubberBandTimeout;
+  const applyRubberBand = (delta) => {
+    chatScrollY -= delta * 0.15;
+    if (chatScrollY > 60) chatScrollY = 60;
+    if (chatScrollY < -60) chatScrollY = -60;
+    chatMessages.style.transform = `translate3d(0, ${chatScrollY}px, 0)`;
+
+    clearTimeout(rubberBandTimeout);
+    rubberBandTimeout = setTimeout(() => {
+      chatScrollY = 0;
+      chatMessages.style.transform = `translate3d(0, 0, 0)`;
+    }, 150); 
+  };
+
+  chatMessages.addEventListener('wheel', (e) => {
+    const isAtTop = chatMessages.scrollTop <= 0;
+    const isAtBottom = Math.abs(chatMessages.scrollHeight - chatMessages.scrollTop - chatMessages.clientHeight) < 2;
+
+    if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+      applyRubberBand(e.deltaY);
+    }
+  }, { passive: true });
+
+  let touchStartY = 0;
+  chatMessages.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+  chatMessages.addEventListener('touchmove', e => {
+    const touchY = e.touches[0].clientY;
+    const deltaY = touchStartY - touchY;
+    const isAtTop = chatMessages.scrollTop <= 0;
+    const isAtBottom = Math.abs(chatMessages.scrollHeight - chatMessages.scrollTop - chatMessages.clientHeight) < 2;
+    if ((isAtTop && deltaY < 0) || (isAtBottom && deltaY > 0)) { applyRubberBand(deltaY * 0.5); }
+    touchStartY = touchY;
+  }, { passive: true });
+
+  // --- CẬP NHẬT: SHOW TOAST (Chỉ bật class, không xoá HTML) ---
   function showToast(message) {
-    toast.querySelector('span').textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3000);
+    const btn = document.getElementById('sidebarToggleBtn');
+    const msgText = document.getElementById('islandMsgText');
+    if(msgText) msgText.textContent = message;
+    
+    btn.removeAttribute('data-tooltip');
+    btn.classList.add('dynamic-island-active');
+
+    if (window.islandTimeout) clearTimeout(window.islandTimeout);
+    window.islandTimeout = setTimeout(() => {
+      btn.classList.remove('dynamic-island-active');
+      setTimeout(() => {
+         if(!btn.classList.contains('dynamic-island-active')) {
+             const isActive = sidebar.classList.contains('active');
+             btn.setAttribute('data-tooltip', isActive ? 'Ẩn thanh bên' : 'Hiện thanh bên');
+         }
+      }, 700); 
+    }, 3500);
   }
 
   function updateDarkModeUI(isDark) {
@@ -109,7 +192,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const messageContent = document.createElement('div');
     messageContent.classList.add('message-content');
-    messageContent.textContent = text;
+    
+    if (sender === 'bot') {
+      const parsedText = text.replace(/•/g, '-');
+      messageContent.innerHTML = window.marked ? marked.parse(parsedText) : parsedText;
+      
+      const walker = document.createTreeWalker(messageContent, NodeFilter.SHOW_TEXT, null, false);
+      const nodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+          if(node.nodeValue.trim() !== '') nodes.push(node);
+      }
+      
+      const spans = [];
+      nodes.forEach(n => {
+          const words = n.nodeValue.split(/(\s+)/);
+          const fragment = document.createDocumentFragment();
+          words.forEach(word => {
+              if(word.trim() !== '') {
+                  const span = document.createElement('span');
+                  span.textContent = word;
+                  span.style.opacity = '0';
+                  span.style.filter = 'blur(8px)';
+                  span.style.display = 'inline-block';
+                  span.style.transform = 'translateY(5px)';
+                  span.style.transition = 'opacity 0.4s ease, filter 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                  fragment.appendChild(span);
+                  spans.push(span);
+                  fragment.appendChild(document.createTextNode(' '));
+              } else {
+                  fragment.appendChild(document.createTextNode(word));
+              }
+          });
+          n.parentNode.replaceChild(fragment, n);
+      });
+      
+      let delay = 0;
+      spans.forEach((span) => {
+          setTimeout(() => {
+              span.style.opacity = '1';
+              span.style.filter = 'blur(0px)';
+              span.style.transform = 'translateY(0)';
+          }, delay);
+          delay += 15; 
+      });
+
+      const scrollInterval = setInterval(() => {
+         chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 50);
+      setTimeout(() => clearInterval(scrollInterval), delay + 400);
+
+    } else {
+      messageContent.textContent = text;
+    }
+
     bodyEl.appendChild(messageContent);
 
     if (sender === 'bot') {
@@ -176,7 +312,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const content = document.createElement('div');
     content.classList.add('typing-indicator');
-    content.innerHTML = `<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>`;
+    
+    content.innerHTML = `
+      <div class="ai-aura-container">
+        <div class="ai-aura-indicator"></div>
+        <div class="ai-aura-core"></div>
+      </div>`;
+      
     typingEl.appendChild(avatar);
     typingEl.appendChild(content);
     chatMessages.appendChild(typingEl);
@@ -195,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const keywords = {
       'giới thiệu': 'Giới thiệu chung về CLB SMY',
-      'liên hệ': 'Thông tin liên hệ',
+      'liên hệ': 'Thông liên hệ',
       'tham gia': 'Cách tham gia CLB SMY',
       'đăng ký': 'Đăng ký làm Hội viên',
       'sứ mệnh': 'Sứ mệnh',
@@ -219,7 +361,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   async function callOpenRouter(question) {
-    // Tạo bộ nhớ để AI đọc hiểu thông tin CLB nội bộ trước khi trả lời
     let clubContext = "Dưới đây là thông tin nội bộ của CLB Khoa học STEM MyDinh (SMY) để bạn dùng làm tài liệu tham khảo khi trả lời:\n\n";
     for (const [key, value] of Object.entries(faqData)) {
       clubContext += `- ${key}: ${value}\n`;
@@ -273,10 +414,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  document.getElementById('sidebarToggleBtn').addEventListener('click', function() {
+  document.getElementById('sidebarToggleBtn').addEventListener('click', (e) => {
+    // Không mở thanh bên nếu click lúc thông báo đang bật
+    if (document.getElementById('sidebarToggleBtn').classList.contains('dynamic-island-active')) return;
     toggleSidebar();
   });
-
   document.getElementById('closeSidebarBtn').addEventListener('click', () => toggleSidebar(false));
   sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
 
@@ -287,7 +429,28 @@ document.addEventListener('DOMContentLoaded', function() {
     updateDarkModeUI(isDark);
   });
 
-  function openApiModal() {
+  function openApiModal(e) {
+    lastClickedElement = e ? e.currentTarget : document.getElementById('apiSettings');
+    const modalContent = apiKeyModal.querySelector('.modal-content');
+    
+    if (lastClickedElement) {
+      const rect = lastClickedElement.getBoundingClientRect();
+      const tx = (rect.left + rect.width / 2) - (window.innerWidth / 2);
+      const ty = (rect.top + rect.height / 2) - (window.innerHeight / 2);
+
+      modalContent.style.transition = 'none';
+      modalContent.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(0.05)`;
+      modalContent.style.filter = 'blur(15px)';
+      modalContent.style.opacity = '0';
+      
+      void modalContent.offsetWidth;
+
+      modalContent.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease, filter 0.5s ease-out';
+      modalContent.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      modalContent.style.filter = 'blur(0)';
+      modalContent.style.opacity = '1';
+    }
+
     apiKeyModal.classList.add('show');
     document.getElementById('openrouterKeyInput').value = openrouterApiKey;
     document.getElementById('openrouterModelSelector').value = openrouterModel;
@@ -295,24 +458,40 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('apiSettings').addEventListener('click', openApiModal);
 
   function closeApiModal() {
+    const modalContent = apiKeyModal.querySelector('.modal-content');
+    
+    if (lastClickedElement) {
+      const rect = lastClickedElement.getBoundingClientRect();
+      const tx = (rect.left + rect.width / 2) - (window.innerWidth / 2);
+      const ty = (rect.top + rect.height / 2) - (window.innerHeight / 2);
+
+      modalContent.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(0.05)`;
+      modalContent.style.filter = 'blur(15px)';
+      modalContent.style.opacity = '0';
+    }
+    
     apiKeyModal.classList.remove('show');
+    
+    setTimeout(() => {
+      if(!apiKeyModal.classList.contains('show')) {
+        modalContent.style.transition = 'none';
+        modalContent.style.transform = '';
+        modalContent.style.filter = '';
+        modalContent.style.opacity = '';
+      }
+    }, 600);
   }
   document.getElementById('modalCloseBtn').addEventListener('click', closeApiModal);
   document.getElementById('cancelApiKey').addEventListener('click', closeApiModal);
-  window.addEventListener('click', (e) => {
-    if (e.target === apiKeyModal) closeApiModal();
-  });
+  window.addEventListener('click', (e) => { if (e.target === apiKeyModal) closeApiModal(); });
 
   document.getElementById('saveApiKey').addEventListener('click', function() {
     openrouterApiKey = document.getElementById('openrouterKeyInput').value.trim();
     openrouterModel = document.getElementById('openrouterModelSelector').value;
-    
     currentAI = openrouterApiKey ? 'openrouter' : 'none';
-
     localStorage.setItem('openrouterApiKey', openrouterApiKey);
     localStorage.setItem('openrouterModel', openrouterModel);
     localStorage.setItem('currentAI', currentAI);
-    
     updateAIModelInfo();
     showToast('Cài đặt API đã được lưu!');
     closeApiModal();
@@ -330,10 +509,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function exportChat() {
     const msgs = Array.from(document.querySelectorAll('.message'));
-    if (msgs.length === 0) {
-      showToast('Không có tin nhắn để xuất');
-      return;
-    }
+    if (msgs.length === 0) { showToast('Không có tin nhắn để xuất'); return; }
     const content = msgs.map(msg => {
       const sender = msg.classList.contains('user') ? 'User' : 'Bot';
       const text = msg.querySelector('.message-content').textContent;
@@ -344,10 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const a = document.createElement('a');
     a.href = url;
     a.download = `smy-chat-${new Date().toISOString().slice(0,10)}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
     showToast('Đã xuất trò chuyện!');
   }
   document.getElementById('exportChat').addEventListener('click', exportChat);
@@ -365,10 +538,7 @@ document.addEventListener('DOMContentLoaded', function() {
       addMessage(question, 'user');
       showTyping();
       const answer = faqData[question] || "Mọi thông tin thắc mắc xin liên hệ: Gmail: stemofmydinh@gmail.com. Chủ tịch: Đoàn Phúc Uy Vũ - K5A8; Phó chủ tịch: Đàm Đông Quân - K5A5 hoặc nhắn tin trực tiếp qua trang ( https://www.facebook.com/STEMofMyDinh/ ) để nhận được phản hồi sớm nhất!";
-      setTimeout(() => {
-        removeTyping();
-        addMessage(answer, 'bot');
-      }, 800);
+      setTimeout(() => { removeTyping(); addMessage(answer, 'bot'); }, 800);
     });
   });
 
@@ -382,14 +552,20 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   chatInput.addEventListener('input', function() {
+    chatForm.classList.remove('haptic-pulse');
+    void chatForm.offsetWidth;
+    chatForm.classList.add('haptic-pulse');
+    
     const val = this.value.trim().toLowerCase();
     if (val.length < 2) {
-      suggestionsContainer.style.display = 'none';
+      suggestionsContainer.classList.remove('active'); 
+      setTimeout(() => suggestionsContainer.style.display = 'none', 300); 
       return;
     }
     const matches = Object.keys(faqData).filter(q => q.toLowerCase().includes(val)).slice(0, 5);
     if (matches.length === 0) {
-      suggestionsContainer.style.display = 'none';
+      suggestionsContainer.classList.remove('active');
+      setTimeout(() => suggestionsContainer.style.display = 'none', 300);
       return;
     }
     suggestionsContainer.innerHTML = '';
@@ -399,17 +575,24 @@ document.addEventListener('DOMContentLoaded', function() {
       div.textContent = m;
       div.addEventListener('click', function() {
         chatInput.value = this.textContent;
-        suggestionsContainer.style.display = 'none';
+        suggestionsContainer.classList.remove('active');
+        setTimeout(() => suggestionsContainer.style.display = 'none', 300);
         chatForm.dispatchEvent(new Event('submit'));
       });
       suggestionsContainer.appendChild(div);
     });
     suggestionsContainer.style.display = 'block';
+    void suggestionsContainer.offsetWidth; 
+    suggestionsContainer.classList.add('active');
+    
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
   });
 
   document.addEventListener('click', (e) => {
     if (!suggestionsContainer.contains(e.target) && e.target !== chatInput) {
-      suggestionsContainer.style.display = 'none';
+      suggestionsContainer.classList.remove('active');
+      setTimeout(() => suggestionsContainer.style.display = 'none', 300);
     }
   });
 
@@ -421,7 +604,8 @@ document.addEventListener('DOMContentLoaded', function() {
     addMessage(msg, 'user');
     chatInput.value = '';
     chatInput.style.height = '48px';
-    suggestionsContainer.style.display = 'none';
+    suggestionsContainer.classList.remove('active');
+    setTimeout(() => suggestionsContainer.style.display = 'none', 300);
     showTyping();
 
     sendBtn.classList.add('loading');
@@ -457,11 +641,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  chatInput.addEventListener('input', function() {
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight) + 'px';
-  });
-
   chatInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -472,15 +651,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 (function() {
-  let activeEl = null;
-  let stX = 0, stY = 0;
-  let isDragging = false;
+  let activeEl = null; let stX = 0, stY = 0; let isDragging = false; let rafId = null;
 
   function getPointer(e) {
     if (e.touches && e.touches.length > 0) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
     return { x: e.clientX, y: e.clientY };
   }
-
   const targetSelectors = '.btn-icon, .hamburger-btn, .send-btn, .modal-close, .modal-btn, .tool-item, .question-btn, .category-header, .suggestion-item, .bottom-action-btn';
 
   function onStart(e) {
@@ -488,16 +664,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!target) return;
     if (e.type === 'mousedown' && e.button !== 0) return;
 
-    activeEl = target;
-    isDragging = true;
-    activeEl.classList.add('is-pressed');
-
-    const pos = getPointer(e);
-    stX = pos.x; 
-    stY = pos.y;
-
+    activeEl = target; isDragging = true; activeEl.classList.add('is-pressed');
+    const pos = getPointer(e); stX = pos.x; stY = pos.y;
     activeEl.style.setProperty('transition', 'transform 0.15s cubic-bezier(0.2, 0, 0.2, 1)', 'important');
-    activeEl.style.setProperty('transform', 'scale(0.92) translateY(2px)', 'important');
+    activeEl.style.setProperty('transform', 'scale(0.92) translate3d(0,2px,0)', 'important');
 
     window.addEventListener('mousemove', onMove, { passive: true });
     window.addEventListener('touchmove', onMove, { passive: true });
@@ -508,55 +678,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function onMove(e) {
     if (!activeEl || !isDragging) return;
+    if (rafId) cancelAnimationFrame(rafId);
     
-    const pos = getPointer(e);
-    const dx = pos.x - stX;
-    const dy = pos.y - stY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
+    rafId = requestAnimationFrame(() => {
+        const pos = getPointer(e);
+        const dx = pos.x - stX; const dy = pos.y - stY;
+        const dist = Math.sqrt(dx*dx + dy*dy);
 
-    if (dist > 3) {
-      activeEl.style.setProperty('transition', 'none', 'important');
+        if (dist > 3) {
+          activeEl.style.setProperty('transition', 'none', 'important');
+          const friction = 0.25; let px = dx * friction; let py = dy * friction;
+          const pullDist = Math.sqrt(px*px + py*py);
+          let cappedDist = Math.min(pullDist, 12); 
+          if (pullDist > 0) { px = (px / pullDist) * cappedDist; py = (py / pullDist) * cappedDist; }
+          const angle = Math.atan2(py, px);
+          const stretch = (cappedDist / 12) * 0.06; const baseScale = 0.92;
 
-      const friction = 0.25; 
-      let px = dx * friction;
-      let py = dy * friction;
-      const pullDist = Math.sqrt(px*px + py*py);
-      
-      let cappedDist = Math.min(pullDist, 12); 
-
-      if (pullDist > 0) {
-        px = (px / pullDist) * cappedDist;
-        py = (py / pullDist) * cappedDist;
-      }
-
-      const angle = Math.atan2(py, px);
-      const stretch = (cappedDist / 12) * 0.06; 
-      const baseScale = 0.92;
-
-      activeEl.style.setProperty('transform', `
-        translate(${px}px, ${py}px)
-        rotate(${angle}rad)
-        scale(${baseScale + stretch}, ${baseScale - stretch * 0.5})
-        rotate(-${angle}rad)
-      `, 'important');
-    }
+          activeEl.style.setProperty('transform', `translate3d(${px}px, ${py}px, 0) rotate(${angle}rad) scale(${baseScale + stretch}, ${baseScale - stretch * 0.5}) rotate(-${angle}rad)`, 'important');
+        }
+    });
   }
 
   function onEnd() {
     if (!activeEl) return;
+    if (rafId) cancelAnimationFrame(rafId);
     
     activeEl.style.setProperty('transition', 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.2s ease', 'important');
     activeEl.style.removeProperty('transform');
     activeEl.classList.remove('is-pressed');
     
-    let el = activeEl;
-    activeEl = null;
-    isDragging = false;
-
-    setTimeout(() => { 
-      if (el) el.style.removeProperty('transition'); 
-    }, 600);
-
+    let el = activeEl; activeEl = null; isDragging = false;
+    setTimeout(() => { if (el) el.style.removeProperty('transition'); }, 600);
     cleanEvents();
   }
 
@@ -568,17 +720,8 @@ document.addEventListener('DOMContentLoaded', function() {
     window.removeEventListener('touchcancel', onEnd);
   }
 
-  window.addEventListener('scroll', function() {
-    if (isDragging) onEnd();
-  }, true);
-
+  window.addEventListener('scroll', function() { if (isDragging) onEnd(); }, true);
   document.body.addEventListener('mousedown', onStart);
   document.body.addEventListener('touchstart', onStart, { passive: true });
-
   document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    if (e.key === 'F12') { e.preventDefault(); return false; }
-    if (e.ctrlKey && e.shiftKey && ['I','J','C','K','E','U'].includes(e.key)) { e.preventDefault(); return false; }
-    if (e.ctrlKey && ['u','s'].includes(e.key)) { e.preventDefault(); return false; }
-  });
 })();

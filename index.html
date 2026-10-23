@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>SMY GPT · Liquid Glass</title>
+  <meta name="description" content="Trợ lý của SMY – STEM of MyDinh.">
+  <meta name="theme-color" content="#0c1321">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("smyTheme")==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+  <div class="ambient-scene" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="ribbon-blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8edfb"/><stop offset=".42" stop-color="#8bc6eb" stop-opacity=".5"/><stop offset="1" stop-color="#c7d7f6" stop-opacity=".08"/></linearGradient>
+        <linearGradient id="ribbon-violet" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#c9c2ef" stop-opacity=".4"/><stop offset=".5" stop-color="#d9dbf7" stop-opacity=".4"/><stop offset="1" stop-color="#f4dce4" stop-opacity=".15"/></linearGradient>
+        <linearGradient id="ribbon-edge"><stop stop-color="#fff" stop-opacity=".7"/><stop offset=".5" stop-color="#9dc8ed" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/></linearGradient>
+      </defs>
+      <path d="M-220 130 C160 -100 215 380 440 390 S830 100 1160 -100 L1500 -230 L1500 -140 C1060 40 980 430 570 525 S120 240 -150 550Z" fill="url(#ribbon-blue)"/>
+      <path d="M-250 130 C160 -100 215 380 440 390 S830 100 1160 -100" fill="none" stroke="url(#ribbon-edge)" stroke-width="2"/>
+      <path d="M-150 1000 C200 530 350 1140 810 790 S1280 550 1590 400 L1570 630 C1200 630 1120 1040 660 1050 S160 800 -150 1220Z" fill="url(#ribbon-violet)"/>
+      <path d="M-150 1000 C200 530 350 1140 810 790 S1280 550 1590 400" fill="none" stroke="url(#ribbon-edge)" stroke-width="3"/>
+    </svg>
+  </div>
+
+
+  <div class="container">
+    
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="sidebar" id="mainSidebar" aria-label="Điều hướng và câu hỏi thường gặp" aria-hidden="true" inert>
+      <div class="sidebar-top">
+        <button class="btn-icon" id="closeSidebarBtn" data-tooltip="Ẩn thanh bên">
+          <i class="fas fa-bars"></i>
+        </button>
+        <button class="btn-icon" id="newChatBtn" data-tooltip="Trò chuyện mới">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-scroll" id="sidebarScroll">
+        <div class="sidebar-tools">
+          <div class="tool-item" id="darkModeToggle" data-tooltip="Chuyển đổi chế độ tối/sáng"><i class="fas fa-moon"></i> Chế độ tối</div>
+          <div class="tool-item" id="apiSettings" data-tooltip="Cấu hình API Key">
+            <i class="fas fa-key"></i> Cài đặt API
+          </div>
+          <div class="tool-item" id="exportChat" data-tooltip="Xuất nội dung chat">
+            <i class="fas fa-download"></i> Xuất trò chuyện
+          </div>
+        </div>
+        
+        <div class="faq-section">
+          <div class="section-title">Câu hỏi thường gặp</div>
+          
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-school"></i> TỔNG QUAN</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content active">
+              <button class="question-btn"><i class="fas fa-comment"></i> Giới thiệu chung về CLB SMY</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Ý nghĩa tên gọi SMY</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Thông tin liên hệ</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-bullseye"></i> SỨ MỆNH VÀ TẦM NHÌN</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Sứ mệnh</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Tầm nhìn</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-sitemap"></i> MÔ HÌNH TỔ CHỨC</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Ban điều hành</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Các phân ban</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Thành viên trong từng ban</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-file-alt"></i> QUY ĐỊNH CHUNG</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Tên gọi</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Tôn chỉ</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Mục đích</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-tasks"></i> CHỨC NĂNG VÀ NHIỆM VỤ</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Chức năng</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Nhiệm vụ</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-coins"></i> CÔNG TÁC TÀI CHÍNH</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Tài chính</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-award"></i> KHEN THƯỞNG, KỶ LUẬT</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Khen thưởng</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Kỷ luật</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-users"></i> HỘI VIÊN</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Tiêu chuẩn Hội viên</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Quyền lợi của Hội viên</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Nghĩa vụ của Hội viên</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Đăng ký làm Hội viên</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Rút, xóa tên khỏi CLB</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-file-contract"></i> GIẤY TỜ LIÊN QUAN</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Đơn đăng ký tham gia CLB</button>
+              <button class="question-btn"><i class="fas fa-comment"></i> Quy chế hoạt động CLB</button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="category-header"><span><i class="fas fa-door-open"></i> CÁCH THAM GIA CLB</span><i class="fas fa-chevron-down"></i></div>
+            <div class="category-content">
+              <button class="question-btn"><i class="fas fa-comment"></i> Cách tham gia CLB SMY</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-main">
+      <div class="chat-header">
+        <div class="chat-title">
+          <button class="hamburger-btn" id="sidebarToggleBtn" aria-controls="mainSidebar" aria-expanded="false" data-tooltip="Hiện thanh bên">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1>SMY GPT Assistant</h1>
+        </div>
+        <div class="chat-info">
+          <span id="ai-model-info">Đang sử dụng: OpenRouter</span>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-label="Nội dung trò chuyện"></div>
+      <div class="chat-input-container">
+        <div class="latest-wrap" id="latestWrap" aria-hidden="true" inert>
+          <button type="button" class="btn-icon latest-btn" id="latestMessageBtn" aria-label="Về tin nhắn mới nhất" data-tooltip="Về tin nhắn mới nhất">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="suggestions-container" id="suggestionsContainer" style="display: none;"></div>
+        <form class="chat-form" id="chatForm">
+          <textarea class="chat-input" placeholder="Nhập câu hỏi của bạn..." id="chatInput" aria-label="Nhập câu hỏi" rows="1"></textarea>
+          <button type="submit" class="send-btn" id="sendBtn" data-tooltip="Gửi tin nhắn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">
+    <div class="toast-body"><i class="fas fa-check-circle"></i><span class="toast-label" id="toastText"></span></div>
+  </div>
+
+  <div class="modal" id="apiKeyModal" role="dialog" aria-modal="true" aria-labelledby="apiModalTitle" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="apiModalTitle"><i class="fas fa-key"></i> Cài đặt API Key</h2>
+        <button class="modal-close" id="modalCloseBtn" aria-label="Đóng cài đặt">×</button>
+      </div>
+      <div class="api-tabs">
+        <div class="api-tab active" data-tab="openrouter">OpenRouter</div>
+      </div>
+      
+      <div class="api-tab-content active" id="openrouter-tab">
+        <p class="api-info">Kết nối OpenRouter bằng API key của bạn. Các câu hỏi thường gặp về CLB vẫn dùng được khi chưa kết nối AI.</p>
+        <input type="password" class="api-key-input openrouter-input" id="openrouterKeyInput" aria-label="OpenRouter API key" autocomplete="off" placeholder="Nhập OpenRouter API Key">
+        <select class="ai-model-selector" id="openrouterModelSelector" aria-label="Mô hình AI">
+          <option value="inclusionai/ling-3.0-tiny:free">InclusionAI Ling 3.0 Tiny (Miễn phí)</option>
+        </select>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="modal-btn secondary" id="cancelApiKey">Hủy</button>
+        <button class="modal-btn primary" id="saveApiKey">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>

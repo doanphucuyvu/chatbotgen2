@@ -73,7 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // API key chỉ lấy từ cấu hình của người dùng, không nhúng vào mã nguồn.
-  let openrouterApiKey = localStorage.getItem('openrouterApiKey') || '';
+  const DEFAULT_OPENROUTER_KEY = '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';
+
+let openrouterApiKey =
+  localStorage.getItem('openrouterApiKey')?.trim() ||
+  DEFAULT_OPENROUTER_KEY;
   let openrouterModel = localStorage.getItem('openrouterModel') || 'inclusionai/ling-3.0-tiny:free';
   
   // Chỉ bật OpenRouter khi người dùng đã cấu hình API key.
